@@ -122,8 +122,6 @@ const ChangePassword = () => {
           onPress={handleChangePassword}
           styleCustom={styles.btnChangePassword}
         />
-
-        <View style={{height: theme.heightHeader}} />
       </ViewContainer>
     </BgView>
   )

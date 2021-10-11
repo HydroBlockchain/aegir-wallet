@@ -1,4 +1,5 @@
 import { CoinData } from "./CoinInterfaces";
+import { ICollectibleData } from "./Icollectibles";
 
 export interface DepositScreenParams extends CoinData {};
 
@@ -33,6 +34,12 @@ export type RootStackParams = {
   *******************/
   Home: any;
   Settings: any;
+  Contacts: any;
+  AddContact: any;
+  ListNFT: any;
+  AddNFT: any;
+  SendNFT: ICollectibleData;
+  ViewNFT: ICollectibleData;
   Receive: CoinData;
   History: CoinData;
   Notification: any;

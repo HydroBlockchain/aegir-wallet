@@ -5,7 +5,6 @@ import Paragraph from '../Paragraph';
 import { ButtonProps } from './interfaces';
 import { TouchableOpacity } from 'react-native';
 import { ThemeContext } from '../../hooks/useTheme';
-import { lightTheme, darkTheme } from '../../libs/Theme';
 
 const Button = ({
   text,
@@ -34,7 +33,7 @@ const Button = ({
   } else if(variant === 'outlined') {
     style.push({ borderColor: theme.colors.backgroundApp2 })
   }
-  
+
   return (
     <TouchableOpacity
       onPress={onPress}

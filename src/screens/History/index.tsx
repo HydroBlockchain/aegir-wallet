@@ -7,6 +7,7 @@ import CoinCard from '../../components/CoinCard';
 import Paragraph from '../../components/Paragraph';
 import HeaderCustom from '../../components/Header';
 import BgView from '../../components/Layouts/BgView';
+import Clipboard from '@react-native-clipboard/clipboard';
 import { ScrollView } from 'react-native-gesture-handler';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Dimensions, TouchableOpacity, View } from 'react-native';
@@ -25,7 +26,6 @@ import styles from './styles';
 /* constants */
 import { TUSC_WALLET_ADDRESS } from '../../../constants';
 import { AppStateManagerContext } from '../../context/AppStateManager';
-import Clipboard from '@react-native-clipboard/clipboard';
 
 const History = ({ navigation, route }: HistoryParam) => {
   const { coin, network } = route.params;

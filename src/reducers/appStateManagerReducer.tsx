@@ -1,6 +1,12 @@
 import { CoinType } from '../interfaces/CoinInterfaces';
 import { Notifications, BlockNumber } from '../interfaces/Web3ServiceInterface';
-import { AppState, BlockNumberEthereum, BlockNumberBSC } from '../interfaces/AppStateManagerInterfaces';
+import {
+  AppState,
+  BlockNumberBSC,
+  BlockNumberEthereum,
+} from '../interfaces/AppStateManagerInterfaces';
+import { IContacts } from '../interfaces/IContacts';
+import { ICollectibles } from '../interfaces/Icollectibles';
 
 export const appStateInitial: AppState = {
   address: '',
@@ -16,12 +22,22 @@ export const appStateInitial: AppState = {
     USDT: null,
     HYDRO: null,
   },
+  contacts: [],
+  collectibles: []
 }
 
 export type AppStateAction =
   | {
     type: 'setAddress',
     payload: { address: string }
+  }
+  | {
+    type: 'updateContacts',
+    payload: IContacts,
+  }
+  | {
+    type: 'updateCollectibles',
+    payload: ICollectibles,
   }
   | {
     type: 'setNotifications',
@@ -112,6 +128,12 @@ export const appStateManagerReducer = (state = appStateInitial, action: AppState
             [action.payload.coin]: action.payload.value,
           }
         }
+
+    case 'updateContacts':
+      return { ...state, contacts: action.payload }
+
+    case 'updateCollectibles':
+      return { ...state, collectibles: action.payload }
 
     case 'initialised':
       return { ...state, isInitialised: true }

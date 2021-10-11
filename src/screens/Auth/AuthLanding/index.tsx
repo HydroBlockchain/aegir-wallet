@@ -55,14 +55,14 @@ const AuthLanding = ({ navigation }: Props) => {
               variant='grey'
               text='Get Started'
               onPress={HandleGetStarted}
-              styleCustom={styles.button}
             />
+
+            <View style={{ height: 15 }} />
 
             <Button
               variant='grey'
               text='Recover'
               onPress={recover}
-              styleCustom={styles.button}
             />
           </View>
         </ViewContainer>
@@ -104,9 +104,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'flex-end',
   },
-  button: {
-    marginBottom: 15
-  }
 });
 
 export default AuthLanding;

@@ -3,16 +3,15 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   viewContainer: {
     flex: 1,
-    paddingVertical: 20
+    paddingTop: 20
   },
   historyWrapper: {
     flex: 1,
-    marginVertical: 20
+    marginTop: 20
   },
   historyData: {
     padding: 13,
     marginBottom: 10,
-    // flexDirection: 'row',
   },
   operationContent: {
     marginRight: 10,

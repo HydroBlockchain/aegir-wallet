@@ -55,8 +55,6 @@ const PasswordSet = ({ navigation }) => {
                 onPress={onSubmit}
                 text='Okey, i understand'
               />
-
-              <View style={{ marginBottom: 5 }} />
             </ViewContainer>
           </ScrollView>
         </BgView>
@@ -67,7 +65,6 @@ const styles = StyleSheet.create({
     ViewContainer: {
       flex: 1,
       paddingTop: '20%',
-      paddingBottom: 15,
       minHeight: height,
       alignItems: 'center',
       justifyContent: 'center',

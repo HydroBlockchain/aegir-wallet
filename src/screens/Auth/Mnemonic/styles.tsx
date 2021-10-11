@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   },
   wrapperButton: {
     width: '100%',
-    marginBottom: 15,
     justifyContent: 'flex-end',
   },
   text: {

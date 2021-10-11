@@ -15,7 +15,7 @@ import { Header } from "react-native-elements";
 import * as SecureStore from 'expo-secure-store';
 import { ThemeContext } from '../../hooks/useTheme';
 import { useNavigation } from '@react-navigation/native';
-import Icon from "react-native-vector-icons/FontAwesome5";
+import FaIcon from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import IconMaterial from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -94,14 +94,18 @@ const HeaderCustom = ({ variant = 'defuault', title }: HeaderProps) => {
 
     headerOptions.rightComponent = (
       <View style={styles.nav}>
+        <TouchableOpacity onPress={() => { navigation.navigate('ListNFT') }}>
+          <FaIcon name="images"  color={theme.colors.text} size={20} />
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={toggleTheme} style={{ paddingHorizontal: width * 0.02 }}>
           {(isLightTheme)
-            ? <Icon name="moon" color={theme.colors.text} solid={true} size={20} />
+            ? <FaIcon name="moon" color={theme.colors.text} solid={true} size={20} />
             : <MaterialIcons name="wb-sunny" color='#F0B90B' size={20} />
           }
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={toTransfer} style={{ paddingHorizontal: width * 0.02 }}>
+        <TouchableOpacity onPress={toTransfer} >
           <IconMaterial name="bank-transfer" color={theme.colors.text} size={35} />
         </TouchableOpacity>
 
@@ -113,14 +117,14 @@ const HeaderCustom = ({ variant = 'defuault', title }: HeaderProps) => {
           <Badge visible={notifications.length > 0} size={15} style={styles.badgeStyle} >
             {(notifications.length >= 10) ? '+9' : notifications.length.toString()}
           </Badge>
-          <Icon name="bell" color={theme.colors.text} solid={true} size={20} />
+          <FaIcon name="bell" color={theme.colors.text} solid={true} size={20} />
         </TouchableOpacity>
 
         <TouchableOpacity
           style={{ paddingLeft: width * 0.02, paddingRight: '1%' }}
           onPress={() => navigation.navigate("Settings")}
         >
-          <Icon name="cog" color={theme.colors.text} size={20} />
+          <FaIcon name="cog" color={theme.colors.text} size={20} />
         </TouchableOpacity>
       </View>
     );

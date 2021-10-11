@@ -47,15 +47,15 @@ const PROVIDER_WS_BSC_DEV = 'wss://bsc.getblock.io/testnet/';
 const PROVIDER_BSC_DEV = 'https://data-seed-prebsc-1-s1.binance.org:8545/';
 
 /* APIs Key */
-const infuraAPI = '75cc8cba22ab40b9bfa7406ae9b69a27';
-const etherscanAPI = 'F4SXMWX2NF5W3W8PUDZBCNP6EMR3HRHQQF';
-const alchemyMainnetAPI = 'UvYSrTzN7irP8VVOsXMmTHY_2LfXdlmS';
-const alchemyTestnetAPI = 'c7N7arSdoWGJ-VMOEKblEV2asJmwnddS';
-
+export const infuraAPI = '75cc8cba22ab40b9bfa7406ae9b69a27';
+export const etherscanAPI = 'F4SXMWX2NF5W3W8PUDZBCNP6EMR3HRHQQF';
+export const alchemyMainnetAPI = 'UvYSrTzN7irP8VVOsXMmTHY_2LfXdlmS';
+export const alchemyTestnetAPI = 'c7N7arSdoWGJ-VMOEKblEV2asJmwnddS';
 
 class Web3Service {
 	alchemyAPI: string = '';
-	isMainnet: boolean = !__DEV__;
+	web3: Web3 | null = null;
+	isMainnet: boolean = false; //!__DEV__;
 	hydroTokenABI = HydroToken.abi;
 	DAITokenERC20Address: string = '';
 	USDTTokenERC20Address: string = '';
@@ -98,6 +98,10 @@ class Web3Service {
 		this.providerBSC = new ethers.providers.Web3Provider(
 			new Web3.providers.HttpProvider(networkBinance)
 		);
+
+		this.web3 = new Web3(new Web3.providers.HttpProvider(
+			`https://${(isMainnet) ? 'mainnet' : 'ropsten'}.infura.io/v3/${infuraAPI}`
+		))
 
 		this.contracHydroTokenERC20 = new ethers.Contract(
 			this.hydroTokenERC20Address,

@@ -322,7 +322,7 @@ const Home = ({ navigation }: PropsParams) => {
 const styles = StyleSheet.create({
   viewContainer: {
     flex: 1,
-    paddingVertical: 30,
+    paddingTop: 20,
     alignItems: 'center',
   },
   card: {
@@ -336,6 +336,7 @@ const styles = StyleSheet.create({
   total: {
     height: 50,
     width: '100%',
+    paddingTop: 10,
     alignItems: 'center',
     justifyContent:'center',
   }

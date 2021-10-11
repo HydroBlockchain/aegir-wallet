@@ -59,6 +59,13 @@ const Settings = ({ navigation }: SettingsParam) => {
           <ScrollView>
             <Button
               variant='grey'
+              text='Contacts'
+              styleCustom={styles.button}
+              onPress={() => navigation.navigate('Contacts')}
+            />
+
+            <Button
+              variant='grey'
               onPress={toggleTheme}
               styleCustom={styles.button}
               text={isLightTheme ? "Dark Mode" : "Light Mode"}
@@ -104,14 +111,6 @@ const Settings = ({ navigation }: SettingsParam) => {
             />
 
             {/*
-            <Button
-              text='Contact'
-              variant='grey'
-              styleCustom={styles.button}
-              //onPress={() => navigation.navigate('Contact')}
-              onPress={() => {}}
-            />
-
             <Button
               variant='grey'
               text='Add Coin or Token'

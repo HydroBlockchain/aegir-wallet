@@ -17,13 +17,21 @@ const BgView = ({ children, style }: Props) => {
   return (
     <View
       style={{
-        ...insets,
         flex: 1,
         backgroundColor: theme.colors.backgroundApp,
-        ...style,
       }}
     >
-      {children}
+      <View
+        style={{
+          ...insets,
+          flex: 1,
+          top: insets.top - 15,
+          paddingBottom: insets.top,
+          ...style,
+        }}
+      >
+        {children}
+      </View>
     </View>
   );
 };

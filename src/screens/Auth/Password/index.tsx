@@ -126,8 +126,6 @@ const Password = ({ route, navigation }: PasswordParam) => {
 						text='Set password'
 						onPress={onSubmit}
 					/>
-
-					<View style={{ marginBottom: 5 }} />
 				</ViewContainer>
 			</ScrollView>
 		</BgView>
@@ -137,7 +135,6 @@ const Password = ({ route, navigation }: PasswordParam) => {
 const styles = StyleSheet.create({
 	ViewContainer: {
 	  paddingTop: '20%',
-	  paddingBottom: 15,
 	  minHeight: height,
 	  alignItems: 'center',
 	},

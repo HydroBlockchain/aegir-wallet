@@ -10,7 +10,9 @@ import React, {
 import Toast from 'react-native-root-toast';
 import * as SecureStore from 'expo-secure-store';
 import Web3Service from '../../libs/Web3Service';
+import useContacts from '../../hooks/useContacts';
 import { ThemeContext } from '../../hooks/useTheme';
+import BgView from '../../components/Layouts/BgView';
 import BackgroundTimer from 'react-native-background-timer';
 
 /* constants */
@@ -35,17 +37,20 @@ import {
   appStateInitial,
   appStateManagerReducer,
 } from '../../reducers/appStateManagerReducer';
-import BgView from '../../components/Layouts/BgView';
+
 
 import { AppState, LogBox } from 'react-native';
+import useCollectible from '../../hooks/useCollectible';
 LogBox.ignoreLogs(['Setting a timer']);
 
 export const AppStateManagerContext = createContext({} as AppStateContext);
 
 const AppStateManager = ({ children }: AppStateManagerProps) => {
   const { theme } = useContext(ThemeContext);
+  const { contacts, updateContacts } = useContacts();
   const Web3ServiceRef = useRef<null | Web3Service>(null);
   const [ appState, dispatch ] = useReducer(appStateManagerReducer, appStateInitial);
+  const { collectibles, updateCollectibles, refresCollectiblesUri } = useCollectible();
   const [
     currentStateApp, setCurrentStateApp
   ] = useState<CurrentStateApp>(AppState.currentState);
@@ -110,6 +115,20 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
       AppState.removeEventListener('change', handleAppstateChange);
     }
   }, [])
+
+  useEffect(() => {
+    dispatch({
+      payload: contacts,
+      type: 'updateContacts',
+    })
+  }, [ contacts ])
+
+  useEffect(() => {
+    dispatch({
+      payload: collectibles,
+      type: 'updateCollectibles',
+    })
+  }, [ collectibles ])
 
   useEffect(() => {
     const {
@@ -222,7 +241,10 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
       toast,
       appState,
       setAddress,
+      updateContacts,
+      updateCollectibles,
       resetNotifications,
+      refresCollectiblesUri,
       setAllBlockNumbersBSC,
       setAllBlockNumbersEthereum,
       web3Service: Web3ServiceRef.current

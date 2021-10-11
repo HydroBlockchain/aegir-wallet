@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   viewContainer: {
     flex: 1,
     paddingTop: 20,
-    paddingBottom: 40,
     alignItems: 'center'
   },
   logo: {

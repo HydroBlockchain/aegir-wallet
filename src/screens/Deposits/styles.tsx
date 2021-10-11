@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   viewContainer: {
     flex: 1,
-    paddingBottom: 20
   },
   wrapperImageCard: {
     marginTop: 20,

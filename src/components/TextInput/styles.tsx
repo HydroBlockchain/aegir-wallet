@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, Dimensions } from 'react-native';
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   content: {},
   wrapperInput: {
+    alignItems: 'center',
     flexDirection: 'row',
-    alignItems: 'flex-start'
   },
   input: {
     flex: 1,
@@ -16,13 +16,29 @@ const styles = StyleSheet.create({
   },
   icon: {},
   wrapperIcon: {
-    padding: 13,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingRight: 13,
   },
   label: {
     marginBottom: 13.5
-  }
+  },
+  centerText: {
+    flex: 1,
+    fontSize: 18,
+    padding: 32,
+    color: '#777'
+  },
+  textBold: {
+    fontWeight: '500',
+    color: '#000'
+  },
+  buttonText: {
+    fontSize: 21,
+    color: 'rgb(0,122,255)',
+    marginTop:30
+  },
+  buttonTouchable: {
+    marginTop:30
+  },
 });
 
 export default styles;
