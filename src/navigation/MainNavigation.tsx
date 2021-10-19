@@ -3,21 +3,22 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParams } from "../interfaces/RootStackParams";
 
 /* screens */
-import ListNFT from "../screens/NFT";
 import Receive from "../screens/Receive";
 import History from "../screens/History";
-import AddNFT from "../screens/NFT/AddNFT";
 import Settings from '../screens/Settings';
 import Deposits from "../screens/Deposits";
-import Contacts from "../screens/Contacts";
-import ViewNFT from "../screens/NFT/ViewNFT";
-import SendNFT from "../screens/NFT/SendNFT";
 import Home from "../screens/Dashboard/Home";
 import Notification from "../screens/Notification";
 import AddAccountTusc from "../screens/AddAccountTusc";
-import AddContact from '../screens/Contacts/AddContact';
 import RemittancesNavigation from "./RemittancesNavigation";
 import ChangePassword from "../screens/Auth/Password/ChangePassword";
+import Contacts from "../screens/Contacts";
+import AddContact from '../screens/Contacts/AddContact';
+import ListNFT from "../screens/NFT";
+import AddNFT from "../screens/NFT/AddNFT";
+import ViewNFT from "../screens/NFT/ViewNFT";
+import SendNFT from "../screens/NFT/SendNFT";
+import Browser from '../screens/Browser/index';
 
 const Stack = createStackNavigator<RootStackParams>();
 
@@ -44,6 +45,7 @@ const MainNavigation = () => {
       <Stack.Screen name="Deposits" component={Deposits} />
       <Stack.Screen name="AddAccountTusc" component={AddAccountTusc} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen name="Browser" component={Browser} />
     </Stack.Navigator>
 
   );

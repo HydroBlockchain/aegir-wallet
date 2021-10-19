@@ -55,7 +55,7 @@ export const alchemyTestnetAPI = 'c7N7arSdoWGJ-VMOEKblEV2asJmwnddS';
 class Web3Service {
 	alchemyAPI: string = '';
 	web3: Web3 | null = null;
-	isMainnet: boolean = false; //!__DEV__;
+	isMainnet: boolean = !__DEV__;
 	hydroTokenABI = HydroToken.abi;
 	DAITokenERC20Address: string = '';
 	USDTTokenERC20Address: string = '';

@@ -1,4 +1,4 @@
-export type KeyBoardTypeOption = 
+export type KeyBoardTypeOption =
   | 'default'
   | 'number-pad'
   | 'decimal-pad'
@@ -6,23 +6,25 @@ export type KeyBoardTypeOption =
   | 'email-address'
   | 'phone-pad';
 
-  export interface TextInputCustomProps {
-    icon?: string;
-    iconStyle?: {};
-    propsIcon?: {};
-    value?: string;
-    label?: string;
-    editable?: boolean;
-    multiline?: boolean;
-    placeholder?: string;
-    autoCorrect?: boolean;
-    secureTextEntry?: boolean;
-    keyboardType?: KeyBoardTypeOption;
-    stylesCustom?: {
-      input?: {};
-      wrapper?: {};
-      wrapperInput?: {}
-    };
-    onBlur?: () => void | undefined;
-    onChangeText?: (value: string) => void | undefined;
-  }
+export interface TextInputCustomProps {
+  icon?: string;
+  iconStyle?: {};
+  propsIcon?: {};
+  value?: string;
+  label?: string;
+  editable?: boolean;
+  multiline?: boolean;
+  placeholder?: string;
+  autoCorrect?: boolean;
+  secureTextEntry?: boolean;
+  keyboardType?: KeyBoardTypeOption;
+  stylesCustom?: {
+    input?: {};
+    wrapper?: {};
+    wrapperInput?: {};
+  };
+  errorMsg?: string;
+  onBlur?: () => void | undefined;
+  onChangeText?: (value: string) => void | undefined;
+  onIconClick?: () => void | undefined;
+}
