@@ -19,6 +19,7 @@ import AddNFT from "../screens/NFT/AddNFT";
 import ViewNFT from "../screens/NFT/ViewNFT";
 import SendNFT from "../screens/NFT/SendNFT";
 import Browser from '../screens/Browser/index';
+import AddCustomToken from "../screens/AddCustomToken";
 
 const Stack = createStackNavigator<RootStackParams>();
 
@@ -34,6 +35,7 @@ const MainNavigation = () => {
       <Stack.Screen name="Remittances" component={RemittancesNavigation} />
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="Contacts" component={Contacts} />
+      <Stack.Screen name="AddCustomToken" component={AddCustomToken} />
       <Stack.Screen name="ListNFT" component={ListNFT} />
       <Stack.Screen name="AddNFT" component={AddNFT} />
       <Stack.Screen name="ViewNFT" component={ViewNFT} />

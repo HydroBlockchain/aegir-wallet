@@ -29,5 +29,6 @@ export const APPLE_STORE_ID = 'id284882215';
 export const GOOGLE_PACKAGE_NAME = 'com.aegirwallet';
 
 /* App state manager */
+export const CUSTOM_TOKENS = 'AEGIR_CUSTOM_TOKENS';
 export const LAST_BLOCK_NUMBER_BSC = 'LAST_BLOCK_NUMBER_BSC';
 export const LAST_BLOCK_NUMBER_ETHEREUM = 'LAST_BLOCK_NUMBER_ETHEREUM';

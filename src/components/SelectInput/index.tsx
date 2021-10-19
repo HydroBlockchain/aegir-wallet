@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FlatList, TouchableHighlight, View } from 'react-native';
 
 import styles from './style';
@@ -15,11 +15,23 @@ const SelectInput = ({
   options = [],
   placeholder = '',
   onChange = () => {},
+  selectedDefault = null,
 }: ISelectInput) => {
   const { theme } = useContext(ThemeContext);
   const [ selectedValue, setSelectedValue ] = useState('');
   const [ isModalVisible, setModalVisible ] = useState(false);
   const [ selectedIndex, setSelectedIndex ] = useState<null | number>(null);
+
+  useEffect(() => {
+    if(selectedDefault) {
+      const index = options.findIndex(el => el.id === selectedDefault.id);
+
+      if(index !== -1) {
+        setSelectedIndex(index);
+        setSelectedValue(selectedDefault.id);
+      }
+    }
+  }, [])
 
   const toggleModal = () => {
     setModalVisible((prevState) => !prevState);

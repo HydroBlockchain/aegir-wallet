@@ -28,12 +28,12 @@ import {TUSC_WALLET_ADDRESS} from '../../../constants';
 import {AppStateManagerContext} from '../../context/AppStateManager';
 
 const History = ({navigation, route}: HistoryParam) => {
-  const { coin, network } = route.params;
   const { theme } = useContext(ThemeContext);
   const { height } = Dimensions.get('window');
   const [ balance, setBalance ] = useState(0);
   const [ scanURI, setScanURI ] = useState('');
   const [ spinner, setSpinner ] = useState(true);
+  const { coin, network, customToken } = route.params;
   const [ addressTUSC, setAddressTUSC ] = useState('');
   const [ history, setHistory ] = useState<HistoryData>([]);
   const {
@@ -65,13 +65,13 @@ const History = ({navigation, route}: HistoryParam) => {
             );
           }
 
-          if (coin === 'BNB') {
+          if (coin === 'BNB' && !customToken) {
             let data = await Promise.all([
               web3Service.getBNBHistory(address),
               web3Service.getBNBBalanceOf(address),
             ]);
             if (data) [history, balance] = data;
-          } else if (coin === 'ETH') {
+          } else if (coin === 'ETH' && !customToken) {
             balance = await web3Service.getEtherBalanceOf(address);
             const responseHistory = await web3Service.getEthereumHistory({
               address,
@@ -110,13 +110,18 @@ const History = ({navigation, route}: HistoryParam) => {
               });
             }
           } else {
+            let symbol = coin;
+            if(customToken) {
+              symbol = (network === 'BSC') ? 'BNB' : 'ETH';
+            }
+
             let data = await Promise.all([
-              web3Service.getTokenBalance({address, coin, network}),
+              web3Service.getTokenBalance({ address, coin: symbol, network, customToken }),
               web3Service[
                 network === 'ETH'
                   ? 'getEthereumTokenHistory'
                   : 'getBSCTokenHistory'
-              ]({address, token: coin}),
+              ]({ address, token: symbol, customToken }),
             ]);
             if (data) [balance, history] = data;
           }
@@ -162,8 +167,9 @@ const History = ({navigation, route}: HistoryParam) => {
           coin={coin}
           showAddress
           balance={balance}
-          address={addressTUSC}
           network={network}
+          address={addressTUSC}
+          customToken={customToken}
         />
 
         <View style={styles.historyWrapper}>
@@ -258,7 +264,7 @@ const History = ({navigation, route}: HistoryParam) => {
             variant="grey"
             onPress={handleBroser}
             text="Open in blockexplorer"
-            
+
           />
         </View>
       </ViewContainer>

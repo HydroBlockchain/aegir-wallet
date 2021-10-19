@@ -7,6 +7,7 @@ import {
 } from '../interfaces/AppStateManagerInterfaces';
 import { IContacts } from '../interfaces/IContacts';
 import { ICollectibles } from '../interfaces/Icollectibles';
+import { IcustomTokens } from '../interfaces/AppStateManagerInterfaces';
 
 export const appStateInitial: AppState = {
   address: '',
@@ -23,7 +24,8 @@ export const appStateInitial: AppState = {
     HYDRO: null,
   },
   contacts: [],
-  collectibles: []
+  collectibles: [],
+  customTokens: []
 }
 
 export type AppStateAction =
@@ -34,6 +36,10 @@ export type AppStateAction =
   | {
     type: 'updateContacts',
     payload: IContacts,
+  }
+  | {
+    type: 'updateCustomTokens',
+    payload: IcustomTokens,
   }
   | {
     type: 'updateCollectibles',
@@ -131,6 +137,9 @@ export const appStateManagerReducer = (state = appStateInitial, action: AppState
 
     case 'updateContacts':
       return { ...state, contacts: action.payload }
+
+    case 'updateCustomTokens':
+      return { ...state, customTokens: action.payload }
 
     case 'updateCollectibles':
       return { ...state, collectibles: action.payload }

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   BackHandler,
   RefreshControl,
+  Dimensions,
 } from "react-native";
 
 import Header from "../../components/Header";
@@ -26,7 +27,7 @@ import { TUSC_WALLET_NAME } from '../../../constants'
 import currencyConverter from "../../libs/currencyConverter";
 import { RootStackParams } from "../../interfaces/RootStackParams";
 import { AppStateManagerContext } from '../../context/AppStateManager/index';
-import { CurrentStateApp } from "../../interfaces/AppStateManagerInterfaces";
+import { CurrentStateApp, IcustomToken } from '../../interfaces/AppStateManagerInterfaces';
 import { CoinData, CoinType, Network } from '../../interfaces/CoinInterfaces';
 
 interface PropsParams extends StackScreenProps<RootStackParams, 'Home'>{};
@@ -48,6 +49,7 @@ const Home = ({ navigation }: PropsParams) => {
   const [ totalBalances, setTotalBalances ] = useState(0);
   const [ tuscWalletName, setTuscWalletName ] = useState('');
   const [ balances, setBalances ] = useState(balancesDefault);
+  const [ widthCraouselItem, setWidthCraouselItem ] = useState(0);
   const [ balanceInUSD, setBalanceInUSD ] = useState(balancesDefault);
   const { appState, web3Service, toast } = useContext(AppStateManagerContext);
   const [
@@ -60,6 +62,10 @@ const Home = ({ navigation }: PropsParams) => {
     gettingBalanceRef.current = status;
     _setGettingBalance(status);
   }
+
+  /* Custom Token's */
+  const { customTokens } = appState;
+  const [ customTokensBalance, setCustomTokensBalance ] = useState({});
 
   const cards: CoinData[] = [
     { coin: 'HYDRO', network: 'BSC' },
@@ -74,6 +80,7 @@ const Home = ({ navigation }: PropsParams) => {
 
   useEffect(() => {
     handleGetAllBalances();
+    getBalanceCustomTokens();
 
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
     AppState.addEventListener('change', handleAppstateChange);
@@ -245,6 +252,34 @@ const Home = ({ navigation }: PropsParams) => {
     }
   }
 
+  const getBalanceCustomTokens = async () => {
+    const customTokensPromises = customTokens.map(async (el) => {
+      const { address } = appState;
+      const coin = (el.network === 'BSC') ? 'BNB' : 'ETH';
+      const balance = await web3Service.getTokenBalance({
+        coin,
+        address,
+        customToken: el,
+        network: el.network,
+      });
+
+      return {
+        tokenData: el,
+        balance: Boolean(balance) ? balance : 0,
+      }
+    });
+
+    Promise.all(customTokensPromises)
+    .then(result => {
+      const balances = {};
+      result.forEach(el => {
+        balances[el.tokenData.address] = el.balance ?? 0;
+      })
+      setCustomTokensBalance(balances);
+    })
+    .catch(error => {})
+  }
+
   const handleReceive = (params: CoinData) => {
     // navigation.navigate("transfertusc");
     navigation.navigate("Receive", params);
@@ -301,6 +336,28 @@ const Home = ({ navigation }: PropsParams) => {
                   />
                 );
               })}
+
+              {customTokens.map((item, key) => {
+                const { network } = item;
+                const balance = customTokensBalance?.[item.address] ?? 0;
+                const coin: CoinType = (network === 'BSC') ? 'BNB' : 'ETH';
+
+                const data = { coin, network, customToken: item }
+
+                return(
+                  <CoinCard
+                    key={key}
+                    coin={coin}
+                    balance={balance}
+                    network={network}
+                    customToken={item}
+                    history={() => handleHistory(data)}
+                    deposit={() => handleDeposit(data)}
+                    receive={() => handleReceive(data)}
+                    styleCustom={{ card: styles.card }}
+                  />
+                );
+              })}
           </ScrollView>
         </View>
 
@@ -339,7 +396,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     alignItems: 'center',
     justifyContent:'center',
-  }
+  },
 });
 
 export default Home;

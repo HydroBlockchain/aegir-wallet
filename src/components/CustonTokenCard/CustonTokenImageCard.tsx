@@ -3,12 +3,10 @@ import { Image } from 'react-native'
 import styles from './styles';
 import { ImageCardProps } from '../../interfaces/CoinInterfaces';
 
-const ImageCard = ({ coin, network, styleCustom = {}, isCustomToken = false }: ImageCardProps) => {
+const CustonTokenImageCard = ({ coin, network, styleCustom = {} }: ImageCardProps) => {  
   return (
     <Image
       source={
-        (coin === 'ETH' && isCustomToken) ? require('../../assets/images/cards/ETH.png') :
-        (coin === 'BNB' && isCustomToken) ? require('../../assets/images/cards/BNB.png') :
         (coin === 'ETH') ? require('../../assets/images/cards/ETH.png') :
         (coin === 'BNB') ? require('../../assets/images/cards/BNB.png') :
         (coin === 'BTC') ? require('../../assets/images/cards/BTC.png') :
@@ -17,11 +15,11 @@ const ImageCard = ({ coin, network, styleCustom = {}, isCustomToken = false }: I
         (coin === 'TUSC') ? require('../../assets/images/cards/TUSC.png') :
         (coin === 'HYDRO' && network === 'BSC') ? require('../../assets/images/cards/HYDRO.png') :
         (coin === 'HYDRO' && network !== 'BSC') ? require('../../assets/images/cards/HYDRO_ETH.png') :
-        {}
+        require('../../assets/images/cards/emma.png')
       }
       style={[styles.imageCard, styleCustom]}
     />
   )
 }
 
-export default ImageCard
+export default CustonTokenImageCard

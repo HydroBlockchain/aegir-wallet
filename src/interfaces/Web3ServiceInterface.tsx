@@ -1,11 +1,12 @@
 import { ethers } from 'ethers';
 import { CoinType, Network } from './CoinInterfaces';
-import { BlockNumberBSC, BlockNumberEthereum } from './AppStateManagerInterfaces';
+import { BlockNumberBSC, BlockNumberEthereum, IcustomToken } from './AppStateManagerInterfaces';
 
 export interface GetTokenBalanceProps {
   coin: CoinType;
   address: string;
   network: Network;
+  customToken?: IcustomToken | null
 }
 
 export type OperationTransaction = 'SENT' | 'RECEIVED';
@@ -57,10 +58,12 @@ export interface GetEthereumTokenHistoryProps {
   address: string;
   token: CoinType;
   startblock?: BlockNumber;
+  customToken?: IcustomToken | null;
 }
 
 /* Ethers types */
 export type Contract = ethers.Contract;
+export type Provider = ethers.providers.Provider;
 export type Web3Provider = ethers.providers.Web3Provider;
 export type JsonRpcProvider = ethers.providers.JsonRpcProvider;
 export type FallbackProvider = ethers.providers.FallbackProvider;

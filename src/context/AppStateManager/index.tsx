@@ -17,6 +17,7 @@ import BackgroundTimer from 'react-native-background-timer';
 
 /* constants */
 import {
+  CUSTOM_TOKENS,
   LAST_BLOCK_NUMBER_BSC,
   LAST_BLOCK_NUMBER_ETHEREUM,
 } from '../../../constants';
@@ -29,6 +30,7 @@ import {
   AppStateContext,
   BlockNumberEthereum,
   AppStateManagerProps,
+  IcustomTokens,
 } from '../../interfaces/AppStateManagerInterfaces';
 import { Notifications } from '../../interfaces/Web3ServiceInterface';
 
@@ -61,6 +63,16 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
     }
 
     const init = async () => {
+      const customTokenRaw = await SecureStore.getItemAsync(CUSTOM_TOKENS);
+
+      if(customTokenRaw) {
+        const customToken = JSON.parse(customTokenRaw);
+        dispatch({
+          payload: customToken,
+          type: 'updateCustomTokens',
+        })
+      }
+
       const blockNumberBSC = await SecureStore.getItemAsync(LAST_BLOCK_NUMBER_BSC);
       const blockNumberEthereum = await SecureStore.getItemAsync(LAST_BLOCK_NUMBER_ETHEREUM);
 
@@ -158,6 +170,14 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
     appState.blockNumberEthereum,
   ])
 
+  const updateCustomTokens = async (custonTokens: IcustomTokens) => {
+    await SecureStore.setItemAsync(CUSTOM_TOKENS, JSON.stringify(custonTokens));
+    dispatch({
+      type: 'updateCustomTokens',
+      payload: custonTokens
+    });
+  }
+
   const handleAppstateChange = (state: CurrentStateApp) => {
     setCurrentStateApp(state);
   }
@@ -244,6 +264,7 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
       updateContacts,
       updateCollectibles,
       resetNotifications,
+      updateCustomTokens,
       refresCollectiblesUri,
       setAllBlockNumbersBSC,
       setAllBlockNumbersEthereum,

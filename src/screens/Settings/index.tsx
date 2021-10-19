@@ -66,6 +66,13 @@ const Settings = ({ navigation }: SettingsParam) => {
 
             <Button
               variant='grey'
+              text='Add custom token'
+              styleCustom={styles.button}
+              onPress={() => navigation.navigate('AddCustomToken')}
+            />
+
+            <Button
+              variant='grey'
               onPress={toggleTheme}
               styleCustom={styles.button}
               text={isLightTheme ? "Dark Mode" : "Light Mode"}
@@ -109,16 +116,6 @@ const Settings = ({ navigation }: SettingsParam) => {
               //onPress={() => navigation.navigate('security')}
               onPress={() => {}}
             />
-
-            {/*
-            <Button
-              variant='grey'
-              text='Add Coin or Token'
-              styleCustom={styles.button}
-              //onPress={() => navigation.navigate('Asset')}
-              onPress={() => {}}
-            />
-            */}
 
             <Button
               variant='grey'

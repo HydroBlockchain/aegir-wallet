@@ -31,7 +31,7 @@ interface PropsParams extends StackScreenProps<RootStackParams, 'Deposits'> {}
 
 const Deposits = ({route}: PropsParams) => {
   const [ fee, setFee ] = useState('');
-  const { coin, network } = route.params;
+  const { coin, network, customToken } = route.params;
   const { theme } = useContext(ThemeContext);
   const [ amount, setAmount ] = useState('');
   const [ balance, setBalance ] = useState(0);
@@ -54,12 +54,19 @@ const Deposits = ({route}: PropsParams) => {
   useEffect(() => {
     const getBalance = async () => {
       try {
+        let symbol = coin;
+        if(customToken) {
+          symbol = (network === 'BSC') ? 'BNB' : 'ETH';
+        }
+
         const balance = await web3Service.getTokenBalance({
           address,
-          coin,
           network,
+          customToken,
+          coin: symbol,
         });
-        if (balance) {
+
+        if (balance && !customToken) {
           setBalance(balance);
           const balanceInUSD = await currencyConverter({
             coin,
@@ -157,7 +164,6 @@ const Deposits = ({route}: PropsParams) => {
     try {
       for (let key in errors) {
         if (errors[key] || !ethers.utils.isAddress(receiver)) {
-          // validateAddress();
           toast({
             type: 'error',
             text: 'Correct any errors before continuing',
@@ -195,7 +201,7 @@ const Deposits = ({route}: PropsParams) => {
         return;
       }
 
-      if (['ETH', 'BNB'].includes(coin)) {
+      if (['ETH', 'BNB'].includes(coin) && !customToken) {
         const tx = {
           to: receiver,
           value: ethers.utils.parseEther(amount),
@@ -203,27 +209,34 @@ const Deposits = ({route}: PropsParams) => {
 
         await wallet.sendTransaction(tx);
       } else {
-        const methodsGetTokenAddress = {
-          DAI_ETH: 'getDAIERC20Address',
-          USDT_ETH: 'getUSDTERC20Address',
-          HYDRO_ETH: 'getHydroTokenERC20Address',
-          HYDRO_BSC: 'getHydroTokenBEP20Address',
-        };
-        const ABI = web3Service.hydroTokenABI;
-        const method = methodsGetTokenAddress[`${coin}_${network}`];
+        let tokenAddress = '';
 
-        if (!method) {
-          setSpinner(false);
-          return;
+        if(customToken) {
+          tokenAddress = customToken.address;
+        } else {
+          const methodsGetTokenAddress = {
+            DAI_ETH: 'getDAIERC20Address',
+            USDT_ETH: 'getUSDTERC20Address',
+            HYDRO_ETH: 'getHydroTokenERC20Address',
+            HYDRO_BSC: 'getHydroTokenBEP20Address',
+          };
+          const method = methodsGetTokenAddress[`${coin}_${network}`];
+
+          if (!method) {
+            setSpinner(false);
+            return;
+          }
+
+          tokenAddress = web3Service[method]();
         }
 
-        const tokenAddress = web3Service[method]();
 
         if (!tokenAddress) {
           setSpinner(false);
           return;
         }
 
+        const ABI = web3Service.hydroTokenABI;
         const contract = new ethers.Contract(tokenAddress, ABI, wallet);
         const decimals = await contract.decimals();
         const tokensToSend = ethers.utils.parseUnits(amount, decimals);
@@ -298,7 +311,7 @@ const Deposits = ({route}: PropsParams) => {
           <TextInputCustom
             icon="qrcode"
             value={receiver}
-            label={`Send ${coin} (${network}) to`}
+            label={`Send ${(customToken) ? customToken.symbol : coin} (${network}) to`}
             errorMsg={
               receiver
                 ? validateQrAddress(receiver)

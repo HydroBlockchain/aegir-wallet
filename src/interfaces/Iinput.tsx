@@ -19,6 +19,7 @@ export interface IOption {
 
 export interface ISelectInput extends InputBase {
   options?: IOption[];
+  selectedDefault?: IOption | null;
   onChange?: (item: IOption) => any;
 }
 

@@ -1,4 +1,6 @@
-export type CoinType = 
+import { IcustomToken } from "./AppStateManagerInterfaces";
+
+export type CoinType =
   | 'ETH'
   | 'BNB'
   | 'BTC'
@@ -16,18 +18,20 @@ export type Network =
 export interface CoinData {
   coin: CoinType;
   network: Network;
+  customToken?: IcustomToken | null;
 }
 
 export interface ImageCardProps extends CoinData {
   styleCustom?: {};
+  isCustomToken?: boolean;
 }
 
 export interface CoinCardProps extends CoinData {
   balance: number;
   styleCustom?: {
-    card?: {},
-    button?: {},
-    buttonText?: {},
+    card?: {};
+    button?: {};
+    buttonText?: {};
   };
   address?: string;
   deposit?: () => void;
@@ -35,5 +39,6 @@ export interface CoinCardProps extends CoinData {
   receive?: () => void;
   showAddress?: boolean;
   balanceInUSD?: number;
+  changeWidth?: (width: number) => void;
   createAccount?: () => void | undefined;
 }

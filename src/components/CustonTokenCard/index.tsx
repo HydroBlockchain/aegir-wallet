@@ -6,7 +6,7 @@ import styles from './styles';
 /* components */
 import Button from '../Button';
 import { View } from 'react-native'
-import ImageCard from './ImageCard';
+import ImageCard from './CustonTokenImageCard';
 import Paragraph from '../Paragraph/index';
 
 /* utils */
@@ -15,7 +15,7 @@ import { CoinCardProps } from '../../interfaces/CoinInterfaces';
 /* context */
 import { ThemeContext } from '../../hooks/useTheme';
 
-const CoinCard = ({
+const CustonTokenCard = ({
   coin,
   balance,
   network,
@@ -23,11 +23,9 @@ const CoinCard = ({
   showAddress,
   balanceInUSD,
   createAccount,
-  customToken = null,
   deposit = () => {},
   history = () => {},
   receive = () => {},
-  changeWidth = (width) => {},
   styleCustom = {
     card: {},
     button: {},
@@ -49,8 +47,6 @@ const CoinCard = ({
     styleCustom.buttonText
   ];
 
-  const symbol = (customToken?.symbol) ? customToken.symbol : coin;
-
   return (
     <View
       style={[
@@ -66,7 +62,6 @@ const CoinCard = ({
       ]}
       onLayout={(event) => {
         var { width } = event.nativeEvent.layout;
-        changeWidth(width);
         setHeightCard((prevState) => {
           return (prevState) ? prevState : (9 / 16) * width
         })
@@ -84,7 +79,7 @@ const CoinCard = ({
               styles.criptoBalance,
             ]}
           >
-            {`${balance} ${symbol}`}
+            {`${balance} ${coin}`}
           </Paragraph>
 
           { (!balanceInUSD) ? null : (
@@ -168,4 +163,4 @@ const CoinCard = ({
   )
 }
 
-export default CoinCard;
+export default CustonTokenCard;

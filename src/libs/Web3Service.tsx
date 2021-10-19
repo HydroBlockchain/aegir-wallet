@@ -17,10 +17,12 @@ import {
 	GetNotificationsERC20Props,
 	GetNotificationsBEP20Props,
 	GetEthereumTokenHistoryProps,
+	Provider,
 } from '../interfaces/Web3ServiceInterface';
 import { CoinType } from '../interfaces/CoinInterfaces';
 
 /* contracts */
+import abiERC20 from '../contracts/abiERC20';
 import HydroToken from '../contracts/HydroToken.json';
 import ClientRainDrop from '../contracts/ClientRaindrop.json';
 
@@ -55,6 +57,7 @@ export const alchemyTestnetAPI = 'c7N7arSdoWGJ-VMOEKblEV2asJmwnddS';
 class Web3Service {
 	alchemyAPI: string = '';
 	web3: Web3 | null = null;
+	web3BSC: Web3 | null = null;
 	isMainnet: boolean = !__DEV__;
 	hydroTokenABI = HydroToken.abi;
 	DAITokenERC20Address: string = '';
@@ -63,6 +66,7 @@ class Web3Service {
 	hydroTokenBEP20Address: string = '';
 	providerBSC: Web3Provider | null = null;
 	providerETH: FallbackProvider | null = null;
+	defaultProviderETH: Provider | null = null;
 	contracDAITokenERC20: Contract | null = null;
 	contracUSDTTokenERC20: Contract | null = null;
 	contracHydroTokenERC20: Contract | null = null;
@@ -92,12 +96,19 @@ class Web3Service {
 			ethers.providers.AlchemyProvider.getWebSocketProvider(networkEthereum, this.alchemyAPI),
 		];
 
-			this.providerETH = new ethers.providers.FallbackProvider(providersETH);
+		this.providerETH = new ethers.providers.FallbackProvider(providersETH);
 
+
+		this.defaultProviderETH = ethers.providers.InfuraProvider.getWebSocketProvider(networkEthereum);
 
 		this.providerBSC = new ethers.providers.Web3Provider(
 			new Web3.providers.HttpProvider(networkBinance)
 		);
+
+		this.web3BSC = new Web3(new Web3.providers.HttpProvider(
+			(isMainnet) ?	'https://bsc-dataseed.binance.org/'
+				: 'https://data-seed-prebsc-1-s1.binance.org:8545/'
+		))
 
 		this.web3 = new Web3(new Web3.providers.HttpProvider(
 			`https://${(isMainnet) ? 'mainnet' : 'ropsten'}.infura.io/v3/${infuraAPI}`
@@ -342,7 +353,7 @@ class Web3Service {
 		return result;
 	}
 
-	async getTokenBalance({ address, coin, network }: GetTokenBalanceProps) {
+	async getTokenBalance({ address, coin, network, customToken }: GetTokenBalanceProps) {
 		try {
 			const contractMethods = {
 				DAI_ETH: 'contracDAITokenERC20',
@@ -350,6 +361,20 @@ class Web3Service {
 				HYDRO_ETH: 'contracHydroTokenERC20',
 				HYDRO_BSC: 'contracHydroTokenBEP20',
 			}
+
+
+			if(customToken) {
+				const provider = (network === 'ETH') ? this.providerETH : this.providerBSC;
+
+				if(!provider) return null;
+				const ERC20 = new ethers.Contract( customToken.address, abiERC20, provider );
+				const decimals = await ERC20.decimals();
+				const tokenbalance = await ERC20.balanceOf(address);
+				const amount = ethers.utils.formatUnits(tokenbalance, decimals);
+
+				return parseFloat(amount);
+			}
+
 
 			if(coin === 'BNB') return this.getBNBBalanceOf(address);
 			if(coin === 'ETH') return this.getEtherBalanceOf(address);
@@ -468,6 +493,7 @@ class Web3Service {
 		token,
 		address,
 		startblock,
+		customToken,
 	}: GetEthereumTokenHistoryProps) {
 		const result: HistoryData = [];
 		try {
@@ -476,7 +502,17 @@ class Web3Service {
 				USDT: 'contracUSDTTokenERC20',
 				HYDRO: 'contracHydroTokenERC20',
 			};
-			const contract =this[contractMethods[token]];
+
+			let contract: any = null;
+
+			if(customToken) {
+				const provider = (customToken.network === 'ETH') ? this.providerETH : this.providerBSC;
+				if(!provider) return result;
+				contract = new ethers.Contract( customToken.address, abiERC20, provider );
+			} else {
+				contract = this[contractMethods[token]];
+			}
+
 
 			if(!contract) return result;
 
@@ -514,12 +550,14 @@ class Web3Service {
 	async getBSCTokenHistory({
 		token,
 		address,
+		customToken
 	}: GetEthereumTokenHistoryProps) {
 		const result: HistoryData = [];
 		try {
 			const contractMethods = {
 				HYDRO: 'contracHydroTokenBEP20',
 			};
+
 			const contractAddress = this.hydroTokenBEP20Address.toLowerCase();
 
 			if(token === 'HYDRO') {

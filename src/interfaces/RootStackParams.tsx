@@ -36,6 +36,8 @@ export type RootStackParams = {
   Settings: any;
   Contacts: any;
   AddContact: any;
+  AddCustomToken: any;
+  Browser: any;
   ListNFT: any;
   AddNFT: any;
   SendNFT: ICollectibleData;
