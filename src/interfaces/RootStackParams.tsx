@@ -44,7 +44,9 @@ export type RootStackParams = {
   ViewNFT: ICollectibleData;
   Receive: CoinData;
   History: CoinData;
+  ExportKeys: any;
   Notification: any;
+  ClaimHydroID: any;
   AddAccountTusc: any;
   Deposits: DepositScreenParams;
   Etherhistory: EtherHistoryScreenParams;

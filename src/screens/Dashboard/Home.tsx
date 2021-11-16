@@ -82,11 +82,11 @@ const Home = ({ navigation }: PropsParams) => {
     handleGetAllBalances();
     getBalanceCustomTokens();
 
-    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-    AppState.addEventListener('change', handleAppstateChange);
+    const BackHandlerEvent = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    const AppStateEvent = AppState.addEventListener('change', handleAppstateChange);
     return () => {
-      AppState.removeEventListener('change', handleAppstateChange);
-      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+      AppStateEvent.remove();
+      BackHandlerEvent.remove();
     };
   }, []);
 
@@ -97,6 +97,7 @@ const Home = ({ navigation }: PropsParams) => {
   useEffect(() => {
     if(!gettingBalanceRef.current && currentStateApp !== 'background') {
       handleGetAllBalances();
+      getBalanceCustomTokens();
     }
   }, [ appState.notifications.length, currentStateApp ])
 
@@ -118,7 +119,6 @@ const Home = ({ navigation }: PropsParams) => {
 
     for(let key in balances) {
       const data = key.split('_');
-      setTotalBalances(totalBalances);
       const coin = data[0] as CoinType;
       const network: any = data[1] as Network;
 
@@ -137,7 +137,7 @@ const Home = ({ navigation }: PropsParams) => {
       const balanceInUSD = { ...balancesDefault };
 
       values.forEach((el) => {
-        balanceInUSD[el.key] = el.value;
+        balanceInUSD[el.key] = parseFloat(parseFloat(el.value).toFixed(2));
       });
 
       setBalanceInUSD(balanceInUSD);
@@ -309,6 +309,7 @@ const Home = ({ navigation }: PropsParams) => {
           <ScrollView refreshControl={
             <RefreshControl refreshing={false} onRefresh={() => {
               handleGetAllBalances();
+              getBalanceCustomTokens();
             }}/>
           }>
               {cards.map((data, key) => {

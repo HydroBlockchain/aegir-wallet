@@ -10,6 +10,7 @@ import { ICollectibles } from '../interfaces/Icollectibles';
 import { IcustomTokens } from '../interfaces/AppStateManagerInterfaces';
 
 export const appStateInitial: AppState = {
+  EIN: '',
   address: '',
   notifications: [],
   isInitialised: false,
@@ -32,6 +33,10 @@ export type AppStateAction =
   | {
     type: 'setAddress',
     payload: { address: string }
+  }
+  | {
+    type: 'setEIN',
+    payload: { EIN: string }
   }
   | {
     type: 'updateContacts',
@@ -75,6 +80,12 @@ export const appStateManagerReducer = (state = appStateInitial, action: AppState
       return {
         ...state,
         address: action.payload.address,
+      };
+
+    case 'setEIN':
+      return {
+        ...state,
+        EIN: action.payload.EIN,
       };
 
     case 'resetNotifications':

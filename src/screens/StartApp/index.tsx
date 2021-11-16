@@ -40,10 +40,10 @@ const StartApp = ({ navigation }: Props) => {
   const [showApp, setShowApp] = useState(false);
 
   useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    const event = BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
 
     return () => {
-      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+      event.remove();
     }
   }, [])
 

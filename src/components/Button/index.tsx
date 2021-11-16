@@ -9,6 +9,7 @@ import { ThemeContext } from '../../hooks/useTheme';
 const Button = ({
   text,
   styleText = {},
+  disable = false,
   styleCustom = {},
   onPress = () => {},
   variant = 'default',
@@ -37,6 +38,7 @@ const Button = ({
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={disable}
       style={[
         style,
         { borderRadius: theme.roundness },

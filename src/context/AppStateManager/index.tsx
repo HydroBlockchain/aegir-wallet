@@ -43,6 +43,7 @@ import {
 
 import { AppState, LogBox } from 'react-native';
 import useCollectible from '../../hooks/useCollectible';
+import { ethers } from 'ethers';
 LogBox.ignoreLogs(['Setting a timer']);
 
 export const AppStateManagerContext = createContext({} as AppStateContext);
@@ -63,8 +64,9 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
     }
 
     const init = async () => {
-      const customTokenRaw = await SecureStore.getItemAsync(CUSTOM_TOKENS);
+      const w3 = Web3ServiceRef.current;
 
+      const customTokenRaw = await SecureStore.getItemAsync(CUSTOM_TOKENS);
       if(customTokenRaw) {
         const customToken = JSON.parse(customTokenRaw);
         dispatch({
@@ -80,7 +82,7 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
       if(blockNumberBSC) {
         blockNumberBSCInitial = JSON.parse(blockNumberBSC);
       } else {
-        const provider = Web3ServiceRef.current?.providerBSC;
+        const provider = w3?.providerBSC;
         if(provider) {
           const blockNumber = await provider.getBlockNumber();
           for(let key in blockNumberBSCInitial) {
@@ -100,7 +102,7 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
         blockNumberEthereumInitial = JSON.parse(blockNumberEthereum);
 
       } else {
-        const provider = Web3ServiceRef.current?.providerETH;
+        const provider = w3?.providerETH;
         if(provider) {
           const blockNumber = await provider.getBlockNumber();
           for(let key in blockNumberEthereumInitial) {
@@ -115,16 +117,16 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
       setAllBlockNumbersEthereum(blockNumberEthereumInitial);
 
       dispatch({type: 'initialised'});
-      // setTimeout(() => dispatch({type: 'initialised'}), 500);
     }
 
     init();
+    getEIN();
 
-    AppState.addEventListener('change', handleAppstateChange);
+    const event = AppState.addEventListener('change', handleAppstateChange);
 
     return () => {
       Web3ServiceRef.current = null;
-      AppState.removeEventListener('change', handleAppstateChange);
+      event.remove();
     }
   }, [])
 
@@ -141,6 +143,12 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
       type: 'updateCollectibles',
     })
   }, [ collectibles ])
+
+  useEffect(() => {
+    if(appState.address) {
+      getEIN();
+    }
+  }, [ appState.address ])
 
   useEffect(() => {
     const {
@@ -178,6 +186,16 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
     });
   }
 
+  const getEIN = async () => {
+    try {
+      const { address } = appState;
+      const w3 = Web3ServiceRef.current;
+      if(!w3 || !w3.contracIdentityRegistry || !address) return;
+      const ein = await w3.contracIdentityRegistry.getEIN(appState.address);
+      setEIN(ein.toString());
+    } catch {}
+  }
+
   const handleAppstateChange = (state: CurrentStateApp) => {
     setCurrentStateApp(state);
   }
@@ -203,6 +221,13 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
     dispatch({
       type: 'setAddress',
       payload: { address }
+    })
+  }
+
+  const setEIN = (EIN: string) => {
+    dispatch({
+      type: 'setEIN',
+      payload: { EIN }
     })
   }
 
@@ -259,6 +284,7 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
   return (
     <AppStateManagerContext.Provider value={{
       toast,
+      setEIN,
       appState,
       setAddress,
       updateContacts,

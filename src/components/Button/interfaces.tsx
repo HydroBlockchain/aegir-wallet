@@ -6,5 +6,6 @@ export interface ButtonProps {
   text: string;
   styleText?: {};
   styleCustom?: {};
+  disable?: boolean;
   onPress?: () => void;
 }

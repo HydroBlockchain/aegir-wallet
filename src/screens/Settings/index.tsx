@@ -82,16 +82,14 @@ const Settings = ({ navigation }: SettingsParam) => {
               variant='grey'
               text='Claim Hydro ID'
               styleCustom={styles.button}
-              //onPress={() => navigation.navigate('ClaimHydroId')}
-              onPress={() => {}}
+              onPress={() => navigation.navigate('ClaimHydroID')}
             />
 
             <Button
               variant='grey'
               text='Export keys'
               styleCustom={styles.button}
-              //onPress={() => navigation.navigate('exportKeys')}
-              onPress={() => {}}
+              onPress={() => navigation.navigate('ExportKeys')}
             />
 
             <Button

@@ -66,8 +66,11 @@ const Deposits = ({route}: PropsParams) => {
           coin: symbol,
         });
 
-        if (balance && !customToken) {
+        if (balance) {
           setBalance(balance);
+
+          if(customToken) return;
+
           const balanceInUSD = await currencyConverter({
             coin,
             network,

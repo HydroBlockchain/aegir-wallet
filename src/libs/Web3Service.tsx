@@ -23,21 +23,30 @@ import { CoinType } from '../interfaces/CoinInterfaces';
 
 /* contracts */
 import abiERC20 from '../contracts/abiERC20';
+import Snowflake from '../contracts/Snowflake.json';
 import HydroToken from '../contracts/HydroToken.json';
 import ClientRainDrop from '../contracts/ClientRaindrop.json';
+import IdentityRegistry from '../contracts/IdentityRegistry.json';
 
 /* Contract addresses Mainnet */
+const SNOWFLAKE_ADDRESS = '0xE2BB33e4Fd6000598E471121e8f7eD91bAB08291';
 const DAI_ERC20_ADDRESS = '0x6b175474e89094c44da98b954eedeac495271d0f';
 const USDT_ERC20_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7';
 const HYDRO_BEP20_ADDRESS = '0xf3dbb49999b25c9d6641a9423c7ad84168d00071';
 const HYDRO_ERC20_ADDRESS = '0x946112efab61c3636cbd52de2e1392d7a75a6f01';
-const CLIENT_RAINDROP_ADDRESS = '0x387Ce3020e13B0a334Bb3EB25DdCb73c133f1D7A';
+/* BSC */
+const CLIENT_RAINDROP_ADDRESS = '0x6997eDB5b5c7BCe3f1B30B3fcf3e94B301Bf33A7';
+const IDENTITY_REGISTRY_ADDRESS = '0x7ABFdEaAe610D95664e314678532d36f0eFf0aeC';
 
 /* Contract addresses testnet */
+const SNOWFLAKE_ADDRESS_TESNET = '0x8c618623218102cbC9CD66E0c5f5964b491a03Ea';
 const DAI_ERC20_ADDRESS_TESNET = '0x8fb853872dAEC90Dcc547e5d46c1194B97Cfab32';
 const USDT_ERC20_ADDRESS_TESNET = '0xbd2CE0089628D2FA58C12e1155ADBB9cFa4627a3';
 const HYDRO_BEP20_ADDRESS_TESNET = '0x15e80146367D8Cf1F2a9e8EA04fdAF87d2Ad3193';
 const HYDRO_ERC20_ADDRESS_TESNET = '0xED4F7922FAaa14679bD755DCbd43491D6De2C0a4';
+/* BSC - testnet */
+const IDENTITY_REGISTRY_ADDRESS_TESNET = '0xf7ed5c6a365aE1Ecf60237CE8704Eb9464738bCD';
+const CLIENT_RAINDROP_ADDRESS_TESTNET = '0x8dB5563B2C5F2951B884000615f4426e9faDf6B1';
 
 /* PROVIDERS */
 const PROVIDER_TUSC = 'wss://tuscapi.gambitweb.com/';
@@ -60,17 +69,23 @@ class Web3Service {
 	web3BSC: Web3 | null = null;
 	isMainnet: boolean = !__DEV__;
 	hydroTokenABI = HydroToken.abi;
+	raindropAddress: string = '';
+	snowflakeAddress: string = '';
 	DAITokenERC20Address: string = '';
 	USDTTokenERC20Address: string = '';
 	hydroTokenERC20Address: string = '';
 	hydroTokenBEP20Address: string = '';
+	identityRegistryAddress: string = '';
 	providerBSC: Web3Provider | null = null;
 	providerETH: FallbackProvider | null = null;
 	defaultProviderETH: Provider | null = null;
+	contracSnowflake: Contract | null = null;
 	contracDAITokenERC20: Contract | null = null;
+	contracClientRainDrop: Contract | null = null;
 	contracUSDTTokenERC20: Contract | null = null;
 	contracHydroTokenERC20: Contract | null = null;
 	contracHydroTokenBEP20: Contract | null = null;
+	contracIdentityRegistry: Contract | null = null;
 
 	constructor() {
 		const isMainnet = this.isMainnet;
@@ -78,10 +93,14 @@ class Web3Service {
 		this.alchemyAPI = isMainnet ? alchemyMainnetAPI : alchemyTestnetAPI;
 
 		const networkNameEthereum = isMainnet ? 'mainnet' : 'ropsten';
+		this.snowflakeAddress = isMainnet ? SNOWFLAKE_ADDRESS : SNOWFLAKE_ADDRESS_TESNET;
 		this.DAITokenERC20Address = isMainnet ? DAI_ERC20_ADDRESS : DAI_ERC20_ADDRESS_TESNET;
 		this.USDTTokenERC20Address = isMainnet ? USDT_ERC20_ADDRESS : USDT_ERC20_ADDRESS_TESNET;
 		this.hydroTokenERC20Address = isMainnet ? HYDRO_ERC20_ADDRESS : HYDRO_ERC20_ADDRESS_TESNET;
 		this.hydroTokenBEP20Address = isMainnet ? HYDRO_BEP20_ADDRESS : HYDRO_BEP20_ADDRESS_TESNET;
+		this.raindropAddress = isMainnet ? CLIENT_RAINDROP_ADDRESS : CLIENT_RAINDROP_ADDRESS_TESTNET;
+		this.identityRegistryAddress =
+			isMainnet? IDENTITY_REGISTRY_ADDRESS : IDENTITY_REGISTRY_ADDRESS_TESNET;
 
 		const networkBinance = isMainnet ? PROVIDER_BSC : PROVIDER_BSC_DEV;
 		const networkWebsocketBinance = isMainnet ? PROVIDER_WS_BSC : PROVIDER_WS_BSC_DEV;
@@ -137,6 +156,24 @@ class Web3Service {
 			HydroToken.abi,
 			this.providerETH
 		);
+
+		this.contracClientRainDrop = new ethers.Contract(
+			this.raindropAddress,
+			ClientRainDrop.abi,
+			this.providerBSC
+		);
+
+		this.contracSnowflake = new ethers.Contract(
+			this.snowflakeAddress,
+			Snowflake.abi,
+			this.providerBSC
+		);
+
+		this.contracIdentityRegistry = new ethers.Contract(
+			this.identityRegistryAddress,
+			IdentityRegistry.abi,
+			this.providerBSC
+		);
 	}
 
 	static getHydroTokenABI() {
@@ -151,8 +188,8 @@ class Web3Service {
 		return PROVIDER_TUSC;
 	}
 
-	static geRaindropAddress() {
-		return CLIENT_RAINDROP_ADDRESS;
+	geRaindropAddress() {
+		return this.raindropAddress;
 	}
 
 	getHydroTokenBEP20Address() {
@@ -427,6 +464,7 @@ class Web3Service {
 			}
 
 		} catch(error) {
+			console.log('error in getEtherBalanceOf', error);
 			return null
 		}
 	}
@@ -624,28 +662,18 @@ class Web3Service {
 		}
 	}
 
-	static getContractRaindrop() {
-		const provider = new ethers.providers.InfuraProvider("rinkeby");
-
-		const contract = new ethers.Contract(
-			this.geRaindropAddress(),
-			this.getRaindropABI(),
-			provider
-		);
-
-		return contract;
-	}
-
-	static async isHydroIdAvailable(hydroId: string) {
+	async isHydroIdAvailable(hydroId: string) {
     let isAvailable = false;
     try {
-      const contractRaindrop = this.getContractRaindrop();
-      isAvailable = await contractRaindrop.hydroIDAvailable(hydroId);
+      const contractRaindrop = this.contracClientRainDrop;
+			if(!contractRaindrop) return isAvailable;
 
-      return isAvailable;
+			isAvailable = await contractRaindrop.hydroIDAvailable(hydroId);
+			return isAvailable;
     } catch (err) {
-      return isAvailable;
+			console.log('error in isHydroIdAvailable', err);
     }
+		return isAvailable;
   };
 }
 

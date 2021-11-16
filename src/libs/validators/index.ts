@@ -28,7 +28,6 @@ export async function validateContractAddress({ address, network }: IvalidateCon
       byteCode = await web3Service.web3BSC.eth.getCode(address);
     }
 
-    console.log('byteCode', byteCode);
     if(byteCode !== '0x') return true;
 
   } catch (error) {

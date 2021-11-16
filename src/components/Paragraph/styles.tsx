@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   },
   h3: {
     fontSize: 26,
-    lineHeight: 22,
     fontWeight: '500',
     fontFamily: 'Roboto',
   },
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
   },
   body2: {
     fontSize: 14,
-    lineHeight: 22,
+    lineHeight: 20,
     fontWeight: '400',
     letterSpacing: 0.25,
     fontFamily: 'Roboto',

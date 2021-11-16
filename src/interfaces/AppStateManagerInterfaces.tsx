@@ -33,6 +33,7 @@ export interface IcustomToken {
 export type IcustomTokens = IcustomToken[];
 
 export interface AppState {
+  EIN: string;
   address: string;
   contacts: IContacts;
   isInitialised: boolean;
@@ -46,6 +47,7 @@ export interface AppState {
 export interface AppStateContext {
   appState: AppState;
   web3Service: Web3Service;
+  setEIN: (EIN: string) => void;
   resetNotifications: () => void;
   refresCollectiblesUri: () => void;
   setAddress: (address: string) => void;

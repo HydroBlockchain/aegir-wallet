@@ -57,6 +57,7 @@ export interface ThemeProps {
   dark: boolean;
   roundness: number;
   heightHeader: number;
+  defautlPaddingTop: number;
   heightHeaderGoBAck: number;
   mode?: 'adaptive' | 'exact';
   fonts: Fonts;
@@ -85,6 +86,7 @@ export interface ThemeProps {
 export const themeGlobal = {
   roundness: 8,
   heightHeader: 65,
+  defautlPaddingTop: 24,
   heightHeaderGoBAck: 65,
   colors: {
     success: 'green',
