@@ -11,7 +11,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		163A9E8C93F691692C641B26 /* libPods-hydrowallet-hydrowalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4B06A59792BED15923978B /* libPods-hydrowallet-hydrowalletTests.a */; };
+		45CD1FAC26E87B56F51DE1D2 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56B52570B4BA23BA00FEE8A /* ExpoModulesProvider.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B7E0B70F86054BA238F6B9FA /* libPods-hydrowallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF51BE1319DD3096329F654 /* libPods-hydrowallet.a */; };
+		BE4DA2D09E8A54E84CDCE64E /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680170A83B9EF97377DCC93 /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +38,15 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = hydrowallet/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hydrowallet/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hydrowallet/main.m; sourceTree = "<group>"; };
+		5680170A83B9EF97377DCC93 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-hydrowallet-hydrowalletTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		5DDF651304C7C41B8D04E217 /* Pods-hydrowallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hydrowallet.debug.xcconfig"; path = "Target Support Files/Pods-hydrowallet/Pods-hydrowallet.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hydrowallet/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ADF51BE1319DD3096329F654 /* libPods-hydrowallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hydrowallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBCABA7C5F1CD2BBB9808FD0 /* Pods-hydrowallet-hydrowalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hydrowallet-hydrowalletTests.debug.xcconfig"; path = "Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CB4B06A59792BED15923978B /* libPods-hydrowallet-hydrowalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hydrowallet-hydrowalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D56B52570B4BA23BA00FEE8A /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-hydrowallet/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		D6CB9C61FEE99C62EE3EF90E /* Pods-hydrowallet-hydrowalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hydrowallet-hydrowalletTests.release.xcconfig"; path = "Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests.release.xcconfig"; sourceTree = "<group>"; };
+		E32A282EE6C6C59C439EE358 /* Pods-hydrowallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hydrowallet.release.xcconfig"; path = "Target Support Files/Pods-hydrowallet/Pods-hydrowallet.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -43,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				163A9E8C93F691692C641B26 /* libPods-hydrowallet-hydrowalletTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E0B70F86054BA238F6B9FA /* libPods-hydrowallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,8 +104,26 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				ADF51BE1319DD3096329F654 /* libPods-hydrowallet.a */,
+				CB4B06A59792BED15923978B /* libPods-hydrowallet-hydrowalletTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		38D6BB1D10849FE1C0EF11E9 /* hydrowalletTests */ = {
+			isa = PBXGroup;
+			children = (
+				5680170A83B9EF97377DCC93 /* ExpoModulesProvider.swift */,
+			);
+			name = hydrowalletTests;
+			sourceTree = "<group>";
+		};
+		81472A24E51973B17089C431 /* hydrowallet */ = {
+			isa = PBXGroup;
+			children = (
+				D56B52570B4BA23BA00FEE8A /* ExpoModulesProvider.swift */,
+			);
+			name = hydrowallet;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -110,6 +142,8 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				DCC24852568942DF840B3CC5 /* Resources */,
+				AC4A1E8736162270B478EFBF /* Pods */,
+				F10E72DDBEE1E5CF503F695E /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -125,11 +159,32 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AC4A1E8736162270B478EFBF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5DDF651304C7C41B8D04E217 /* Pods-hydrowallet.debug.xcconfig */,
+				E32A282EE6C6C59C439EE358 /* Pods-hydrowallet.release.xcconfig */,
+				BBCABA7C5F1CD2BBB9808FD0 /* Pods-hydrowallet-hydrowalletTests.debug.xcconfig */,
+				D6CB9C61FEE99C62EE3EF90E /* Pods-hydrowallet-hydrowalletTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		DCC24852568942DF840B3CC5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		F10E72DDBEE1E5CF503F695E /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				81472A24E51973B17089C431 /* hydrowallet */,
+				38D6BB1D10849FE1C0EF11E9 /* hydrowalletTests */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,9 +194,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "hydrowalletTests" */;
 			buildPhases = (
+				946AF216B295A13DDAD4E4E4 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				A3EB33BD49149BD2E26A763E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -157,11 +214,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "hydrowallet" */;
 			buildPhases = (
+				6D0A82F5ACEBE5A5C0775859 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				4009A7E3A60EFD12BEE922E4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -242,6 +301,84 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
+		4009A7E3A60EFD12BEE922E4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet/Pods-hydrowallet-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet/Pods-hydrowallet-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hydrowallet/Pods-hydrowallet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D0A82F5ACEBE5A5C0775859 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-hydrowallet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		946AF216B295A13DDAD4E4E4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-hydrowallet-hydrowalletTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3EB33BD49149BD2E26A763E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -269,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* hydrowalletTests.m in Sources */,
+				BE4DA2D09E8A54E84CDCE64E /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +416,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				45CD1FAC26E87B56F51DE1D2 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +433,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BBCABA7C5F1CD2BBB9808FD0 /* Pods-hydrowallet-hydrowalletTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -320,6 +460,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6CB9C61FEE99C62EE3EF90E /* Pods-hydrowallet-hydrowalletTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -343,6 +484,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DDF651304C7C41B8D04E217 /* Pods-hydrowallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -369,6 +511,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E32A282EE6C6C59C439EE358 /* Pods-hydrowallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -424,6 +567,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -488,6 +632,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
