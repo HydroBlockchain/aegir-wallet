@@ -3,11 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "test": "jest",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "devtools": "npx react-devtools",
+    "android": "react-native run-android",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "release": "cd android && ./gradlew assembleRelease",
+    "release:clean": "cd android && ./gradlew clean && ./gradlew assembleRelease"
+  },
+  "engines": {
+    "node": ">= 16.13.0"
   },
   "dependencies": {
     "react": "17.0.2",
