@@ -1,11 +1,6 @@
-.autogit
-
 # OSX
 #
 .DS_Store
-
-# Editors
-.vscode
 
 # Xcode
 #
@@ -28,12 +23,12 @@ DerivedData
 
 # Android/IntelliJ
 #
-*.hprof
 build/
 .idea
 .gradle
 local.properties
 *.iml
+*.hprof
 
 # node.js
 #
