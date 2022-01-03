@@ -18,7 +18,6 @@ const SelectInput = ({
   selectedDefault = null,
 }: ISelectInput) => {
   const { theme } = useContext(ThemeContext);
-  const [ selectedValue, setSelectedValue ] = useState('');
   const [ isModalVisible, setModalVisible ] = useState(false);
   const [ selectedIndex, setSelectedIndex ] = useState<null | number>(null);
 
@@ -28,10 +27,10 @@ const SelectInput = ({
 
       if(index !== -1) {
         setSelectedIndex(index);
-        setSelectedValue(selectedDefault.id);
+        onChange(selectedDefault);
       }
     }
-  }, [])
+  }, [ selectedDefault ])
 
   const toggleModal = () => {
     setModalVisible((prevState) => !prevState);
@@ -44,7 +43,6 @@ const SelectInput = ({
       }
     } catch(e) {}
     setSelectedIndex(index);
-    setSelectedValue(item.id);
     onChange(item);
     toggleModal();
   }
@@ -92,10 +90,10 @@ const SelectInput = ({
           label={label}
           editable={false}
           icon='caret-down'
-          value={selectedValue}
           onIconClick={toggleModal}
           placeholder={placeholder}
           iconStyle={styles.iconStyle}
+          value={(selectedIndex !== null) ? options[selectedIndex].title : ''}
         />
       </TouchableHighlight>
 

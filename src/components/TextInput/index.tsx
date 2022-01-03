@@ -1,18 +1,20 @@
 import React, { useContext } from 'react';
+import { TextInput, View } from 'react-native';
+
 
 import styles from './styles';
 import Paragraph from '../Paragraph';
+import TextInputIcon from './TextInputIcon';
 import { ThemeContext } from '../../hooks/useTheme';
-import IconFA from 'react-native-vector-icons/FontAwesome';
 import { TextInputCustomProps } from '../../interfaces/Iinput';
-import { TextInput, TouchableOpacity, View } from 'react-native';
 
 const TextInputCustom = ({
   icon,
   label,
   value,
-  iconStyle,
   placeholder,
+  errorMsg = '',
+  iconStyle = {},
   propsIcon = {},
   editable = true,
   multiline = false,
@@ -23,13 +25,14 @@ const TextInputCustom = ({
   },
   onBlur = () => {},
   autoCorrect = true,
+  iconType = 'default',
+  onIconClick = () => {},
   onChangeText = () => {},
   secureTextEntry = false,
   keyboardType = 'default',
-  onIconClick = () => {},
-  errorMsg = '',
+  autoCapitalize = 'sentences',
 }: TextInputCustomProps) => {
-  const {theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const handleChangeText = (e: any) => {
     onChangeText(e);
@@ -61,21 +64,20 @@ const TextInputCustom = ({
           multiline={multiline}
           autoCorrect={autoCorrect}
           placeholder={placeholder}
-          onChangeText={handleChangeText}
           keyboardType={keyboardType}
+          onChangeText={handleChangeText}
+          autoCapitalize={autoCapitalize}
           secureTextEntry={secureTextEntry}
         />
+
         {icon && (
-          <View style={styles.wrapperIcon}>
-            <TouchableOpacity onPress={onIconClick}>
-              <IconFA
-                size={26}
-                name={icon}
-                style={[styles.icon, {color: theme.colors.text}, iconStyle]}
-                {...propsIcon}
-              />
-            </TouchableOpacity>
-          </View>
+          <TextInputIcon
+            icon={icon}
+            iconType={iconType}
+            propsIcon={propsIcon}
+            iconStyle={iconStyle}
+            onIconClick={onIconClick}
+          />
         )}
       </View>
 

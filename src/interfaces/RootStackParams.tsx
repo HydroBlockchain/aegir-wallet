@@ -33,17 +33,21 @@ export type RootStackParams = {
   * MAIN NAVIGATION *
   *******************/
   Home: any;
+  LockApp: any;
   Settings: any;
+  ExportTx: any;
   Contacts: any;
   AddContact: any;
   AddCustomToken: any;
   Browser: any;
   ListNFT: any;
   AddNFT: any;
+  DefaultFiatCurrency: any;
   SendNFT: ICollectibleData;
   ViewNFT: ICollectibleData;
   Receive: CoinData;
   History: CoinData;
+  Security: any;
   ExportKeys: any;
   Notification: any;
   ClaimHydroID: any;

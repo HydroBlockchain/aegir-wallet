@@ -96,8 +96,7 @@ const Settings = ({ navigation }: SettingsParam) => {
               variant='grey'
               text='Export Transactions'
               styleCustom={styles.button}
-              //onPress={() => navigation.navigate('exportTransactions')}
-              onPress={() => {}}
+              onPress={() => navigation.navigate('ExportTx')}
             />
 
             <Button
@@ -111,17 +110,15 @@ const Settings = ({ navigation }: SettingsParam) => {
               variant='grey'
               text='Security'
               styleCustom={styles.button}
-              //onPress={() => navigation.navigate('security')}
-              onPress={() => {}}
+              onPress={() => navigation.navigate('Security')}
             />
 
             <Button
               variant='grey'
               text='Default Fiat Currency'
               styleCustom={styles.button}
-              //onPress={() => navigation.navigate('defaultFiat')}
-              onPress={() => {}}
-              />
+              onPress={() => navigation.navigate('DefaultFiatCurrency')}
+            />
 
             <Button
               variant='grey'

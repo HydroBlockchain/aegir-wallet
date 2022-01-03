@@ -16,6 +16,7 @@ export type HistoryData = History[];
 export interface History {
   to: string;
   from: string;
+  hash?: string;
   amount: string;
   blockNumber: number,
   operation: OperationTransaction;

@@ -1,4 +1,5 @@
 import { IcustomToken } from "./AppStateManagerInterfaces";
+import { Tfiat } from "./currencyConverter";
 
 export type CoinType =
   | 'ETH'
@@ -34,6 +35,7 @@ export interface CoinCardProps extends CoinData {
     buttonText?: {};
   };
   address?: string;
+  symbolFiat?: Tfiat;
   deposit?: () => void;
   history?: () => void;
   receive?: () => void;

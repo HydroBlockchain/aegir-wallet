@@ -1,24 +1,6 @@
 import Web3 from 'web3';
 import axios from 'axios';
-import { CoinType, Network } from '../interfaces/CoinInterfaces';
-
-interface CurrencyConverterProps {
-  coin: CoinType;
-  balance: number;
-  network: Network;
-}
-
-interface CalculateBalanceProps {
-  balance: number;
-  currencyPrices: {
-    dai?: { usd: number };
-    hydro?: { usd: number };
-    tether?: { usd: number };
-    ethereum?: { usd: number };
-    binancecoin?: { usd: number };
-    'original-crypto-coin'?: { usd: number };
-  };
-}
+import { IcalculateBalance, IcoingeckoAPI, IcurrencyConverter } from '../interfaces/currencyConverter';
 
 function toFixed(x: number) {
   let result: string | null = null;
@@ -73,9 +55,10 @@ function getModa(arr: number[]) {
   return arr[getHigherIndex(frecuencias)];
 }
 
-async function coingeckoAPI() {
+async function coingeckoAPI(props: IcoingeckoAPI = {}) {
+  const { FIAT = 'USD' } = props;
   let result: null | object = null;
-  
+
   const coins = [
     'dai',
     'hydro',
@@ -86,7 +69,7 @@ async function coingeckoAPI() {
   ];
   try {
     const response = await axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(',')}&vs_currencies=usd`
+      `https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(',')}&vs_currencies=${FIAT}`
     );
 
     if(response.status === 200) {
@@ -100,74 +83,28 @@ async function coingeckoAPI() {
   return result;
 }
 
-async function currencyConverterHydro({ balance, currencyPrices }: CalculateBalanceProps) {
-// Buscar el precio en al menos dos fuentes más en caso de que alguna falle
+async function calculateBalance({ balance, currencyPrices, coin, FIAT }: IcalculateBalance) {
   let result: null | number = null;
+  const currencyKey = {
+    DAI: 'dai',
+    HYDRO: 'hydro',
+    USDT: 'tether',
+    ETH: 'ethereum',
+    BNB: 'binancecoin',
+    TUSC: 'original-crypto-coin'
+  }
+
   try {
-    if(currencyPrices?.hydro) {
-      result = currencyPrices.hydro.usd * balance;
-    }
-  } catch(error) {}
-
-  return result;
-}
-
-async function currencyConverterBNB({ balance, currencyPrices }: CalculateBalanceProps) {
-  // Buscar el precio en al menos dos fuentes más en caso de que alguna falle
-  let result: null | number = null;
-  try {
-    if(currencyPrices?.binancecoin) {
-      result = currencyPrices.binancecoin.usd * balance;
-    }
-  } catch(error) {}
-
-  return result;
-}
-
-async function currencyConverterETH({ balance, currencyPrices }: CalculateBalanceProps) {
-  // Buscar el precio en al menos dos fuentes más en caso de que alguna falle
-  let result: null | number = null;
-  try {
-    if(currencyPrices?.ethereum) {
-      result = currencyPrices.ethereum.usd * balance;
-    }
-  } catch(error) {}
-
-  return result;
-}
-
-async function currencyConverterTUSC({ balance, currencyPrices }: CalculateBalanceProps) {
-  // Buscar el precio en al menos dos fuentes más en caso de que alguna falle
-  let result: null | number = null;
-  try {
-    if(currencyPrices?.['original-crypto-coin']) {
-      result = currencyPrices['original-crypto-coin'].usd * balance;
-    }
-  } catch(error) {}
-
-  return result;
-}
-
-async function currencyConverterDAI({ balance, currencyPrices }: CalculateBalanceProps) {
-  // Buscar el precio en al menos dos fuentes más en caso de que alguna falle
-  let result: null | number = null;
-  try {
-    if(currencyPrices?.dai) {
-      result = currencyPrices.dai.usd * balance;
-    }
-  } catch(error) {}
-
-  return result;
-}
-
-async function currencyConverterUSDT({ balance, currencyPrices }: CalculateBalanceProps) {
-  // Buscar el precio en al menos dos fuentes más en caso de que alguna falle
-  let result: null | number = null;
-  try {
-    if(currencyPrices?.tether) {
-      result = currencyPrices.tether.usd * balance;
-    }
-  } catch(error) {}
+    result = currencyPrices[currencyKey[coin]][FIAT.toLowerCase()] * balance;
+  } catch(error) {
+    console.log('error in calculateBalance', {
+      FIAT,
+      coin,
+      balance,
+      currencyPrices,
+    });
+    console.log(error);
+  }
 
   return result;
 }
@@ -176,22 +113,11 @@ async function currencyConverter({
   coin,
   network,
   balance,
-}: CurrencyConverterProps) {
-  let currencyPrices = await coingeckoAPI() || {};
-  
- return (coin === 'HYDRO')
-  ? currencyConverterHydro({ balance, currencyPrices })
-  : (coin === 'BNB')
-  ? currencyConverterBNB({ balance, currencyPrices })
-  : (coin === 'TUSC')
-  ? currencyConverterTUSC({ balance, currencyPrices })
-  : (coin === 'ETH')
-  ? currencyConverterETH({ balance, currencyPrices })
-  : (coin === 'DAI')
-  ? currencyConverterDAI({ balance, currencyPrices })
-  : (coin === 'USDT')
-  ? currencyConverterUSDT({ balance, currencyPrices })
-  : null
+  FIAT = 'USD'
+}: IcurrencyConverter) {
+  const currencyPrices = await coingeckoAPI({ FIAT }) || {};
+
+  return calculateBalance({ balance, currencyPrices, coin, FIAT })
 }
 
 export default currencyConverter;

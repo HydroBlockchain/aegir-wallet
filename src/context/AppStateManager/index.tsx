@@ -1,37 +1,44 @@
 import React, {
   useRef,
-  useState,
   useEffect,
   useReducer,
   useContext,
+  useCallback,
   createContext,
 } from 'react';
-
+import debounce from 'just-debounce-it';
 import Toast from 'react-native-root-toast';
+import { AppState, LogBox } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
+import BackgroundTimer from 'react-native-background-timer';
+
 import Web3Service from '../../libs/Web3Service';
 import useContacts from '../../hooks/useContacts';
 import { ThemeContext } from '../../hooks/useTheme';
 import BgView from '../../components/Layouts/BgView';
-import BackgroundTimer from 'react-native-background-timer';
+import useCollectible from '../../hooks/useCollectible';
 
 /* constants */
 import {
+  LOCK_TIME,
   CUSTOM_TOKENS,
+  DEFAULT_FIAT_CURRENCY,
   LAST_BLOCK_NUMBER_BSC,
   LAST_BLOCK_NUMBER_ETHEREUM,
+  NOTIFICATION_CHECK_FREQUENCY_BACKGROUND,
+  NOTIFICATION_CHECK_FREQUENCY_FOREGROUND,
 } from '../../../constants';
 
 /* interfaces */
 import {
   ToastProps,
+  IcustomTokens,
   BlockNumberBSC,
-  CurrentStateApp,
   AppStateContext,
   BlockNumberEthereum,
   AppStateManagerProps,
-  IcustomTokens,
 } from '../../interfaces/AppStateManagerInterfaces';
+import { Tfiat } from '../../interfaces/currencyConverter';
 import { Notifications } from '../../interfaces/Web3ServiceInterface';
 
 /* reducers */
@@ -41,22 +48,15 @@ import {
 } from '../../reducers/appStateManagerReducer';
 
 
-import { AppState, LogBox } from 'react-native';
-import useCollectible from '../../hooks/useCollectible';
-import { ethers } from 'ethers';
-LogBox.ignoreLogs(['Setting a timer']);
-
 export const AppStateManagerContext = createContext({} as AppStateContext);
 
 const AppStateManager = ({ children }: AppStateManagerProps) => {
+  const backgroundMode = useRef(false);
   const { theme } = useContext(ThemeContext);
   const { contacts, updateContacts } = useContacts();
   const Web3ServiceRef = useRef<null | Web3Service>(null);
   const [ appState, dispatch ] = useReducer(appStateManagerReducer, appStateInitial);
   const { collectibles, updateCollectibles, refresCollectiblesUri } = useCollectible();
-  const [
-    currentStateApp, setCurrentStateApp
-  ] = useState<CurrentStateApp>(AppState.currentState);
 
   useEffect(() => {
     if(!Web3ServiceRef.current) {
@@ -68,12 +68,14 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
 
       const customTokenRaw = await SecureStore.getItemAsync(CUSTOM_TOKENS);
       if(customTokenRaw) {
-        const customToken = JSON.parse(customTokenRaw);
-        dispatch({
-          payload: customToken,
-          type: 'updateCustomTokens',
-        })
+        dispatch({ payload: JSON.parse(customTokenRaw), type: 'updateCustomTokens' })
       }
+
+      const lockTime = await SecureStore.getItemAsync(LOCK_TIME);
+      if(lockTime) setLockTime(parseInt(lockTime));
+
+      const defaultFiatCurrency = (await SecureStore.getItemAsync(DEFAULT_FIAT_CURRENCY)) as Tfiat;
+      if(defaultFiatCurrency) setDefaultFiatCurrency(defaultFiatCurrency);
 
       const blockNumberBSC = await SecureStore.getItemAsync(LAST_BLOCK_NUMBER_BSC);
       const blockNumberEthereum = await SecureStore.getItemAsync(LAST_BLOCK_NUMBER_ETHEREUM);
@@ -116,19 +118,71 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
       }
       setAllBlockNumbersEthereum(blockNumberEthereumInitial);
 
+      await getEIN();
+
       dispatch({type: 'initialised'});
     }
 
     init();
-    getEIN();
-
-    const event = AppState.addEventListener('change', handleAppstateChange);
 
     return () => {
       Web3ServiceRef.current = null;
-      event.remove();
     }
-  }, [])
+  }, []);
+
+  const handleNotifications = useCallback(async () => {
+    try {
+      if(!appState.address || !appState.isInitialised) return;
+      const web3Service = Web3ServiceRef.current;
+      if(web3Service) {
+        web3Service.getNotifications({
+          setNotifications,
+          address: appState.address,
+          lastBlockNumberBSC: appState.blockNumberBSC,
+          lastBlockNumberEthereum: appState.blockNumberEthereum,
+        });
+      }
+    } catch(error) {
+      console.log('handleNotifications error', error);
+    }
+  }, [ Web3ServiceRef, appState ]);
+
+  const handleNotificationsForeground = useCallback(
+    debounce(async () => {
+      handleNotifications();
+
+      if(!backgroundMode.current)  {
+        handleNotificationsForeground();
+      }
+    }, NOTIFICATION_CHECK_FREQUENCY_FOREGROUND),
+    [ backgroundMode, handleNotifications ]
+  );
+
+  const handleAppstateChange = useCallback( async (state) => {
+    const newModeIsBackground = state === 'background';
+
+    if(backgroundMode.current && !newModeIsBackground) {
+      BackgroundTimer.stopBackgroundTimer();
+    }
+
+    backgroundMode.current = newModeIsBackground;
+
+    if(backgroundMode.current) {
+      BackgroundTimer.runBackgroundTimer(async () => {
+        handleNotifications();
+      }, NOTIFICATION_CHECK_FREQUENCY_BACKGROUND)
+    }
+  }, [ backgroundMode, handleNotificationsForeground ]);
+
+  useEffect(() => {
+    const event = AppState.addEventListener('change', handleAppstateChange);
+    return () => { event.remove() }
+  }, [ handleAppstateChange ])
+
+  useEffect(() => {
+    handleNotificationsForeground()
+    return () => { handleNotificationsForeground.cancel() }
+  }, [ handleNotificationsForeground ])
 
   useEffect(() => {
     dispatch({
@@ -150,34 +204,6 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
     }
   }, [ appState.address ])
 
-  useEffect(() => {
-    const {
-      address,
-      isInitialised,
-      blockNumberBSC,
-      blockNumberEthereum,
-    } = appState;
-
-    if(address && isInitialised) {
-      BackgroundTimer.stopBackgroundTimer();
-      if(currentStateApp === 'background') {
-        BackgroundTimer.runBackgroundTimer(() => {
-          handleNotifications({ address, blockNumberBSC, blockNumberEthereum });
-        }, 60 * 1000 * 15);
-      } else if(currentStateApp === 'active') {
-        BackgroundTimer.runBackgroundTimer(() => {
-          handleNotifications({ address, blockNumberBSC, blockNumberEthereum });
-        }, 60 * 1000);
-      }
-    }
-  }, [
-    currentStateApp,
-    appState.address,
-    appState.isInitialised,
-    appState.blockNumberBSC,
-    appState.blockNumberEthereum,
-  ])
-
   const updateCustomTokens = async (custonTokens: IcustomTokens) => {
     await SecureStore.setItemAsync(CUSTOM_TOKENS, JSON.stringify(custonTokens));
     dispatch({
@@ -193,27 +219,8 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
       if(!w3 || !w3.contracIdentityRegistry || !address) return;
       const ein = await w3.contracIdentityRegistry.getEIN(appState.address);
       setEIN(ein.toString());
-    } catch {}
-  }
-
-  const handleAppstateChange = (state: CurrentStateApp) => {
-    setCurrentStateApp(state);
-  }
-
-  const handleNotifications = async ({ address, blockNumberBSC, blockNumberEthereum }) => {
-    try {
-      const web3Service = Web3ServiceRef.current;
-      if(web3Service) {
-        web3Service.getNotifications({
-          address,
-          setNotifications,
-          lastBlockNumberBSC: blockNumberBSC,
-          lastBlockNumberEthereum: blockNumberEthereum,
-        });
-      }
-
     } catch(error) {
-      console.log('handleNotifications error', error);
+      console.log('error in getEIN', error);
     }
   }
 
@@ -228,6 +235,29 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
     dispatch({
       type: 'setEIN',
       payload: { EIN }
+    })
+  }
+
+  const setLockTime = (lockTime: number) => {
+    SecureStore.setItemAsync(LOCK_TIME, lockTime.toString());
+    dispatch({
+      type: 'setLockTime',
+      payload: { lockTime }
+    })
+  }
+
+  const setLockApp = (lockApp: boolean) => {
+    dispatch({
+      type: 'setLockApp',
+      payload: { lockApp }
+    })
+  }
+
+  const setDefaultFiatCurrency = (defaultFiatCurrency: Tfiat) => {
+    SecureStore.setItemAsync(DEFAULT_FIAT_CURRENCY, defaultFiatCurrency);
+    dispatch({
+      type: 'setDefaultFiatCurrency',
+      payload: { defaultFiatCurrency },
     })
   }
 
@@ -265,7 +295,7 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
 
     const backgroundColor = colorType[type];
 
-    Toast.show(text, {
+    return Toast.show(text, {
       delay: 0,
       shadow: true,
       animation: true,
@@ -277,22 +307,21 @@ const AppStateManager = ({ children }: AppStateManagerProps) => {
     })
   }
 
-  if(!Web3ServiceRef.current) return(
-    <BgView/>
-  )
-
-  return (
+  return ((!appState.isInitialised || !Web3ServiceRef.current) ? <BgView/> :
     <AppStateManagerContext.Provider value={{
       toast,
       setEIN,
       appState,
+      setLockApp,
       setAddress,
+      setLockTime,
       updateContacts,
       updateCollectibles,
       resetNotifications,
       updateCustomTokens,
       refresCollectiblesUri,
       setAllBlockNumbersBSC,
+      setDefaultFiatCurrency,
       setAllBlockNumbersEthereum,
       web3Service: Web3ServiceRef.current
     }} >

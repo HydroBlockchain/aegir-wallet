@@ -3,13 +3,7 @@ import { BlockNumber, Notification } from './Web3ServiceInterface';
 import { IContacts, IupdateContactsPostData, IupdateContactsReturn } from './IContacts';
 import { ICollectibles, IupdateCollectiblePostData, IupdateCollectibleReturn } from './Icollectibles';
 import { Network } from './CoinInterfaces';
-
-export type CurrentStateApp =
- | "active"
- | "unknown"
- | "inactive"
- | "extension"
- | "background";
+import { Tfiat } from './currencyConverter';
 
 export interface BlockNumberEthereum {
   ETH: BlockNumber,
@@ -35,8 +29,11 @@ export type IcustomTokens = IcustomToken[];
 export interface AppState {
   EIN: string;
   address: string;
+  lockTime: number;
+  lockApp: boolean;
   contacts: IContacts;
   isInitialised: boolean;
+  defaultFiatCurrency: Tfiat;
   customTokens: IcustomTokens;
   collectibles: ICollectibles;
   notifications: Notification[];
@@ -51,9 +48,12 @@ export interface AppStateContext {
   resetNotifications: () => void;
   refresCollectiblesUri: () => void;
   setAddress: (address: string) => void;
+  setLockApp: (lockApp: boolean) => void;
+  setLockTime: (lockTime: number) => void;
   toast: ({ text, type }: ToastProps) => void;
   updateCustomTokens: (data: IcustomTokens) => void;
   setAllBlockNumbersBSC: (data: BlockNumberBSC) => void;
+  setDefaultFiatCurrency: (defaultFiatCurrency: Tfiat) => void;
   setAllBlockNumbersEthereum: (data: BlockNumberEthereum) => void;
   updateContacts: (data: IupdateContactsPostData) => Promise<IupdateContactsReturn>;
   updateCollectibles: (data: IupdateCollectiblePostData) => Promise<IupdateCollectibleReturn>;

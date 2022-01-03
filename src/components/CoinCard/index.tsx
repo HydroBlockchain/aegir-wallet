@@ -20,6 +20,7 @@ const CoinCard = ({
   balance,
   network,
   address,
+  symbolFiat,
   showAddress,
   balanceInUSD,
   createAccount,
@@ -92,7 +93,7 @@ const CoinCard = ({
               styles.alignBalance,
               styles.criptoBalance,
             ]}>
-              {`${balanceInUSD} ≈ USD`}
+              {`${balanceInUSD} ≈ ${symbolFiat}`}
             </Paragraph>
           )}
 

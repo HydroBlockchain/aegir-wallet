@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState, useRef, useCallback } from "react";
 
 import {
   View,
@@ -7,7 +7,7 @@ import {
   StyleSheet,
   BackHandler,
   RefreshControl,
-  Dimensions,
+  AppStateStatus,
 } from "react-native";
 
 import Header from "../../components/Header";
@@ -15,6 +15,7 @@ import CoinCard from "../../components/CoinCard";
 
 import * as SecureStore from 'expo-secure-store';
 import Web3Service from '../../libs/Web3Service';
+import usePrevious from "../../hooks/usePrevious";
 import Paragraph from "../../components/Paragraph";
 import { ThemeContext } from "../../hooks/useTheme";
 import BgView from "../../components/Layouts/BgView";
@@ -27,7 +28,6 @@ import { TUSC_WALLET_NAME } from '../../../constants'
 import currencyConverter from "../../libs/currencyConverter";
 import { RootStackParams } from "../../interfaces/RootStackParams";
 import { AppStateManagerContext } from '../../context/AppStateManager/index';
-import { CurrentStateApp, IcustomToken } from '../../interfaces/AppStateManagerInterfaces';
 import { CoinData, CoinType, Network } from '../../interfaces/CoinInterfaces';
 
 interface PropsParams extends StackScreenProps<RootStackParams, 'Home'>{};
@@ -49,14 +49,13 @@ const Home = ({ navigation }: PropsParams) => {
   const [ totalBalances, setTotalBalances ] = useState(0);
   const [ tuscWalletName, setTuscWalletName ] = useState('');
   const [ balances, setBalances ] = useState(balancesDefault);
-  const [ widthCraouselItem, setWidthCraouselItem ] = useState(0);
+  const [ gettingBalance, _setGettingBalance ] = useState(false);
   const [ balanceInUSD, setBalanceInUSD ] = useState(balancesDefault);
   const { appState, web3Service, toast } = useContext(AppStateManagerContext);
-  const [
-    currentStateApp, setCurrentStateApp
-  ] = useState<CurrentStateApp>(AppState.currentState);
-  const [ gettingBalance, _setGettingBalance ] = useState(false);
+  const [ currentStateApp, setCurrentStateApp ] = useState<AppStateStatus>(AppState.currentState);
+
   const gettingBalanceRef = useRef(gettingBalance);
+	const prevDefaultFiatCurrency = usePrevious(appState.defaultFiatCurrency);
 
   const setGettingBalance = (status: boolean) => {
     gettingBalanceRef.current = status;
@@ -91,7 +90,13 @@ const Home = ({ navigation }: PropsParams) => {
   }, []);
 
   useEffect(() => {
-    getBalanceInUSD();
+    if(prevDefaultFiatCurrency !== appState.defaultFiatCurrency) {
+      getBalanceInFiat();
+    }
+  }, [ appState ])
+
+  useEffect(() => {
+    getBalanceInFiat();
   }, [ balances ])
 
   useEffect(() => {
@@ -110,11 +115,11 @@ const Home = ({ navigation }: PropsParams) => {
     setTotalBalances(totalBalances);
   }, [ balanceInUSD ])
 
-  const handleAppstateChange = (state: CurrentStateApp) => {
+  const handleAppstateChange = (state: AppStateStatus) => {
     setCurrentStateApp(state);
   }
 
-  const getBalanceInUSD = async () => {
+  const getBalanceInFiat = async () => {
     const balancePromises: Promise<any>[] = [];
 
     for(let key in balances) {
@@ -125,7 +130,10 @@ const Home = ({ navigation }: PropsParams) => {
       balancePromises.push(
         new Promise(async (resolve) => {
           const value = await currencyConverter({
-            coin, network, balance: balances[key]
+            coin,
+            network,
+            balance: balances[key],
+            FIAT: appState.defaultFiatCurrency
           })
 
           resolve({ key, value });
@@ -154,103 +162,106 @@ const Home = ({ navigation }: PropsParams) => {
 
   }
 
-  const handleGetAllBalances = async () => {
-    setGettingBalance(true);
-    const hydroAddress = appState.address;
-    const tuscWalletName = await SecureStore.getItemAsync(TUSC_WALLET_NAME);
+  const handleGetAllBalances = useCallback(
+    async () => {
+      setGettingBalance(true);
+      const hydroAddress = appState.address;
+      const tuscWalletName = await SecureStore.getItemAsync(TUSC_WALLET_NAME);
 
-    if(hydroAddress && web3Service) {
-      Promise.all([
-        new Promise((resolve) => {
-          web3Service.getTokenBalance({ address: hydroAddress, coin: 'BNB', network: 'BSC'})
-          .then((balance) => {
-            resolve([ 'BNB_BSC', balance ])
-          })
-          .catch((error) => {
-            resolve([ 'BNB_BSC', 0 ]);
-          })
-        }),
-        new Promise((resolve) => {
-          web3Service.getTokenBalance({ address: hydroAddress, coin: 'ETH', network: 'ETH'})
-          .then((balance) => {
-            resolve([ 'ETH_ETH', balance ])
-          })
-          .catch((error) => {
-            resolve([ 'ETH_ETH', 0 ]);
-          })
-        }),
-        new Promise((resolve) => {
-          web3Service.getTokenBalance({ address: hydroAddress, coin: 'DAI', network: 'ETH'})
-          .then((balance) => {
-            resolve([ 'DAI_ETH', balance ])
-          })
-          .catch((error) => {
-            resolve([ 'DAI_ETH', 0 ]);
-          })
-        }),
-        new Promise((resolve) => {
-          web3Service.getTokenBalance({ address: hydroAddress, coin: 'USDT', network: 'ETH'})
-          .then((balance) => {
-            resolve([ 'USDT_ETH', balance ])
-          })
-          .catch((error) => {
-            resolve([ 'USDT_ETH', 0 ]);
-          })
-        }),
-        new Promise((resolve) => {
-          web3Service.getTokenBalance({ address: hydroAddress, coin: 'HYDRO', network: 'BSC'})
-          .then((balance) => {
-            resolve([ 'HYDRO_BSC', balance ])
-          })
-          .catch((error) => {
-            resolve([ 'HYDRO_BSC', 0 ]);
-          })
-        }),
-        new Promise((resolve) => {
-          web3Service.getTokenBalance({ address: hydroAddress, coin: 'HYDRO', network: 'ETH'})
-          .then((balance) => {
-            resolve([ 'HYDRO_ETH', balance ])
-          })
-          .catch((error) => {
-            resolve([ 'HYDRO_ETH', 0 ]);
-          })
-        }),
-        new Promise((resolve) => {
-          if(tuscWalletName) {
-            Web3Service.getTUSCTokenBalanceOf(tuscWalletName).then((balance) => {
-              resolve([ 'TUSC_TUSC', balance ])
+      if(hydroAddress && web3Service) {
+        Promise.all([
+          new Promise((resolve) => {
+            web3Service.getTokenBalance({ address: hydroAddress, coin: 'BNB', network: 'BSC'})
+            .then((balance) => {
+              resolve([ 'BNB_BSC', balance ])
             })
-          } else {
-            resolve([ 'TUSC_TUSC', 0 ])
-          }
-        }),
-       ]).then((values: any) => {
-        const balances = values.reduce((acc: object, current: string[], index: number) => {
-          const [ key, balance ] = current;
-          const value = parseFloat(balance);
+            .catch((error) => {
+              resolve([ 'BNB_BSC', 0 ]);
+            })
+          }),
+          new Promise((resolve) => {
+            web3Service.getTokenBalance({ address: hydroAddress, coin: 'ETH', network: 'ETH'})
+            .then((balance) => {
+              resolve([ 'ETH_ETH', balance ])
+            })
+            .catch((error) => {
+              resolve([ 'ETH_ETH', 0 ]);
+            })
+          }),
+          new Promise((resolve) => {
+            web3Service.getTokenBalance({ address: hydroAddress, coin: 'DAI', network: 'ETH'})
+            .then((balance) => {
+              resolve([ 'DAI_ETH', balance ])
+            })
+            .catch((error) => {
+              resolve([ 'DAI_ETH', 0 ]);
+            })
+          }),
+          new Promise((resolve) => {
+            web3Service.getTokenBalance({ address: hydroAddress, coin: 'USDT', network: 'ETH'})
+            .then((balance) => {
+              resolve([ 'USDT_ETH', balance ])
+            })
+            .catch((error) => {
+              resolve([ 'USDT_ETH', 0 ]);
+            })
+          }),
+          new Promise((resolve) => {
+            web3Service.getTokenBalance({ address: hydroAddress, coin: 'HYDRO', network: 'BSC'})
+            .then((balance) => {
+              resolve([ 'HYDRO_BSC', balance ])
+            })
+            .catch((error) => {
+              resolve([ 'HYDRO_BSC', 0 ]);
+            })
+          }),
+          new Promise((resolve) => {
+            web3Service.getTokenBalance({ address: hydroAddress, coin: 'HYDRO', network: 'ETH'})
+            .then((balance) => {
+              resolve([ 'HYDRO_ETH', balance ])
+            })
+            .catch((error) => {
+              resolve([ 'HYDRO_ETH', 0 ]);
+            })
+          }),
+          new Promise((resolve) => {
+            if(tuscWalletName) {
+              Web3Service.getTUSCTokenBalanceOf(tuscWalletName).then((balance) => {
+                resolve([ 'TUSC_TUSC', balance ])
+              })
+            } else {
+              resolve([ 'TUSC_TUSC', 0 ])
+            }
+          }),
+         ]).then((values: any) => {
+          const balances = values.reduce((acc: object, current: string[], index: number) => {
+            const [ key, balance ] = current;
+            const value = parseFloat(balance);
 
-          if(isNaN(value) || !value) return acc;
+            if(isNaN(value) || !value) return acc;
 
-          return {
-            ...acc,
-            [`${key}`]: value
-          }
-        }, {});
+            return {
+              ...acc,
+              [`${key}`]: value
+            }
+          }, {});
 
-        setSpinner(false);
-        setGettingBalance(false);
-        setTuscWalletName(tuscWalletName || '');
-        setBalances((prevState) => ({ ...prevState, ...balances }));
-      }).catch((error) => {
-        setSpinner(false);
-        setGettingBalance(false);
-        toast({
-          type: 'error',
-          text: 'An unexpected error occurred'
+          setSpinner(false);
+          setGettingBalance(false);
+          setTuscWalletName(tuscWalletName || '');
+          setBalances((prevState) => ({ ...prevState, ...balances }));
+        }).catch((error) => {
+          setSpinner(false);
+          setGettingBalance(false);
+          toast({
+            type: 'error',
+            text: 'An unexpected error occurred'
+          })
         })
-      })
-    }
-  }
+      }
+    },
+    [ appState ],
+  )
 
   const getBalanceCustomTokens = async () => {
     const customTokensPromises = customTokens.map(async (el) => {
@@ -333,6 +344,7 @@ const Home = ({ navigation }: PropsParams) => {
                     deposit={() => handleDeposit(data)}
                     styleCustom={{ card: styles.card }}
                     balance={balances[`${coin}_${network}`]}
+                    symbolFiat={appState.defaultFiatCurrency}
                     balanceInUSD={balanceInUSD[`${coin}_${network}`]}
                   />
                 );
@@ -364,7 +376,7 @@ const Home = ({ navigation }: PropsParams) => {
 
         <View style={styles.total} >
           <Paragraph variant='body1' adjustsFontSizeToFit numberOfLines={1} >
-            {`Total Assets: ${totalBalances.toFixed(2)} ≈ USD`}
+            {`Total Assets: ${totalBalances.toFixed(2)} ≈ ${appState.defaultFiatCurrency}`}
           </Paragraph>
           <Paragraph variant='caption' stylesCustom={{
             color: theme.colors[web3Service.isMainnet ? 'success' : 'error']

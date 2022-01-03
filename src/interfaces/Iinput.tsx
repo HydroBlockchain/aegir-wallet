@@ -12,8 +12,8 @@ export interface InputBase {
 }
 
 export interface IOption {
-  id: string;
   title: string;
+  id: string | number;
   onPress?: () => void;
 }
 
@@ -23,6 +23,12 @@ export interface ISelectInput extends InputBase {
   onChange?: (item: IOption) => any;
 }
 
+type IautoCapitalize =
+  | 'none'
+  | 'words'
+  | 'sentences'
+  | 'characters'
+
 export interface TextInputCustomProps extends InputBase {
   icon?: string;
   iconStyle?: {};
@@ -30,8 +36,10 @@ export interface TextInputCustomProps extends InputBase {
   value?: string;
   editable?: boolean;
   multiline?: boolean;
+  iconType?: IiconType;
   autoCorrect?: boolean;
   secureTextEntry?: boolean;
+  autoCapitalize?: IautoCapitalize;
   keyboardType?: KeyBoardTypeOption;
   stylesCustom?: {
     input?: {};
@@ -42,4 +50,16 @@ export interface TextInputCustomProps extends InputBase {
   onBlur?: () => void | undefined;
   onChangeText?: (value: string) => void | undefined;
   onIconClick?: () => void | undefined;
+}
+
+export type IiconType =
+  | 'default'
+  | 'MaterialCommunityIcons';
+
+export interface ItextInputIcon {
+  icon: string;
+  iconStyle: {};
+  propsIcon: {};
+  iconType: IiconType;
+  onIconClick: () => void | undefined;
 }

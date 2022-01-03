@@ -8,10 +8,16 @@ import {
 import { IContacts } from '../interfaces/IContacts';
 import { ICollectibles } from '../interfaces/Icollectibles';
 import { IcustomTokens } from '../interfaces/AppStateManagerInterfaces';
+import { Tfiat } from '../interfaces/currencyConverter';
 
 export const appStateInitial: AppState = {
   EIN: '',
   address: '',
+  contacts: [],
+  lockTime: -1,
+  lockApp: false,
+  collectibles: [],
+  customTokens: [],
   notifications: [],
   isInitialised: false,
   blockNumberBSC: {
@@ -24,9 +30,7 @@ export const appStateInitial: AppState = {
     USDT: null,
     HYDRO: null,
   },
-  contacts: [],
-  collectibles: [],
-  customTokens: []
+  defaultFiatCurrency: 'USD',
 }
 
 export type AppStateAction =
@@ -37,6 +41,18 @@ export type AppStateAction =
   | {
     type: 'setEIN',
     payload: { EIN: string }
+  }
+  | {
+    type: 'setLockTime',
+    payload: { lockTime: number }
+  }
+  | {
+    type: 'setDefaultFiatCurrency',
+    payload: { defaultFiatCurrency: Tfiat }
+  }
+  | {
+    type: 'setLockApp',
+    payload: { lockApp: boolean }
   }
   | {
     type: 'updateContacts',
@@ -86,6 +102,24 @@ export const appStateManagerReducer = (state = appStateInitial, action: AppState
       return {
         ...state,
         EIN: action.payload.EIN,
+      };
+
+    case 'setLockTime':
+      return {
+        ...state,
+        lockTime: action.payload.lockTime,
+      };
+
+    case 'setDefaultFiatCurrency':
+      return {
+        ...state,
+        defaultFiatCurrency: action.payload.defaultFiatCurrency,
+      };
+
+    case 'setLockApp':
+      return {
+        ...state,
+        lockApp: action.payload.lockApp,
       };
 
     case 'resetNotifications':

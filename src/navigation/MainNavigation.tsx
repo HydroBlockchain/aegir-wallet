@@ -22,6 +22,10 @@ import Browser from '../screens/Browser/index';
 import AddCustomToken from "../screens/AddCustomToken";
 import ExportKeys from "../screens/ExportKeys";
 import ProxyHydroID from "../screens/ClaimHydroID/ProxyHydroID";
+import Security from "../screens/Security";
+import LockApp from "../screens/LockApp";
+import DefaultFiatCurrency from "../screens/DefaultFiatCurrency";
+import ExportTx from "../screens/ExportTx";
 
 const Stack = createStackNavigator<RootStackParams>();
 
@@ -34,6 +38,9 @@ const MainNavigation = () => {
     >
 
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="LockApp" component={LockApp} />
+      <Stack.Screen name="ExportTx" component={ExportTx} />
+      <Stack.Screen name="DefaultFiatCurrency" component={DefaultFiatCurrency} />
       <Stack.Screen name="Remittances" component={RemittancesNavigation} />
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="Contacts" component={Contacts} />
@@ -44,6 +51,7 @@ const MainNavigation = () => {
       <Stack.Screen name="ViewNFT" component={ViewNFT} />
       <Stack.Screen name="SendNFT" component={SendNFT} />
       <Stack.Screen name="AddContact" component={AddContact} />
+      <Stack.Screen name="Security" component={Security} />
       <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="Receive" component={Receive} />
       <Stack.Screen name="History" component={History} />

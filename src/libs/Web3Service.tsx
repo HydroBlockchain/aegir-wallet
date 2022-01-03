@@ -218,10 +218,14 @@ class Web3Service {
 		coinsEthereum.forEach((el) => {
 			this.getNotificationsEthereum({
 				lastBlockNumberEthereum, address, coin: el
-			}).then((data) => {
+			})
+			.then((data) => {
 				if(data.length) {
 					setNotifications(data);
 				}
+			})
+			.catch(error => {
+				console.log('error in getNotificationsEthereum (level 2)', error);
 			})
 		});
 
@@ -234,7 +238,7 @@ class Web3Service {
 					setNotifications(data);
 				}
 			}).catch((error) => {
-				console.log('error in getNotifications => getNotificationsBSC', error);
+				console.log('error in getNotificationsBSC', error);
 			})
 		})
 	}
@@ -349,7 +353,9 @@ class Web3Service {
 						}
 					});
 				}
-			} catch(error) {}
+			} catch(error) {
+				console.log('error in getNotificationsEthereum (level 1)', error);
+			}
 		} else {
 			const contractMethods = {
 				DAI: 'contracDAITokenERC20',
@@ -633,8 +639,8 @@ class Web3Service {
 	async getBNBHistory(address: string) {
 		const result: HistoryData = [];
 		try {
-			const baseUrl = `https://api${this.isMainnet ? '' : '-testnet'}.bscscan.com/api?`;
-			const url = `${baseUrl}module=account&action=txlist&sort=desc&address=${address}`;
+			const url = `https://api${this.isMainnet ? '' : '-testnet'}.bscscan.com/api?` +
+				`apikey=${etherscanAPI}&module=account&action=txlist&sort=desc&address=${address}`;
 
 			const history = await axios.get<BNBHistoryResponse>(url);
 
@@ -658,6 +664,7 @@ class Web3Service {
 			return result;
 
 		} catch(error) {
+			console.log('error in getBNBHistory', error);
 			return result;
 		}
 	}
