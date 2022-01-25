@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import {
 	View,
 	Image,
-	StyleSheet,
-	Dimensions,
 	ScrollView,
 } from "react-native";
 import CryptoJS from "react-native-crypto-js";
@@ -23,8 +21,7 @@ import {
   HYDRO_WALLET_ADDRESS,
   HYDRO_ENCRYPTED_PRIVKEY,
 } from '../../../../constants';
-
-const { height } = Dimensions.get('window');
+import styles from "./styles";
 
 interface PasswordParam extends StackScreenProps<RootStackParams, 'Password'>{};
 
@@ -64,8 +61,8 @@ const Password = ({ route, navigation }: PasswordParam) => {
 
 	return(
 		<BgView>
-			<ScrollView>
-				<ViewContainer style={styles.ViewContainer} >
+			<ViewContainer style={styles.ViewContainer} >
+				<ScrollView>
 					<Image
 						style={styles.logo}
 						source={require("../../../assets/images/brand/logoFull.png")}
@@ -118,41 +115,19 @@ const Password = ({ route, navigation }: PasswordParam) => {
 							onChangeText={setRepassword}
 						/>
 					</View>
+				</ScrollView>
 
-					<View style={{ flex: 1, padding: 10 }} />
+				<View style={{ flex: 1, height: 8 }} />
 
-					<Button
-						variant='grey'
-						text='Set password'
-						onPress={onSubmit}
-					/>
-				</ViewContainer>
-			</ScrollView>
+				<Button
+					variant='grey'
+					text='Set password'
+					onPress={onSubmit}
+				/>
+
+			</ViewContainer>
 		</BgView>
 	);
 };
-
-const styles = StyleSheet.create({
-	ViewContainer: {
-	  paddingTop: '20%',
-	  minHeight: height,
-	  alignItems: 'center',
-	},
-	logo: {
-	  resizeMode: "contain",
-	},
-	wrapperInput: {
-		width: '100%'
-	},
-	wrapperKeys: {
-		width: '100%',
-		marginTop: 30,
-	},
-	valueKey: {
-		padding: 18,
-		marginTop: 10,
-		marginBottom: 20
-	}
-})
 
 export default Password;

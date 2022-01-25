@@ -47,7 +47,10 @@ const Validation = ({ navigation }: Props) => {
       if(address) {
         if(lockTime !== -1) {
           setAddress(address); // AppStateManager
-          navigation.navigate('App', { screen: 'LockApp' });
+          navigation.navigate('App', {
+            screen: 'LockApp',
+            params: { forceAuthBiometrics: true }
+          });
         }
 
         if(lockTime === -1) {

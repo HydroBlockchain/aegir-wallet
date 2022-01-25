@@ -47,11 +47,8 @@ const Receive = ({ route }: ReceiveParam) => {
     <BgView>
       <HeaderCustom variant='back' title='Receive' />
 
-      <ScrollView>
-        <ViewContainer style={[
-          styles.viewContainer,
-          { height: height - theme.heightHeader }
-        ]} >
+      <ViewContainer style={styles.viewContainer} >
+        <ScrollView>
           <Paragraph variant='inputLabel1'>
             Wallet address
           </Paragraph>
@@ -83,15 +80,16 @@ const Receive = ({ route }: ReceiveParam) => {
             )}
 
 
-          <View style={{flex: 1}} />
+        </ScrollView>
 
-          <Button
-            variant='grey'
-            onPress={copyAddress}
-            text='Copy to clipboard'
-          />
-        </ViewContainer>
-      </ScrollView>
+        <View style={{flex: 1}} />
+
+        <Button
+          variant='grey'
+          onPress={copyAddress}
+          text='Copy to clipboard'
+        />
+      </ViewContainer>
     </BgView>
   )
 }

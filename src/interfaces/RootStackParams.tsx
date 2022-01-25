@@ -33,7 +33,9 @@ export type RootStackParams = {
   * MAIN NAVIGATION *
   *******************/
   Home: any;
-  LockApp: any;
+  LockApp: {
+    forceAuthBiometrics?: boolean;
+  };
   Settings: any;
   ExportTx: any;
   Contacts: any;

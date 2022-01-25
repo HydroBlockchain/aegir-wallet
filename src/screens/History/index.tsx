@@ -48,8 +48,8 @@ const History = ({navigation, route}: HistoryParam) => {
 
   const getBalance = async () => {
     try {
-      if (['ETH', 'BSC'].includes(network)) {
-        if (address) {
+      if(['ETH', 'BSC'].includes(network)) {
+        if(address) {
           setAddressTUSC(address);
           let history: HistoryData = [];
           let balance: number | null = null;
@@ -59,77 +59,54 @@ const History = ({navigation, route}: HistoryParam) => {
               `https://${!web3Service.isMainnet ? 'testnet.' : ''}bscscan.com/address/${address}`
             );
           }
+
           if(network === 'ETH') {
             setScanURI(
               `https://${!web3Service.isMainnet ? 'ropsten.' : ''}etherscan.io/address/${address}`
             );
           }
 
-          if (coin === 'BNB' && !customToken) {
+          if(coin === 'BNB' && !customToken) {
             let data = await Promise.all([
               web3Service.getBNBHistory(address),
               web3Service.getBNBBalanceOf(address),
             ]);
-            if (data) [history, balance] = data;
-          } else if (coin === 'ETH' && !customToken) {
-            balance = await web3Service.getEtherBalanceOf(address);
-            const responseHistory = await web3Service.getEthereumHistory({
-              address,
-            });
 
-            const provider = web3Service.providerETH;
-            const resultHistory = responseHistory?.data?.result;
+            if(data) [ history, balance ] = data;
 
-            if (
-              resultHistory &&
-              provider &&
-              typeof resultHistory !== 'string'
-            ) {
-              resultHistory.forEach((tx: any) => {
-                if (tx.value !== '0') {
-                  const {to, from, hash, blockNumber, value} = tx;
-                  const amount = ethers.utils.formatUnits(value);
+          } else if(coin === 'ETH' && !customToken) {
+            let data = await Promise.all([
+              web3Service.getEtherBalanceOf(address),
+              web3Service.getEthereumHistory({ address }),
+            ]);
 
-                  const operation =
-                    address.toLowerCase() === from.toLowerCase()
-                      ? 'SENT'
-                      : 'RECEIVED';
+            if(data) [ balance, history ] = data;
 
-                  history.push({
-                    to,
-                    from,
-                    amount,
-                    operation,
-                    blockNumber,
-                  });
-
-                  history = history.sort((a, b) =>
-                    a.blockNumber > b.blockNumber ? -1 : 1,
-                  );
-                }
-              });
-            }
           } else {
             let symbol = coin;
             if(customToken) {
               symbol = (network === 'BSC') ? 'BNB' : 'ETH';
             }
 
-            let data = await Promise.all([
-              web3Service.getTokenBalance({ address, coin: symbol, network, customToken }),
-              web3Service[
-                network === 'ETH'
-                  ? 'getEthereumTokenHistory'
-                  : 'getBSCTokenHistory'
-              ]({ address, token: symbol, customToken }),
-            ]);
-            if (data) [balance, history] = data;
+            try {
+              const data = await Promise.all([
+                web3Service.getTokenBalance({ address, coin: symbol, network, customToken }),
+                web3Service[
+                  network === 'BSC' ? 'getBSCTokenHistory' : 'getEthereumTokenHistory'
+                ]({ address, token: symbol, customToken }),
+              ]);
+
+              if(data) [ balance, history ] = data;
+
+            } catch(error) {
+              console.log(`error in history - token => ${symbol}`, error);
+            }
           }
 
-          if (balance) setBalance(balance);
-          if (history) setHistory(history);
+          if(balance) setBalance(balance);
+          if(history) setHistory(history);
         }
-      } else if (coin === 'TUSC') {
+      } else if(coin === 'TUSC') {
         SecureStore.getItemAsync(TUSC_WALLET_ADDRESS).then(data => {
           setAddressTUSC(data || '');
         });
@@ -142,7 +119,7 @@ const History = ({navigation, route}: HistoryParam) => {
     setSpinner(false);
   };
 
-  const handleBroser = () => {
+  const handleBrowser = () => {
     if(!scanURI) return;
     navigation.navigate('Browser', { uri: scanURI })
   }
@@ -262,7 +239,7 @@ const History = ({navigation, route}: HistoryParam) => {
 
           <Button
             variant="grey"
-            onPress={handleBroser}
+            onPress={handleBrowser}
             text="Open in blockexplorer"
 
           />

@@ -10,10 +10,10 @@ import {
 	Notifications,
 	FallbackProvider,
 	ProvidersEthereum,
-	BNBHistoryResponse,
 	GetTokenBalanceProps,
 	GetNotificationsProps,
 	GetEthereumHistoryProps,
+	EtherscanHistoryResponse,
 	GetNotificationsERC20Props,
 	GetNotificationsBEP20Props,
 	GetEthereumTokenHistoryProps,
@@ -59,6 +59,7 @@ const PROVIDER_BSC_DEV = 'https://data-seed-prebsc-1-s1.binance.org:8545/';
 
 /* APIs Key */
 export const infuraAPI = '75cc8cba22ab40b9bfa7406ae9b69a27';
+export const bscscanAPI = 'HUBB9IP9NYGW8S99QEXQHICWNJSDGC9APD';
 export const etherscanAPI = 'F4SXMWX2NF5W3W8PUDZBCNP6EMR3HRHQQF';
 export const alchemyMainnetAPI = 'UvYSrTzN7irP8VVOsXMmTHY_2LfXdlmS';
 export const alchemyTestnetAPI = 'c7N7arSdoWGJ-VMOEKblEV2asJmwnddS';
@@ -67,6 +68,7 @@ class Web3Service {
 	alchemyAPI: string = '';
 	web3: Web3 | null = null;
 	web3BSC: Web3 | null = null;
+	// isMainnet: boolean = false;
 	isMainnet: boolean = !__DEV__;
 	hydroTokenABI = HydroToken.abi;
 	raindropAddress: string = '';
@@ -253,7 +255,7 @@ class Web3Service {
 				const queryParams = `${baseUrl}startblock=${lastBlockNumberBSC.BNB}&endblock=latest&`
 				const url = `${queryParams}module=account&action=txlist&sort=desc&address=${address}`;
 
-				const history = await axios.get<BNBHistoryResponse>(url);
+				const history = await axios.get<EtherscanHistoryResponse>(url);
 
 				const resultHistory = history?.data?.result;
 
@@ -282,7 +284,7 @@ class Web3Service {
 			} else if (coin === 'HYDRO') {
 				const queryParams = `${baseUrl}startblock=${lastBlockNumberBSC.HYDRO}&endblock=latest&`
 				const url = `${queryParams}module=account&action=tokentx&sort=desc&address=${address}`;
-				const history = await axios.get<BNBHistoryResponse>(url);
+				const history = await axios.get<EtherscanHistoryResponse>(url);
 
 				const resultHistory = history?.data?.result;
 
@@ -323,36 +325,19 @@ class Web3Service {
 
 		if(coin === 'ETH' && this.providerETH) {
 			try {
-				const responseHistory = await this.getEthereumHistory({
+				const historyETH = await this.getEthereumHistory({
 					address,
 					startblock: lastBlockNumberEthereum.ETH
 				});
 
-				const resultHistory = responseHistory?.data?.result;
-
-				if(resultHistory && typeof resultHistory !== 'string') {
-					resultHistory.forEach( (tx: any) => {
-						if (tx.value !== '0') {
-							const { to, from, hash, blockNumber, value } = tx;
-							const amount = ethers.utils.formatUnits(value);
-
-							const operation =
-							(address.toLowerCase() === from.toLowerCase()) ? 'SENT' : 'RECEIVED';
-
-							result.push({
-								to,
-								from,
-								coin,
-								hash,
-								amount,
-								operation,
-								blockNumber,
-								network: 'ETH',
-							});
-
-						}
+				historyETH.forEach((h) => {
+					result.push({
+						...h,
+						coin,
+						network: 'ETH',
 					});
-				}
+				})
+
 			} catch(error) {
 				console.log('error in getNotificationsEthereum (level 1)', error);
 			}
@@ -525,12 +510,39 @@ class Web3Service {
 	}
 
 	async getEthereumHistory({ address, startblock }: GetEthereumHistoryProps) {
-		const baseUrl = `https://api${this.isMainnet ? '' : '-ropsten'}.etherscan.io/`;
-		const fullUrl = `${baseUrl}api?module=account&action=txlist&` +
-			`address=${address}&startblock=${startblock || '0'}&endblock=latest&sort=asc` +
-			`&apikey=${etherscanAPI}`;
+		let result: HistoryData = [];
 
-		return axios.get(fullUrl);
+		const fullUrl = `https://api${this.isMainnet ? '' : '-ropsten'}` +
+			`.etherscan.io/api?module=account&action=txlist&address=${address}` +
+			`&startblock=${startblock || '0'}&endblock=latest&sort=desc&apikey=${etherscanAPI}`;
+
+		try {
+			const history = await axios.get<EtherscanHistoryResponse>(fullUrl);
+
+			if(Boolean(history.data.status)) {
+				history.data.result.forEach((tx) => {
+					if (tx.value !== '0') {
+						const { to, from, blockNumber, value, blockHash } = tx;
+						const amount = ethers.utils.formatUnits(value);
+
+						result.push({
+							to,
+							from,
+							amount,
+							coin: 'ETH',
+							hash: blockHash,
+							blockNumber: parseInt(blockNumber),
+							operation: (address.toLowerCase() === from.toLowerCase()) ? 'SENT' : 'RECEIVED',
+						})
+					}
+				})
+			}
+
+			return result;
+		} catch(error) {
+			console.log('error in getEthereumHistory', error);
+			return result;
+		}
 	}
 
 	async getEthereumTokenHistory({
@@ -541,52 +553,45 @@ class Web3Service {
 	}: GetEthereumTokenHistoryProps) {
 		const result: HistoryData = [];
 		try {
-			const contractMethods = {
-				DAI: 'contracDAITokenERC20',
-				USDT: 'contracUSDTTokenERC20',
-				HYDRO: 'contracHydroTokenERC20',
+			const addresses = {
+				DAI: 'DAITokenERC20Address',
+				USDT: 'USDTTokenERC20Address',
+				HYDRO: 'hydroTokenERC20Address',
 			};
 
-			let contract: any = null;
+			const contractAddress = this[addresses[token]].toLowerCase();
 
-			if(customToken) {
-				const provider = (customToken.network === 'ETH') ? this.providerETH : this.providerBSC;
-				if(!provider) return result;
-				contract = new ethers.Contract( customToken.address, abiERC20, provider );
-			} else {
-				contract = this[contractMethods[token]];
+			const url = `https://api${this.isMainnet ? '' : '-ropsten'}` +
+		`.etherscan.io/api?module=account&action=tokentx&address=${address}` +
+		`&startblock=${startblock || '0'}&endblock=latest&sort=desc&apikey=${etherscanAPI}`;
+
+			const history = await axios.get<EtherscanHistoryResponse>(url, {
+				headers: { 'User-Agent': 'Mozilla/5.0' }
+			});
+
+			if(Boolean(history.data.status)) {
+				history.data.result.forEach((tx) => {
+					const contractAddressTx = tx.contractAddress.toLowerCase();
+
+					if(contractAddressTx === contractAddress) {
+						const { to, from, blockNumber, value, blockHash } = tx;
+						const amount = ethers.utils.formatUnits(value);
+						result.push({
+							to,
+							from,
+							amount,
+							coin: token,
+							hash: blockHash,
+							blockNumber: parseInt(blockNumber),
+							operation: (address.toLowerCase() === from.toLowerCase()) ? 'SENT' : 'RECEIVED'
+						})
+					}
+				})
 			}
 
-
-			if(!contract) return result;
-
-			const fromBlock = startblock || '0x';
-
-			const decimals = await contract.decimals();
-			const filterTo = contract.filters.Transfer(null, address);
-			const filterFrom = contract.filters.Transfer(address, null);
-			const logsTo = await contract.queryFilter(filterTo, fromBlock, "latest");
-			const logsFrom = await contract.queryFilter(filterFrom, fromBlock, "latest");
-
-			const logs = [ ...logsTo, ...logsFrom ];
-
-
-			logs.forEach((tx) => {
-				const data = contract.interface.parseLog(tx);
-				const [ from, to, amountBN ] = data.args;
-				const amount = ethers.utils.formatUnits(amountBN, decimals);
-
-				result.push({
-					to,
-					from,
-					amount,
-					blockNumber: tx.blockNumber,
-					operation: (address === from) ? 'SENT' : 'RECEIVED',
-				})
-			})
-			return result.sort((a, b) => (a.blockNumber > b.blockNumber) ? -1 : 1	);
+			return result;
 		} catch(error) {
-			console.log('error in getEthereumTokenHistory', error);
+			console.log(`error in getEthereumTokenHistory - token ${token}`, error);
 			return result;
 		}
 	}
@@ -605,21 +610,26 @@ class Web3Service {
 			const contractAddress = this.hydroTokenBEP20Address.toLowerCase();
 
 			if(token === 'HYDRO') {
-				const baseUrl = `https://api${this.isMainnet ? '' : '-testnet'}.bscscan.com/api?`
-				const url = `${baseUrl}module=account&action=tokentx&sort=desc&address=${address}`;
-				const history = await axios.get<BNBHistoryResponse>(url);
+				const url = `https://api${this.isMainnet ? '' : '-testnet'}.bscscan.com/api?` +
+				`apikey=${bscscanAPI}&module=account&action=tokentx&sort=desc&address=${address}`;
+
+				const history = await axios.get<EtherscanHistoryResponse>(url, {
+					headers: { 'User-Agent': 'Mozilla/5.0' }
+				});
 
 				if(Boolean(history.data.status)) {
 					history.data.result.forEach((tx) => {
 						const contractAddressTx = tx.contractAddress.toLowerCase();
 
 						if(contractAddressTx === contractAddress) {
-							const { to, from, blockNumber, value } = tx;
+							const { to, from, blockNumber, value, blockHash } = tx;
 							const amount = ethers.utils.formatUnits(value);
 							result.push({
 								to,
 								from,
 								amount,
+								coin: token,
+								hash: blockHash,
 								blockNumber: parseInt(blockNumber),
 								operation: (address.toLowerCase() === from.toLowerCase()) ? 'SENT' : 'RECEIVED'
 							})
@@ -630,30 +640,33 @@ class Web3Service {
 
 			return result;
 		} catch(error) {
-			console.log('error in getEthereumTokenHistory', error);
+			console.log('error in getBSCTokenHistory', error);
 			return result;
 		}
 	}
-
 
 	async getBNBHistory(address: string) {
 		const result: HistoryData = [];
 		try {
 			const url = `https://api${this.isMainnet ? '' : '-testnet'}.bscscan.com/api?` +
-				`apikey=${etherscanAPI}&module=account&action=txlist&sort=desc&address=${address}`;
+				`apikey=${bscscanAPI}&module=account&action=txlist&sort=desc&address=${address}`;
 
-			const history = await axios.get<BNBHistoryResponse>(url);
+			const history = await axios.get<EtherscanHistoryResponse>(url, {
+				headers: { 'User-Agent': 'Mozilla/5.0' }
+			});
 
 			if(Boolean(history.data.status)) {
 				history.data.result.forEach((tx) => {
 					if (tx.value !== '0') {
-						const { to, from, blockNumber, value } = tx;
+						const { to, from, blockNumber, value, blockHash } = tx;
 						const amount = ethers.utils.formatUnits(value);
 
 						result.push({
 							to,
 							from,
 							amount,
+							coin: 'BNB',
+							hash: blockHash,
 							blockNumber: parseInt(blockNumber),
 							operation: (address.toLowerCase() === from.toLowerCase()) ? 'SENT' : 'RECEIVED',
 						})

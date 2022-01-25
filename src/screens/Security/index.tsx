@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import CryptoJS from 'crypto-js';
-import { Switch } from 'react-native-paper';
 import { ScrollView, View } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -71,8 +70,14 @@ const Security = () => {
     try {
       const privkey = await SecureStore.getItemAsync(HYDRO_ENCRYPTED_PRIVKEY);
 
-      const privateKey = CryptoJS.AES.decrypt( privkey || '', password )
-      .toString(CryptoJS.enc.Utf8);
+      let privateKey = '';
+
+      try {
+        privateKey = CryptoJS.AES.decrypt( privkey || '', password)
+        .toString(CryptoJS.enc.Utf8);
+      } catch(error) {
+        console.log('error in handleConfirm - CryptoJS', error);
+      }
 
       if(!privateKey) {
         setPasswordError('Password incorrect');
@@ -100,7 +105,7 @@ const Security = () => {
   const onChangeSelectTime = (item: IOption) => {
     setCurrentLockTime(item);
   }
-  
+
   return (
     <BgView>
       <HeaderCustom variant='back' title='Security' />
@@ -111,7 +116,7 @@ const Security = () => {
           <Paragraph variant='subtitle2' >
             Automatic lock
           </Paragraph>
-          
+
           <Paragraph variant='body2' >
             Choose the amount of time before the app closes automatically
           </Paragraph>
@@ -135,9 +140,9 @@ const Security = () => {
             placeholder='Enter your password'
           />
         </ScrollView>
-        
+
         <View style={{ flex: 1 }} />
-        
+
         <Button
           variant='grey'
           text='Confirm'

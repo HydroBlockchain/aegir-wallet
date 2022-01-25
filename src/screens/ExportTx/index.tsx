@@ -1,12 +1,11 @@
 import React, { useContext, useState } from 'react';
 
 import XLSX from 'xlsx';
-import { ethers } from 'ethers';
 import CryptoJS from 'crypto-js';
 import RNFS from 'react-native-fs';
 import Toast from 'react-native-root-toast';
 import * as SecureStore from 'expo-secure-store';
-import { PermissionsAndroid, View } from 'react-native';
+import { Keyboard, PermissionsAndroid, View } from 'react-native';
 
 import styles from './styles';
 import Button from '../../components/Button';
@@ -15,7 +14,6 @@ import BgView from '../../components/Layouts/BgView';
 import TextInputCustom from '../../components/TextInput';
 import { HYDRO_ENCRYPTED_PRIVKEY } from '../../../constants';
 import ViewContainer from '../../components/Layouts/ViewContainer';
-import { HistoryData } from '../../interfaces/Web3ServiceInterface';
 import { AppStateManagerContext } from '../../context/AppStateManager';
 
 const ExportTx = () => {
@@ -28,7 +26,7 @@ const ExportTx = () => {
       type: 'success',
       text: 'Export started!'
     });
-    
+
     const [ historyBSC, historyETH ] = await Promise.all([
       getBNBHistory(),
       getEthereumHistory()
@@ -47,11 +45,24 @@ const ExportTx = () => {
     const wsBSC = XLSX.utils.json_to_sheet(historyBSC);
     const wsETH = XLSX.utils.json_to_sheet(historyETH);
 
+    const ColsWidth = [
+      { width: 50 },
+      { width: 50 },
+      { width: 20 },
+      { width: 20 },
+      { width: 70 },
+      { width: 20 },
+      { width: 20 },
+    ];
+
+    wsBSC['!cols'] = ColsWidth;
+    wsETH['!cols'] = ColsWidth;
+
     // attach sheets to spreadsheet
     XLSX.utils.book_append_sheet(wb, wsETH, 'ETH');
     XLSX.utils.book_append_sheet(wb, wsBSC, 'BSC');
     const wbout = XLSX.write(wb, {type:'binary', bookType: 'xlsx'});
-    
+
     // Write generated excel to Storage
     const dt = new Date();
     let path = `${RNFS.DownloadDirectoryPath}/aegirWallet_transactions_`;
@@ -70,7 +81,7 @@ const ExportTx = () => {
     .catch((e) => {
       console.log('Error RNFS.writeFile', e);
       if(currentToast) Toast.hide(currentToast);
-      
+
       toast({
         type: 'error',
         text: 'Export failed!'
@@ -81,49 +92,39 @@ const ExportTx = () => {
   const getBNBHistory = async () => {
     try {
       const { address } = appState;
-      return await web3Service.getBNBHistory(address);
-  
+      const history = await Promise.all([
+        web3Service.getBNBHistory(address),
+        web3Service.getBSCTokenHistory({ token: 'HYDRO', address }),
+      ]);
+
+      return history.reduce((prev, current) => {
+        return [ ...prev, ...current ];
+      }, []);
+
     } catch(error) {
       console.log('error in ExportTx - getBNBHistory', error);
       return [];
     }
   }
-  
+
   const getEthereumHistory = async () => {
-    let history: HistoryData = [];
     try {
       const { address } = appState;
-      const responseHistory = await web3Service.getEthereumHistory({ address });
-  
-      const provider = web3Service.providerETH;
-      const resultHistory = responseHistory?.data?.result;
-  
-      if(resultHistory && provider && typeof resultHistory !== 'string') {
-        resultHistory.forEach((tx: any) => {
-          if (tx.value !== '0') {
-            const {to, from, hash, blockNumber, value} = tx;
-            const amount = ethers.utils.formatUnits(value);
-            const sending = address.toLowerCase() === from.toLowerCase();
-    
-            history.push({
-              to,
-              from,
-              hash,
-              amount,
-              blockNumber,
-              operation: sending ? 'SENT' : 'RECEIVED',
-            });
-    
-            history = history.sort((a, b) => (a.blockNumber > b.blockNumber ? -1 : 1));
-          }
-        });
-      }
-  
-      return history;
+      const history = await Promise.all([
+        web3Service.getEthereumHistory({ address }),
+        web3Service.getEthereumTokenHistory({ token: 'DAI', address }),
+        web3Service.getEthereumTokenHistory({ token: 'USDT', address }),
+        web3Service.getEthereumTokenHistory({ token: 'HYDRO', address }),
+      ]);
+
+      return history.reduce((prev, current) => {
+        return [ ...prev, ...current ];
+      }, []);
+
     } catch(error) {
       console.log('error in ExportTx - getEthereumHistory', error);
+      return [];
     }
-    return history;
   }
 
   const handleClick = async () => {
@@ -146,7 +147,8 @@ const ExportTx = () => {
       }
       setPassword('');
       setPasswordError('');
-      
+      Keyboard.dismiss();
+
       // Check for Permission (check if permission is already given or not)
       const isPermitedExternalStorage = await PermissionsAndroid.check(
         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE

@@ -1,36 +1,37 @@
 import { StyleSheet } from "react-native";
+import { themeGlobal } from "../../../libs/Theme";
 
 const styles = StyleSheet.create({
   ViewContainer: {
     flex: 1,
-    paddingTop: '20%',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: themeGlobal.defautlPaddingTop,
   },
   logo: {
     resizeMode: "contain",
   },
-  wrapperText: {},
   ctaMnemonic: {
-      width: '100%'
+    width: '100%'
   },
   wrapperButton: {
     width: '100%',
     justifyContent: 'flex-end',
   },
   text: {
-      marginVertical: 30,
-      textAlign: 'center',
+    marginVertical: 30,
+    textAlign: 'center',
   },
   textAreaWords: {
-      padding: 10,
-      width: '100%',
-      minHeight: 150,
-      marginVertical: 15,
+    flex: 1,
+    padding: 10,
+    width: '100%',
+    minHeight: 70,
+    marginVertical: 15,
   },
   ctaCopy: {
-      width: '50%',
-      alignSelf: 'flex-end'
+    width: '50%',
+    alignSelf: 'flex-end'
   }
 });
 

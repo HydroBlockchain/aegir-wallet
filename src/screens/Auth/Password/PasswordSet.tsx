@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Dimensions,
     ScrollView,
+    Platform
 } from "react-native";
 
 import Button from "../../../components/Button";
@@ -37,7 +38,7 @@ const PasswordSet = ({ navigation }) => {
               </Paragraph>
 
               <Paragraph variant='body1' stylesCustom={styles.body} >
-                Now you wallet has been generated, encrypted and you have made a backup of your mnemonic seed. Great!
+                Now your wallet has been generated, encrypted and you have made a backup of your mnemonic seed. Great!
               </Paragraph>
 
               <Paragraph variant='body1' stylesCustom={styles.body} >
@@ -55,6 +56,9 @@ const PasswordSet = ({ navigation }) => {
                 onPress={onSubmit}
                 text='Okey, i understand'
               />
+
+              { Platform.OS === 'ios' ? <View style={{ flex: 0.3 }} /> : null }
+              
             </ViewContainer>
           </ScrollView>
         </BgView>
@@ -73,10 +77,12 @@ const styles = StyleSheet.create({
       resizeMode: "contain",
     },
     title: {
-        marginVertical: 55
+      marginVertical: 55
     },
     body: {
-        marginBottom: 20
+      width: '100%',
+      marginBottom: 20,
+      textAlign: 'justify'
     }
 })
 

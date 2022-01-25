@@ -138,8 +138,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         compileSdkVersion rootProject.ext.compileSdkVersion
-        versionCode 143
-        versionName "1.4.3"
+        versionCode 148
+        versionName "1.4.8"
         missingDimensionStrategy 'react-native-camera', 'general'
     }
     splits {
@@ -175,6 +175,10 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+
+        buildTypes.each {
+            it.buildConfigField "String", "FLAG_DEBUG", FLAG_DEBUG
         }
     }
 
@@ -248,6 +252,9 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    implementation "androidx.biometric:biometric:1.1.0"
+    implementation "com.jakewharton.timber:timber:4.7.1"
 }
 
 // Run this once to be able to run the application with BUCK

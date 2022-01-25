@@ -120,7 +120,6 @@ const ChangePassword = () => {
           variant='grey'
           text='Change Password'
           onPress={handleChangePassword}
-          styleCustom={styles.btnChangePassword}
         />
       </ViewContainer>
     </BgView>

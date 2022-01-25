@@ -21,7 +21,6 @@ import { MNEMONIC_KEY } from '../../../../constants';
 /* style */
 import styles from "./styles";
 
-
 const { height } = Dimensions.get('window');
 
 interface Props extends StackScreenProps<RootStackParams, 'Mnemonic'> { };
@@ -71,54 +70,55 @@ const Mnemonic = ({ navigation }: Props) => {
 		<BgView>
 			<Spinner visible={spinner} size={'large'} color={theme.colors.primary} />
 
-			<ScrollView>
-				<ViewContainer style={[styles.ViewContainer, { minHeight: height }]} >
-					<Image
-						style={styles.logo}
-						source={require("../../../assets/images/brand/logoFull.png")}
-					/>
+			<ViewContainer style={[styles.ViewContainer]} >
+				<View style={{ flex: 1 }} />
 
-					<Paragraph variant='body1' stylesCustom={styles.text} >
-						Now we will generate 12 words for you, this is your mnemonic seed which can be used to restore your wallet. Make sure to backup your seed and keep it safe.
+				<Image
+					style={styles.logo}
+					source={require("../../../assets/images/brand/logoFull.png")}
+				/>
+
+				<View style={{ flex: 1 }} />
+
+				<Paragraph variant='body1' stylesCustom={styles.text} >
+					Now we will generate 12 words for you, this is your mnemonic seed which can be used to restore your wallet. Make sure to backup your seed and keep it safe.
+				</Paragraph>
+
+				<Button
+					variant='default'
+					onPress={createWallet}
+					text='Generate Mnemonic Seed'
+				/>
+
+				<View style={[
+					styles.textAreaWords,
+					{
+						borderRadius: theme.roundness,
+						backgroundColor: theme.colors.backgroundApp2,
+					}
+				]}>
+					<Paragraph variant='subtitle1' >
+						{mnemonic}
 					</Paragraph>
+				</View>
 
+				<Button
+					variant='default'
+					text='Copy Mnemonic'
+					onPress={copyMnemonic}
+					styleCustom={styles.ctaCopy}
+				/>
+
+				<View style={{ flex: 1 }} />
+
+				<View style={styles.wrapperButton}>
 					<Button
-						variant='default'
-						onPress={createWallet}
-						text='Generate Mnemonic Seed'
+						text='Next'
+						variant='grey'
+						onPress={onSubmit}
 					/>
-
-					<View style={[
-						styles.textAreaWords,
-						{
-							borderRadius: theme.roundness,
-							backgroundColor: theme.colors.backgroundApp2,
-						}
-					]}>
-						<Paragraph variant='subtitle1' >
-							{mnemonic}
-						</Paragraph>
-					</View>
-
-					<Button
-						variant='default'
-						text='Copy Mnemonic'
-						onPress={copyMnemonic}
-						styleCustom={styles.ctaCopy}
-					/>
-
-
-					<View style={{ flex: 1 }} />
-
-					<View style={styles.wrapperButton}>
-						<Button
-							text='Next'
-							variant='grey'
-							onPress={onSubmit}
-						/>
-					</View>
-				</ViewContainer>
-			</ScrollView>
+				</View>
+			</ViewContainer>
 		</BgView>
 	);
 };

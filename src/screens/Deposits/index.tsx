@@ -39,8 +39,8 @@ const Deposits = ({route}: PropsParams) => {
   const [ receiver, setReceiver ] = useState('');
   const [ spinner, setSpinner ] = useState(false);
   const [ amountInUSD, setAmountInUSD ] = useState('');
-  const [ priceInUSD, setPriceInUSD ] = useState<null | number>(null);
   const [ openQrScanner, setOpenQrScanner ] = useState(false);
+  const [ priceInUSD, setPriceInUSD ] = useState<null | number>(null);
   const {
     appState: { address, contacts },
     web3Service,
@@ -291,12 +291,8 @@ const Deposits = ({route}: PropsParams) => {
       <HeaderCustom variant="back" title="Send transaction" />
       <Spinner visible={spinner} size={'large'} color={theme.colors.primary} />
 
-      <ScrollView>
-        <ViewContainer
-          style={[
-            styles.viewContainer,
-            {minHeight: height - theme.heightHeader},
-          ]}>
+      <ViewContainer style={styles.viewContainer} >
+        <ScrollView>
           <QrScanner
             isShow={Boolean(openQrScanner)}
             onSuccess={value => setReceiver(pickAddressFromQr(value))}
@@ -385,7 +381,7 @@ const Deposits = ({route}: PropsParams) => {
               styleCustom={styles.buttonAmount}
             />
 
-            <View style={{width: 10}} />
+            <View style={{width: 8 }} />
 
             <Button
               text="All"
@@ -427,18 +423,19 @@ const Deposits = ({route}: PropsParams) => {
             </Paragraph>
           )}
 
-          <View style={{flex: 1}} />
+        </ScrollView>
 
-          <Button
-            text="Send"
-            variant="grey"
-            onPress={() => {
-              setSpinner(true);
-              setTimeout(deposit, 200);
-            }}
-          />
-        </ViewContainer>
-      </ScrollView>
+        <View style={{flex: 1}} />
+
+        <Button
+          text="Send"
+          variant="grey"
+          onPress={() => {
+            setSpinner(true);
+            setTimeout(deposit, 200);
+          }}
+        />
+      </ViewContainer>
     </BgView>
   );
 };

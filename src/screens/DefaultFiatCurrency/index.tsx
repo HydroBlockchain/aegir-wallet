@@ -18,7 +18,7 @@ const DefaultFiatCurrency = () => {
   const currencyOptios = [
     {
       id: 'USD',
-      title: '$ - American dollar',
+      title: '$ - US dollar',
     },
     {
       id: 'EUR',

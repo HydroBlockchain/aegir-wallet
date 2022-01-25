@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
+import { themeGlobal } from "../../libs/Theme";
 
 const styles = StyleSheet.create({
   viewContainer: {
     flex: 1,
+    paddingTop: themeGlobal.defautlPaddingTop
   },
   wrapperImageCard: {
-    marginTop: 20,
-    marginBottom: 30,
+    marginBottom: 24,
     alignItems: 'center',
   },
   imageCard: {
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
   },
   wrapperBtnContact: {
     marginTop: 10,
-    marginBottom: 15,
+    marginBottom: 16,
     alignItems: 'flex-end'
   },
   btnContact: {
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   },
   wrapperButtonAmount: {
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },

@@ -1,16 +1,19 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 const { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   containerStyleGlobal: {
     paddingTop: 0,
-    borderBottomColor: 'transparent',
+    borderBottomColor: 'transparent'
   },
   containerStyleGoBack: {},
+  rightContainerStyle: {
+    justifyContent: 'center'
+  },
   nav: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   headerLeft: {
     flexDirection: 'row',
@@ -21,16 +24,17 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: width * 0.03,
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   containerStyleDefault: {
     borderBottomWidth: 0,
-    paddingHorizontal: 10,
+    paddingHorizontal: 10
   },
   centerComponent: {
     fontSize: 18,
     fontWeight: "600",
     fontFamily: "Rubik-Regular",
+    height: 20
   },
   badgeStyle: {
     top: -5,

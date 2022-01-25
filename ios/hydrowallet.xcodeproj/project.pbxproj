@@ -8,26 +8,46 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* hydrowalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* hydrowalletTests.m */; };
+		08DE0FA3A301D357482FDE25 /* libPods-hydrowallet-hydrowalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2365DB1391744939A302A619 /* libPods-hydrowallet-hydrowalletTests.a */; };
+		09C9FF772799F11E00715CED /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF6A2799F11200715CED /* Roboto-BoldItalic.ttf */; };
+		09C9FF782799F11E00715CED /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF6B2799F11400715CED /* Roboto-Bold.ttf */; };
+		09C9FF792799F11E00715CED /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF6C2799F11500715CED /* Roboto-MediumItalic.ttf */; };
+		09C9FF7A2799F11E00715CED /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF6D2799F11500715CED /* Roboto-ThinItalic.ttf */; };
+		09C9FF7B2799F11E00715CED /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF6E2799F11600715CED /* Roboto-Thin.ttf */; };
+		09C9FF7C2799F11E00715CED /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF6F2799F11700715CED /* Roboto-Light.ttf */; };
+		09C9FF7D2799F11E00715CED /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF702799F11800715CED /* LICENSE.txt */; };
+		09C9FF7E2799F11E00715CED /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF712799F11900715CED /* Roboto-Black.ttf */; };
+		09C9FF7F2799F11E00715CED /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF722799F11900715CED /* Roboto-Italic.ttf */; };
+		09C9FF802799F11E00715CED /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF732799F11A00715CED /* Roboto-BlackItalic.ttf */; };
+		09C9FF812799F11E00715CED /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF742799F11B00715CED /* Roboto-Regular.ttf */; };
+		09C9FF822799F11E00715CED /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF752799F11C00715CED /* Roboto-LightItalic.ttf */; };
+		09C9FF832799F11E00715CED /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF762799F11E00715CED /* Roboto-Medium.ttf */; };
+		09C9FF98279A21AA00715CED /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF86279A218000715CED /* Rubik-Medium.ttf */; };
+		09C9FF99279A21AA00715CED /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF87279A218100715CED /* README.txt */; };
+		09C9FF9A279A21AA00715CED /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF88279A218200715CED /* Rubik-BoldItalic.ttf */; };
+		09C9FF9B279A21AA00715CED /* Rubik-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF89279A218300715CED /* Rubik-Italic-VariableFont_wght.ttf */; };
+		09C9FF9C279A21AA00715CED /* Rubik-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF8A279A218400715CED /* Rubik-SemiBoldItalic.ttf */; };
+		09C9FF9D279A21AA00715CED /* Rubik-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF8B279A218700715CED /* Rubik-VariableFont_wght.ttf */; };
+		09C9FF9E279A21AA00715CED /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF8C279A219100715CED /* Rubik-Regular.ttf */; };
+		09C9FF9F279A21AA00715CED /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF8D279A219300715CED /* Rubik-LightItalic.ttf */; };
+		09C9FFA0279A21AA00715CED /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF8E279A219600715CED /* Rubik-Light.ttf */; };
+		09C9FFA1279A21AA00715CED /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF8F279A219A00715CED /* Rubik-Italic.ttf */; };
+		09C9FFA2279A21AA00715CED /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF90279A219E00715CED /* Rubik-BlackItalic.ttf */; };
+		09C9FFA3279A21AA00715CED /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF91279A219E00715CED /* OFL.txt */; };
+		09C9FFA4279A21AA00715CED /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF92279A21A300715CED /* Rubik-Bold.ttf */; };
+		09C9FFA5279A21AA00715CED /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF93279A21A900715CED /* Rubik-Black.ttf */; };
+		09C9FFA6279A21AA00715CED /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF94279A21A900715CED /* Rubik-MediumItalic.ttf */; };
+		09C9FFA7279A21AA00715CED /* Rubik-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF95279A21A900715CED /* Rubik-ExtraBold.ttf */; };
+		09C9FFA8279A21AA00715CED /* Rubik-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF96279A21A900715CED /* Rubik-ExtraBoldItalic.ttf */; };
+		09C9FFA9279A21AA00715CED /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF97279A21AA00715CED /* Rubik-SemiBold.ttf */; };
+		09CCB68D279DEB4B00054A17 /* splashHydro.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CCB68C279DEB4A00054A17 /* splashHydro.png */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3421685536B27D35FB4D32F1 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135BD059A29F7DB272584470 /* ExpoModulesProvider.swift */; };
+		44B2011259667726FC769FDD /* libPods-hydrowallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B7F4C210F52806665192A5 /* libPods-hydrowallet.a */; };
+		6AC80F7BC3745BEBEBDE1D03 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C6C774CCB53ED695E36973 /* ExpoModulesProvider.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		98180DC7DD5E4FA8A1E4B77C /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6A199CE06864B9FB57577F3 /* AntDesign.ttf */; };
-		52900BCB679945CCBD6AD72E /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF35536ACA9443FCB75C1F63 /* Entypo.ttf */; };
-		FEB869D751AB466DB0256DFE /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48A40A00C984BDAA1110DA0 /* EvilIcons.ttf */; };
-		EFA09B4E44B64912849B7D85 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0DB30BDCBA64AF9A63E1228 /* Feather.ttf */; };
-		2085A605A0484826ACF548AA /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A38FD6FA3CC94686BA5113FB /* FontAwesome.ttf */; };
-		C268EAB3530243E6AA218B3E /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A6BE4C8F6D143B39F55D96E /* FontAwesome5_Brands.ttf */; };
-		ABD923BB48344DD390D044C5 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9C5D27BB62141668B0518F9 /* FontAwesome5_Regular.ttf */; };
-		A4956805E0114C6CAAD8FE60 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73F5BEE9BF634A009D5699C7 /* FontAwesome5_Solid.ttf */; };
-		FF65F35C620544ABAF8F9412 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 780D42C1D6524A8B91511536 /* Fontisto.ttf */; };
-		7839068252424271BD20A230 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A995263FCB348A1AF4BF952 /* Foundation.ttf */; };
-		E6359D96146840FC9ACAE608 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA905D4B4A4F4FA2814DCF96 /* Ionicons.ttf */; };
-		5B4D88E915224F438FC15686 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39F6BDF932A743D4BCB744F8 /* MaterialCommunityIcons.ttf */; };
-		FEABA8CCF80D47FBA2BA302D /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29E9214DFC6D4E098E01CEFE /* MaterialIcons.ttf */; };
-		524528FC20AE46A5B69F9A45 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC2D5C62E3724CB8B438F5A4 /* Octicons.ttf */; };
-		CA103AF537AA4E9F88BE531E /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE985B31DFB44F84955DB638 /* SimpleLineIcons.ttf */; };
-		702EE1D89505485497C1232B /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A085E9A27FBC43E88B861957 /* Zocial.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,30 +64,70 @@
 		00E356EE1AD99517003FC87E /* hydrowalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hydrowalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* hydrowalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hydrowalletTests.m; sourceTree = "<group>"; };
+		09C9FF6A2799F11200715CED /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF6B2799F11400715CED /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		09C9FF6C2799F11500715CED /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF6D2799F11500715CED /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF6E2799F11600715CED /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		09C9FF6F2799F11700715CED /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		09C9FF702799F11800715CED /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		09C9FF712799F11900715CED /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		09C9FF722799F11900715CED /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		09C9FF732799F11A00715CED /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF742799F11B00715CED /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		09C9FF752799F11C00715CED /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF762799F11E00715CED /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		09C9FF86279A218000715CED /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		09C9FF87279A218100715CED /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		09C9FF88279A218200715CED /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF89279A218300715CED /* Rubik-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		09C9FF8A279A218400715CED /* Rubik-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF8B279A218700715CED /* Rubik-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		09C9FF8C279A219100715CED /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		09C9FF8D279A219300715CED /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-LightItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF8E279A219600715CED /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
+		09C9FF8F279A219A00715CED /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
+		09C9FF90279A219E00715CED /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BlackItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF91279A219E00715CED /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		09C9FF92279A21A300715CED /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		09C9FF93279A21A900715CED /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
+		09C9FF94279A21A900715CED /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF95279A21A900715CED /* Rubik-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-ExtraBold.ttf"; sourceTree = "<group>"; };
+		09C9FF96279A21A900715CED /* Rubik-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		09C9FF97279A21AA00715CED /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
+		09CCB68C279DEB4A00054A17 /* splashHydro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashHydro.png; path = ../../../../Desktop/splashHydro.png; sourceTree = "<group>"; };
+		135BD059A29F7DB272584470 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-hydrowallet/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* hydrowallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hydrowallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = hydrowallet/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = hydrowallet/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = hydrowallet/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hydrowallet/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hydrowallet/main.m; sourceTree = "<group>"; };
+		142E4FBB58FF9E1E40BFB1C8 /* Pods-hydrowallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hydrowallet.release.xcconfig"; path = "Target Support Files/Pods-hydrowallet/Pods-hydrowallet.release.xcconfig"; sourceTree = "<group>"; };
+		2365DB1391744939A302A619 /* libPods-hydrowallet-hydrowalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hydrowallet-hydrowalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27B7F4C210F52806665192A5 /* libPods-hydrowallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hydrowallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29E9214DFC6D4E098E01CEFE /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		39F6BDF932A743D4BCB744F8 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		54349307C7241593D6DEE37D /* Pods-hydrowallet-hydrowalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hydrowallet-hydrowalletTests.debug.xcconfig"; path = "Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests.debug.xcconfig"; sourceTree = "<group>"; };
+		73F5BEE9BF634A009D5699C7 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		780D42C1D6524A8B91511536 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hydrowallet/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8A6BE4C8F6D143B39F55D96E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		8A995263FCB348A1AF4BF952 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		A085E9A27FBC43E88B861957 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		A15360D45871C4F4786181EE /* Pods-hydrowallet-hydrowalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hydrowallet-hydrowalletTests.release.xcconfig"; path = "Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests.release.xcconfig"; sourceTree = "<group>"; };
+		A38FD6FA3CC94686BA5113FB /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		B7C6C774CCB53ED695E36973 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-hydrowallet-hydrowalletTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		BF35536ACA9443FCB75C1F63 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		C0DB30BDCBA64AF9A63E1228 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		C48A40A00C984BDAA1110DA0 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		DC2D5C62E3724CB8B438F5A4 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		E6A199CE06864B9FB57577F3 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		E9C5D27BB62141668B0518F9 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		EA905D4B4A4F4FA2814DCF96 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		E6A199CE06864B9FB57577F3 /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BF35536ACA9443FCB75C1F63 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C48A40A00C984BDAA1110DA0 /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C0DB30BDCBA64AF9A63E1228 /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A38FD6FA3CC94686BA5113FB /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8A6BE4C8F6D143B39F55D96E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E9C5D27BB62141668B0518F9 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		73F5BEE9BF634A009D5699C7 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		780D42C1D6524A8B91511536 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8A995263FCB348A1AF4BF952 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		EA905D4B4A4F4FA2814DCF96 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		39F6BDF932A743D4BCB744F8 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		29E9214DFC6D4E098E01CEFE /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DC2D5C62E3724CB8B438F5A4 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FE985B31DFB44F84955DB638 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A085E9A27FBC43E88B861957 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FE985B31DFB44F84955DB638 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		FF0EA8875560DBF829BE85D7 /* Pods-hydrowallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hydrowallet.debug.xcconfig"; path = "Target Support Files/Pods-hydrowallet/Pods-hydrowallet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08DE0FA3A301D357482FDE25 /* libPods-hydrowallet-hydrowalletTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44B2011259667726FC769FDD /* libPods-hydrowallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,15 +167,55 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		09C9FF672799EFD600715CED /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				09C9FF91279A219E00715CED /* OFL.txt */,
+				09C9FF87279A218100715CED /* README.txt */,
+				09C9FF93279A21A900715CED /* Rubik-Black.ttf */,
+				09C9FF90279A219E00715CED /* Rubik-BlackItalic.ttf */,
+				09C9FF92279A21A300715CED /* Rubik-Bold.ttf */,
+				09C9FF88279A218200715CED /* Rubik-BoldItalic.ttf */,
+				09C9FF95279A21A900715CED /* Rubik-ExtraBold.ttf */,
+				09C9FF96279A21A900715CED /* Rubik-ExtraBoldItalic.ttf */,
+				09C9FF89279A218300715CED /* Rubik-Italic-VariableFont_wght.ttf */,
+				09C9FF8F279A219A00715CED /* Rubik-Italic.ttf */,
+				09C9FF8E279A219600715CED /* Rubik-Light.ttf */,
+				09C9FF8D279A219300715CED /* Rubik-LightItalic.ttf */,
+				09C9FF86279A218000715CED /* Rubik-Medium.ttf */,
+				09C9FF94279A21A900715CED /* Rubik-MediumItalic.ttf */,
+				09C9FF8C279A219100715CED /* Rubik-Regular.ttf */,
+				09C9FF97279A21AA00715CED /* Rubik-SemiBold.ttf */,
+				09C9FF8A279A218400715CED /* Rubik-SemiBoldItalic.ttf */,
+				09C9FF8B279A218700715CED /* Rubik-VariableFont_wght.ttf */,
+				09C9FF702799F11800715CED /* LICENSE.txt */,
+				09C9FF712799F11900715CED /* Roboto-Black.ttf */,
+				09C9FF732799F11A00715CED /* Roboto-BlackItalic.ttf */,
+				09C9FF6B2799F11400715CED /* Roboto-Bold.ttf */,
+				09C9FF6A2799F11200715CED /* Roboto-BoldItalic.ttf */,
+				09C9FF722799F11900715CED /* Roboto-Italic.ttf */,
+				09C9FF6F2799F11700715CED /* Roboto-Light.ttf */,
+				09C9FF752799F11C00715CED /* Roboto-LightItalic.ttf */,
+				09C9FF762799F11E00715CED /* Roboto-Medium.ttf */,
+				09C9FF6C2799F11500715CED /* Roboto-MediumItalic.ttf */,
+				09C9FF742799F11B00715CED /* Roboto-Regular.ttf */,
+				09C9FF6E2799F11600715CED /* Roboto-Thin.ttf */,
+				09C9FF6D2799F11500715CED /* Roboto-ThinItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* hydrowallet */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				09CCB68C279DEB4A00054A17 /* splashHydro.png */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				09C9FF672799EFD600715CED /* Resources */,
 			);
 			name = hydrowallet;
 			sourceTree = "<group>";
@@ -122,8 +224,26 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				27B7F4C210F52806665192A5 /* libPods-hydrowallet.a */,
+				2365DB1391744939A302A619 /* libPods-hydrowallet-hydrowalletTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5EC0427FF07733870070C0EA /* hydrowalletTests */ = {
+			isa = PBXGroup;
+			children = (
+				B7C6C774CCB53ED695E36973 /* ExpoModulesProvider.swift */,
+			);
+			name = hydrowalletTests;
+			sourceTree = "<group>";
+		};
+		787C824D5FDB7D060CF57C37 /* hydrowallet */ = {
+			isa = PBXGroup;
+			children = (
+				135BD059A29F7DB272584470 /* ExpoModulesProvider.swift */,
+			);
+			name = hydrowallet;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -142,6 +262,8 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				DCC24852568942DF840B3CC5 /* Resources */,
+				BA78C7E52D3EAEC7A62BE6E4 /* Pods */,
+				C6B12B55E83656689F71EA94 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -157,8 +279,28 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BA78C7E52D3EAEC7A62BE6E4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FF0EA8875560DBF829BE85D7 /* Pods-hydrowallet.debug.xcconfig */,
+				142E4FBB58FF9E1E40BFB1C8 /* Pods-hydrowallet.release.xcconfig */,
+				54349307C7241593D6DEE37D /* Pods-hydrowallet-hydrowalletTests.debug.xcconfig */,
+				A15360D45871C4F4786181EE /* Pods-hydrowallet-hydrowalletTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C6B12B55E83656689F71EA94 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				787C824D5FDB7D060CF57C37 /* hydrowallet */,
+				5EC0427FF07733870070C0EA /* hydrowalletTests */,
+			);
+			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
 		DCC24852568942DF840B3CC5 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				E6A199CE06864B9FB57577F3 /* AntDesign.ttf */,
 				BF35536ACA9443FCB75C1F63 /* Entypo.ttf */,
@@ -179,7 +321,6 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -188,9 +329,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "hydrowalletTests" */;
 			buildPhases = (
+				D06200DB48559AE202673713 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				A5E194774C80EDD7049CC351 /* [CP] Embed Pods Frameworks */,
+				C31BC7C09DD197925BF8B668 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,11 +350,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "hydrowallet" */;
 			buildPhases = (
+				F0730A3C8D2F9FC5A53C25FB /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				6E4B0861307658015AF1F1FF /* [CP] Embed Pods Frameworks */,
+				7EFF2B87E2919C450E17E4A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -269,24 +416,40 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09C9FFA5279A21AA00715CED /* Rubik-Black.ttf in Resources */,
+				09C9FF9D279A21AA00715CED /* Rubik-VariableFont_wght.ttf in Resources */,
+				09C9FFA1279A21AA00715CED /* Rubik-Italic.ttf in Resources */,
+				09C9FF7B2799F11E00715CED /* Roboto-Thin.ttf in Resources */,
+				09C9FF99279A21AA00715CED /* README.txt in Resources */,
+				09C9FF7A2799F11E00715CED /* Roboto-ThinItalic.ttf in Resources */,
+				09C9FF822799F11E00715CED /* Roboto-LightItalic.ttf in Resources */,
+				09C9FFA6279A21AA00715CED /* Rubik-MediumItalic.ttf in Resources */,
+				09C9FF772799F11E00715CED /* Roboto-BoldItalic.ttf in Resources */,
+				09C9FF7D2799F11E00715CED /* LICENSE.txt in Resources */,
+				09C9FF832799F11E00715CED /* Roboto-Medium.ttf in Resources */,
+				09C9FFA7279A21AA00715CED /* Rubik-ExtraBold.ttf in Resources */,
+				09C9FF9C279A21AA00715CED /* Rubik-SemiBoldItalic.ttf in Resources */,
+				09C9FF9A279A21AA00715CED /* Rubik-BoldItalic.ttf in Resources */,
+				09C9FF792799F11E00715CED /* Roboto-MediumItalic.ttf in Resources */,
+				09C9FFA3279A21AA00715CED /* OFL.txt in Resources */,
+				09C9FF9F279A21AA00715CED /* Rubik-LightItalic.ttf in Resources */,
+				09C9FF98279A21AA00715CED /* Rubik-Medium.ttf in Resources */,
+				09C9FFA0279A21AA00715CED /* Rubik-Light.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				09C9FF782799F11E00715CED /* Roboto-Bold.ttf in Resources */,
+				09C9FF802799F11E00715CED /* Roboto-BlackItalic.ttf in Resources */,
+				09C9FF7E2799F11E00715CED /* Roboto-Black.ttf in Resources */,
+				09C9FF7C2799F11E00715CED /* Roboto-Light.ttf in Resources */,
+				09C9FF9E279A21AA00715CED /* Rubik-Regular.ttf in Resources */,
+				09C9FF9B279A21AA00715CED /* Rubik-Italic-VariableFont_wght.ttf in Resources */,
+				09C9FFA8279A21AA00715CED /* Rubik-ExtraBoldItalic.ttf in Resources */,
+				09C9FFA2279A21AA00715CED /* Rubik-BlackItalic.ttf in Resources */,
+				09C9FF812799F11E00715CED /* Roboto-Regular.ttf in Resources */,
+				09CCB68D279DEB4B00054A17 /* splashHydro.png in Resources */,
+				09C9FFA4279A21AA00715CED /* Rubik-Bold.ttf in Resources */,
+				09C9FFA9279A21AA00715CED /* Rubik-SemiBold.ttf in Resources */,
+				09C9FF7F2799F11E00715CED /* Roboto-Italic.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				98180DC7DD5E4FA8A1E4B77C /* AntDesign.ttf in Resources */,
-				52900BCB679945CCBD6AD72E /* Entypo.ttf in Resources */,
-				FEB869D751AB466DB0256DFE /* EvilIcons.ttf in Resources */,
-				EFA09B4E44B64912849B7D85 /* Feather.ttf in Resources */,
-				2085A605A0484826ACF548AA /* FontAwesome.ttf in Resources */,
-				C268EAB3530243E6AA218B3E /* FontAwesome5_Brands.ttf in Resources */,
-				ABD923BB48344DD390D044C5 /* FontAwesome5_Regular.ttf in Resources */,
-				A4956805E0114C6CAAD8FE60 /* FontAwesome5_Solid.ttf in Resources */,
-				FF65F35C620544ABAF8F9412 /* Fontisto.ttf in Resources */,
-				7839068252424271BD20A230 /* Foundation.ttf in Resources */,
-				E6359D96146840FC9ACAE608 /* Ionicons.ttf in Resources */,
-				5B4D88E915224F438FC15686 /* MaterialCommunityIcons.ttf in Resources */,
-				FEABA8CCF80D47FBA2BA302D /* MaterialIcons.ttf in Resources */,
-				524528FC20AE46A5B69F9A45 /* Octicons.ttf in Resources */,
-				CA103AF537AA4E9F88BE531E /* SimpleLineIcons.ttf in Resources */,
-				702EE1D89505485497C1232B /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +469,118 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		6E4B0861307658015AF1F1FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet/Pods-hydrowallet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet/Pods-hydrowallet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hydrowallet/Pods-hydrowallet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7EFF2B87E2919C450E17E4A0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet/Pods-hydrowallet-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet/Pods-hydrowallet-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hydrowallet/Pods-hydrowallet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5E194774C80EDD7049CC351 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C31BC7C09DD197925BF8B668 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D06200DB48559AE202673713 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-hydrowallet-hydrowalletTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0730A3C8D2F9FC5A53C25FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-hydrowallet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -334,6 +609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* hydrowalletTests.m in Sources */,
+				6AC80F7BC3745BEBEBDE1D03 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +619,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				3421685536B27D35FB4D32F1 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +636,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54349307C7241593D6DEE37D /* Pods-hydrowallet-hydrowalletTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -385,6 +663,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A15360D45871C4F4786181EE /* Pods-hydrowallet-hydrowalletTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -408,12 +687,15 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF0EA8875560DBF829BE85D7 /* Pods-hydrowallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 4TD24DJ776;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = hydrowallet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -433,11 +715,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 142E4FBB58FF9E1E40BFB1C8 /* Pods-hydrowallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 4TD24DJ776;
 				INFOPLIST_FILE = hydrowallet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -487,6 +772,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -502,7 +788,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -551,6 +837,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -559,7 +846,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",

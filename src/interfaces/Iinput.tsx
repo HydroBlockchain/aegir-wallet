@@ -49,7 +49,7 @@ export interface TextInputCustomProps extends InputBase {
   errorMsg?: string;
   onBlur?: () => void | undefined;
   onChangeText?: (value: string) => void | undefined;
-  onIconClick?: () => void | undefined;
+  onIconClick?: () => void | Promise<void> | undefined;
 }
 
 export type IiconType =

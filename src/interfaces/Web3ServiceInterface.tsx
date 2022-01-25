@@ -16,20 +16,21 @@ export type HistoryData = History[];
 export interface History {
   to: string;
   from: string;
-  hash?: string;
+  hash: string;
   amount: string;
+  coin: CoinType;
   blockNumber: number,
   operation: OperationTransaction;
 }
 
 /* BNB */
-export interface BNBHistoryResponse {
+export interface EtherscanHistoryResponse {
   status:  string;
   message: string;
-  result:  ResultHistoryBNB[];
+  result:  ResultHistoryEtherscan[];
 }
 
-export interface ResultHistoryBNB {
+export interface ResultHistoryEtherscan {
   blockNumber:       string;
   timeStamp:         string;
   hash:              string;

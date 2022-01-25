@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
+import { themeGlobal } from "../../libs/Theme";
 
 const styles = StyleSheet.create({
   viewContainer: {
-    paddingTop: 20
+    flex: 1,
+    paddingTop: themeGlobal.defautlPaddingTop
   },
   address: {
     padding: 13,

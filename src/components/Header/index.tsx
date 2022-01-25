@@ -20,7 +20,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import IconMaterial from "react-native-vector-icons/MaterialCommunityIcons";
 
 /* utils */
-import { headerOptionsType, HeaderProps } from './interfeces';
+import { headerOptionsType, HeaderProps } from './interfaces';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParams } from '../../interfaces/RootStackParams';
 import { AppStateManagerContext } from '../../context/AppStateManager/index';
@@ -28,7 +28,7 @@ import { AppStateManagerContext } from '../../context/AppStateManager/index';
 /* constant */
 import { HYDRO_WALLET_ADDRESS } from '../../../constants';
 
-const HeaderCustom = ({ variant = 'defuault', title }: HeaderProps) => {
+const HeaderCustom = ({ variant = 'default', title }: HeaderProps) => {
   const { width } = Dimensions.get('window');
   const { isLightTheme, theme, toggleTheme } = useContext(ThemeContext);
   const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
@@ -75,7 +75,7 @@ const HeaderCustom = ({ variant = 'defuault', title }: HeaderProps) => {
     },
   };
 
-  if(variant === 'defuault') {
+  if(variant === 'default') {
     headerOptions.leftComponent = (
       <TouchableOpacity onPress={toHome} >
         <View style={styles.nav}>
@@ -105,9 +105,9 @@ const HeaderCustom = ({ variant = 'defuault', title }: HeaderProps) => {
           }
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={toTransfer} >
+        {/* <TouchableOpacity onPress={toTransfer} >
           <IconMaterial name="bank-transfer" color={theme.colors.text} size={35} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity
           style={{ paddingHorizontal: width * 0.02 }}
@@ -133,17 +133,20 @@ const HeaderCustom = ({ variant = 'defuault', title }: HeaderProps) => {
       ...headerOptions.containerStyle,
       ...styles.containerStyleDefault,
     }
+    // @ts-ignore
+    headerOptions.rightContainerStyle = styles.rightContainerStyle;
   } else {
     headerOptions.leftComponent = {
       icon: "arrow-back",
       onPress: onBackPress,
       color: theme.colors.text,
     };
-
+    
     headerOptions.containerStyle = {
       ...headerOptions.containerStyle,
       ...styles.containerStyleGoBack,
       height: theme.heightHeaderGoBAck,
+      top: -20
     }
 
     if(title) {
@@ -151,7 +154,7 @@ const HeaderCustom = ({ variant = 'defuault', title }: HeaderProps) => {
         text: title,
         style: {
           color: theme.colors.text,
-          ...styles.centerComponent,
+          ...styles.centerComponent
         },
       }
     }
@@ -160,7 +163,6 @@ const HeaderCustom = ({ variant = 'defuault', title }: HeaderProps) => {
   return (
     <Fragment>
       <Header placement='right' { ...headerOptions } />
-
     </Fragment>
   )
 }
