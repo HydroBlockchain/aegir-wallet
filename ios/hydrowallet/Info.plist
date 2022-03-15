@@ -44,11 +44,13 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>CAMERA</string>
+	<string>We need to use your camera to read QR codes containing crypto addresses</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>FACE_ID</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need to use your camera to read QR codes containing crypto addresses</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

@@ -16,6 +16,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import ViewContainer from '../../components/Layouts/ViewContainer';
 import { AppStateManagerContext } from '../../context/AppStateManager';
 import { validateAddress, validateContractAddress } from '../../libs/validators';
+import { IOption } from '../../interfaces/Iinput';
 
 const AddCustomToken = ({ navigation }: IaddCustomToken) => {
   const networks = [
@@ -27,7 +28,7 @@ const AddCustomToken = ({ navigation }: IaddCustomToken) => {
   const [ spinner, setSpinner ] = useState(false);
   const [ contractAddress, setContractAddress ] = useState('');
   const [ disableTokenData, setDisableTokenData ] = useState(true);
-  const [ selectedNetwork, setSelectedNetwork ] = useState(networks[0]);
+  const [ selectedNetwork, setSelectedNetwork ] = useState<IOption>(networks[0]);
   const [ activateValidation, setActivateValidation ] = useState(false);
   const [ contractAddressError, setContractAddressError ] = useState('');
   const [ dataToken, setDataToken ] = useState({ symbol: '', decimals: '' })
@@ -133,7 +134,7 @@ const AddCustomToken = ({ navigation }: IaddCustomToken) => {
   const validateContractERC20 = async () => {
     try {
       if(validateAddress(contractAddress)) {
-        const network = selectedNetwork.id;
+        const network = `${selectedNetwork.id}`;
         const isValidContract = await validateContractAddress({
           network,
           address: contractAddress,
@@ -159,6 +160,10 @@ const AddCustomToken = ({ navigation }: IaddCustomToken) => {
     }
   }
 
+  const handleSelectedNetwork = (item: IOption) => {
+    setSelectedNetwork(item);
+  }
+
   return (
     <BgView>
       <HeaderCustom variant='back' title='Add custom token'/>
@@ -182,7 +187,7 @@ const AddCustomToken = ({ navigation }: IaddCustomToken) => {
           label='Network'
           placeholder='ETH'
           options={networks}
-          onChange={setSelectedNetwork}
+          onChange={handleSelectedNetwork}
           selectedDefault={selectedNetwork}
         />
 

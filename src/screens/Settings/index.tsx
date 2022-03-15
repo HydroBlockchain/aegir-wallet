@@ -18,12 +18,13 @@ import ViewContainer from "../../components/Layouts/ViewContainer";
 /* utils/constants */
 import { SettingsParam } from "./interfaces";
 import { APPLE_STORE_ID, GOOGLE_PACKAGE_NAME } from "../../../constants";
-import { getVersion } from "react-native-device-info";
+import { getBuildNumber, getVersion } from "react-native-device-info";
 import Paragraph from "../../components/Paragraph";
 
 const Settings = ({ navigation }: SettingsParam) => {
   const { isLightTheme, toggleTheme } = useContext(ThemeContext);
   const versionRelease =  getVersion();
+  const buildNumber = getBuildNumber()
 
   const startRatingCounter = () => {
     Alert.alert(
@@ -137,7 +138,11 @@ const Settings = ({ navigation }: SettingsParam) => {
           }
         />
         <Paragraph variant='caption' >
-          {`Version ${versionRelease}`}
+          {
+            Platform.OS === 'ios' ?  
+            `Version ${versionRelease}.${buildNumber}` :
+            `Version ${versionRelease}()`
+          }
         </Paragraph>
       </ViewContainer>
     </BgView>

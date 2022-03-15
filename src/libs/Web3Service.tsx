@@ -68,7 +68,6 @@ class Web3Service {
 	alchemyAPI: string = '';
 	web3: Web3 | null = null;
 	web3BSC: Web3 | null = null;
-	// isMainnet: boolean = false;
 	isMainnet: boolean = !__DEV__;
 	hydroTokenABI = HydroToken.abi;
 	raindropAddress: string = '';

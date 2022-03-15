@@ -2,11 +2,15 @@ import {
   DarkTheme as navigationDarkTheme,
   DefaultTheme as navigationDefaultTheme
 } from '@react-navigation/native';
+import { Platform, Dimensions } from 'react-native';
 import {
   DarkTheme as paperDarkTheme,
   DefaultTheme as paperDefaultTheme,
 
 } from 'react-native-paper';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
+const { height } = Dimensions.get('window');
 
 interface Font {
   fontFamily: string;
@@ -85,9 +89,10 @@ export interface ThemeProps {
 
 export const themeGlobal = {
   roundness: 8,
-  heightHeader: 65,
+  // heightHeader: height * 0.1,
+  heightHeader: getStatusBarHeight() + 40,
   defautlPaddingTop: 24,
-  heightHeaderGoBAck: 65,
+  heightHeaderGoBAck: getStatusBarHeight() + 30,
   colors: {
     success: 'green',
     primary: '#3D4B66',

@@ -40,7 +40,6 @@
 		09C9FFA7279A21AA00715CED /* Rubik-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF95279A21A900715CED /* Rubik-ExtraBold.ttf */; };
 		09C9FFA8279A21AA00715CED /* Rubik-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF96279A21A900715CED /* Rubik-ExtraBoldItalic.ttf */; };
 		09C9FFA9279A21AA00715CED /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09C9FF97279A21AA00715CED /* Rubik-SemiBold.ttf */; };
-		09CCB68D279DEB4B00054A17 /* splashHydro.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CCB68C279DEB4A00054A17 /* splashHydro.png */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -95,7 +94,6 @@
 		09C9FF95279A21A900715CED /* Rubik-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-ExtraBold.ttf"; sourceTree = "<group>"; };
 		09C9FF96279A21A900715CED /* Rubik-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		09C9FF97279A21AA00715CED /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
-		09CCB68C279DEB4A00054A17 /* splashHydro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashHydro.png; path = ../../../../Desktop/splashHydro.png; sourceTree = "<group>"; };
 		135BD059A29F7DB272584470 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-hydrowallet/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* hydrowallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hydrowallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = hydrowallet/AppDelegate.h; sourceTree = "<group>"; };
@@ -108,6 +106,7 @@
 		27B7F4C210F52806665192A5 /* libPods-hydrowallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hydrowallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29E9214DFC6D4E098E01CEFE /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		39F6BDF932A743D4BCB744F8 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		4DC700A327C3BF70006B7574 /* hydrowallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = hydrowallet.entitlements; path = hydrowallet/hydrowallet.entitlements; sourceTree = "<group>"; };
 		54349307C7241593D6DEE37D /* Pods-hydrowallet-hydrowalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hydrowallet-hydrowalletTests.debug.xcconfig"; path = "Target Support Files/Pods-hydrowallet-hydrowalletTests/Pods-hydrowallet-hydrowalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		73F5BEE9BF634A009D5699C7 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		780D42C1D6524A8B91511536 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
@@ -208,10 +207,10 @@
 		13B07FAE1A68108700A75B9A /* hydrowallet */ = {
 			isa = PBXGroup;
 			children = (
+				4DC700A327C3BF70006B7574 /* hydrowallet.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				09CCB68C279DEB4A00054A17 /* splashHydro.png */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -445,7 +444,6 @@
 				09C9FFA8279A21AA00715CED /* Rubik-ExtraBoldItalic.ttf in Resources */,
 				09C9FFA2279A21AA00715CED /* Rubik-BlackItalic.ttf in Resources */,
 				09C9FF812799F11E00715CED /* Roboto-Regular.ttf in Resources */,
-				09CCB68D279DEB4B00054A17 /* splashHydro.png in Resources */,
 				09C9FFA4279A21AA00715CED /* Rubik-Bold.ttf in Resources */,
 				09C9FFA9279A21AA00715CED /* Rubik-SemiBold.ttf in Resources */,
 				09C9FF7F2799F11E00715CED /* Roboto-Italic.ttf in Resources */,
@@ -689,9 +687,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FF0EA8875560DBF829BE85D7 /* Pods-hydrowallet.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconV2;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CODE_SIGN_ENTITLEMENTS = hydrowallet/hydrowallet.entitlements;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 4TD24DJ776;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = hydrowallet/Info.plist;
@@ -705,7 +704,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.projecthydro.aegirwallet;
 				PRODUCT_NAME = hydrowallet;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -717,9 +716,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 142E4FBB58FF9E1E40BFB1C8 /* Pods-hydrowallet.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconV2;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CODE_SIGN_ENTITLEMENTS = hydrowallet/hydrowallet.entitlements;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 4TD24DJ776;
 				INFOPLIST_FILE = hydrowallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -732,7 +732,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.projecthydro.aegirwallet;
 				PRODUCT_NAME = hydrowallet;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

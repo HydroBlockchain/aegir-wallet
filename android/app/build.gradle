@@ -138,8 +138,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         compileSdkVersion rootProject.ext.compileSdkVersion
-        versionCode 148
-        versionName "1.4.8"
+        versionCode 1410
+        versionName "1.4.10"
         missingDimensionStrategy 'react-native-camera', 'general'
     }
     splits {
@@ -194,6 +194,7 @@ android {
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
+            output.outputFileName = "aegir-wallet_v${variant.versionName}.apk"
 
         }
     }

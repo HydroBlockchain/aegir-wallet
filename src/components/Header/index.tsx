@@ -8,7 +8,7 @@ import {
   View,
   Image,
   Dimensions,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 import { Badge } from 'react-native-paper';
 import { Header } from "react-native-elements";
@@ -20,13 +20,15 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import IconMaterial from "react-native-vector-icons/MaterialCommunityIcons";
 
 /* utils */
-import { headerOptionsType, HeaderProps } from './interfaces';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { HeaderProps, HeaderSubComponent } from './interfaces';
 import { RootStackParams } from '../../interfaces/RootStackParams';
 import { AppStateManagerContext } from '../../context/AppStateManager/index';
 
 /* constant */
 import { HYDRO_WALLET_ADDRESS } from '../../../constants';
+import { StyleProp, ViewStyle } from 'react-native';
+
 
 const HeaderCustom = ({ variant = 'default', title }: HeaderProps) => {
   const { width } = Dimensions.get('window');
@@ -60,23 +62,15 @@ const HeaderCustom = ({ variant = 'default', title }: HeaderProps) => {
     navigation.goBack();
   }
 
-  const headerOptions: headerOptionsType = {
-    leftComponent: {},
-    rightComponent: {},
-    centerComponent: {},
-    containerStyle: {
-      ...styles.containerStyleGlobal,
-      height: theme.heightHeader,
-      backgroundColor: theme.colors.backgroundApp2
-    },
-    statusBarProps: {
-      barStyle: 'light-content',
-      backgroundColor: theme.colors.backgroundApp
-    },
-  };
+  let
+    leftComponent: HeaderSubComponent,
+    rightComponent: HeaderSubComponent,
+    centerComponent: HeaderSubComponent,
+    rightContainerStyle: StyleProp<ViewStyle>,
+    containerStyleVariant: StyleProp<ViewStyle>;
 
   if(variant === 'default') {
-    headerOptions.leftComponent = (
+    leftComponent = (
       <TouchableOpacity onPress={toHome} >
         <View style={styles.nav}>
           <View style={styles.headerLeft}>
@@ -92,25 +86,28 @@ const HeaderCustom = ({ variant = 'default', title }: HeaderProps) => {
       </TouchableOpacity>
     );
 
-    headerOptions.rightComponent = (
+    rightComponent = (
       <View style={styles.nav}>
-        <TouchableOpacity onPress={() => { navigation.navigate('ListNFT') }}>
+        <TouchableOpacity 
+          onPress={() => { navigation.navigate('ListNFT') }}
+          style={{ paddingRight: width * 0.02 }}
+        >
           <FaIcon name="images"  color={theme.colors.text} size={20} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={toggleTheme} style={{ paddingHorizontal: width * 0.02 }}>
+        {/* <TouchableOpacity onPress={toggleTheme} style={{ paddingHorizontal: width * 0.02 }}>
           {(isLightTheme)
             ? <FaIcon name="moon" color={theme.colors.text} solid={true} size={20} />
             : <MaterialIcons name="wb-sunny" color='#F0B90B' size={20} />
           }
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* <TouchableOpacity onPress={toTransfer} >
           <IconMaterial name="bank-transfer" color={theme.colors.text} size={35} />
         </TouchableOpacity> */}
 
         <TouchableOpacity
-          style={{ paddingHorizontal: width * 0.02 }}
+          style={{ paddingHorizontal: width * 0.05 }}
           onPress={() => navigation.navigate("Notification")}
         >
 
@@ -124,33 +121,24 @@ const HeaderCustom = ({ variant = 'default', title }: HeaderProps) => {
           style={{ paddingLeft: width * 0.02, paddingRight: '1%' }}
           onPress={() => navigation.navigate("Settings")}
         >
-          <FaIcon name="cog" color={theme.colors.text} size={20} />
+          <FaIcon name="sliders-h" color={theme.colors.text} size={20} />
         </TouchableOpacity>
       </View>
     );
 
-    headerOptions.containerStyle = {
-      ...headerOptions.containerStyle,
-      ...styles.containerStyleDefault,
-    }
-    // @ts-ignore
-    headerOptions.rightContainerStyle = styles.rightContainerStyle;
+    rightContainerStyle = styles.rightContainerStyle;
+    containerStyleVariant = styles.containerStyleDefault;
   } else {
-    headerOptions.leftComponent = {
+    leftComponent = {
       icon: "arrow-back",
       onPress: onBackPress,
       color: theme.colors.text,
     };
-    
-    headerOptions.containerStyle = {
-      ...headerOptions.containerStyle,
-      ...styles.containerStyleGoBack,
-      height: theme.heightHeaderGoBAck,
-      top: -20
-    }
+
+    containerStyleVariant = styles.containerStyleGoBack;
 
     if(title) {
-      headerOptions.centerComponent = {
+      centerComponent = {
         text: title,
         style: {
           color: theme.colors.text,
@@ -162,7 +150,22 @@ const HeaderCustom = ({ variant = 'default', title }: HeaderProps) => {
 
   return (
     <Fragment>
-      <Header placement='right' { ...headerOptions } />
+      <Header
+        // placement='right'
+        leftComponent={leftComponent}
+        rightComponent={rightComponent}
+        centerComponent={centerComponent}
+        rightContainerStyle={rightContainerStyle}
+        statusBarProps={{
+          barStyle: 'light-content',
+          backgroundColor: theme.colors.backgroundApp
+        }}
+        containerStyle={[
+          styles.containerStyleGlobal,
+          { backgroundColor: theme.colors.backgroundApp2 },
+          containerStyleVariant
+        ]}
+      />
     </Fragment>
   )
 }
