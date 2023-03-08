@@ -17,13 +17,21 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   buttonTouchable: {
-    marginTop: 30,
+    top: 200,
+    width: 150,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderRadius: 50,
+    borderColor: '#777',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    alignItems: 'center',
   },
   modalView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    marginTop: 0,
     backgroundColor: 'white',
   },
 });

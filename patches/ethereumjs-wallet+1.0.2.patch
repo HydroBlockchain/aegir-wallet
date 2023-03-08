@@ -1,0 +1,36 @@
+diff --git a/node_modules/ethereumjs-wallet/dist.browser/index.js b/node_modules/ethereumjs-wallet/dist.browser/index.js
+index ef4695c..5d89e22 100644
+--- a/node_modules/ethereumjs-wallet/dist.browser/index.js
++++ b/node_modules/ethereumjs-wallet/dist.browser/index.js
+@@ -70,7 +70,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.thirdparty = exports.hdkey = void 0;
+-var crypto = __importStar(require("crypto"));
++var crypto = __importStar(require("crypto-js"));
+ var ethereumjs_util_1 = require("ethereumjs-util");
+ var scrypt_js_1 = require("scrypt-js");
+ var hdkey_1 = require("./hdkey");
+diff --git a/node_modules/ethereumjs-wallet/dist.browser/thirdparty.js b/node_modules/ethereumjs-wallet/dist.browser/thirdparty.js
+index 4d7f582..b66a5d8 100644
+--- a/node_modules/ethereumjs-wallet/dist.browser/thirdparty.js
++++ b/node_modules/ethereumjs-wallet/dist.browser/thirdparty.js
+@@ -59,7 +59,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.fromQuorumWallet = exports.fromKryptoKit = exports.fromEtherCamp = exports.fromEtherWallet = void 0;
+-var crypto = __importStar(require("crypto"));
++var crypto = __importStar(require("crypto-js"));
+ var ethereumjs_util_1 = require("ethereumjs-util");
+ var scrypt_js_1 = require("scrypt-js");
+ var index_1 = __importDefault(require("./index"));
+diff --git a/node_modules/ethereumjs-wallet/src/index.ts b/node_modules/ethereumjs-wallet/src/index.ts
+index 421cd71..33534c3 100644
+--- a/node_modules/ethereumjs-wallet/src/index.ts
++++ b/node_modules/ethereumjs-wallet/src/index.ts
+@@ -1,4 +1,4 @@
+-import * as crypto from 'crypto'
++import * as crypto from 'crypto-js'
+ import {
+   BN,
+   keccak256,

@@ -121,7 +121,7 @@ const CombinedDarkTheme = {
   ...navigationDarkTheme,
   ...themeGlobal,
   colors: {
-    ...paperDarkTheme.colors,
+    ...paperDarkTheme?.colors,
     ...navigationDarkTheme.colors,
     ...themeGlobal.colors,
     text: '#9C9C9C',
