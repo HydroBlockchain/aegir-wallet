@@ -68,20 +68,20 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = AegirWallet;
+			remoteInfo = "AegirWallet";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* AegirWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AegirWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* AegirWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AegirWalletTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* AegirWalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AegirWalletTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* AegirWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AegirWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = AegirWallet/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = AegirWallet/AppDelegate.mm; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AegirWallet/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AegirWallet/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AegirWallet/main.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* AegirWalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AegirWalletTests.m"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* AegirWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AegirWallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "AegirWallet/AppDelegate.h"; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "AegirWallet/AppDelegate.mm"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "AegirWallet/Images.xcassets"; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "AegirWallet/Info.plist"; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "AegirWallet/main.m"; sourceTree = "<group>"; };
 		2C2BC2387396402ACF684A99 /* libPods-AegirWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AegirWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A0D057E2996D7420077E551 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "Fonts/Roboto-Regular.ttf"; sourceTree = SOURCE_ROOT; };
 		4A0D057F2996D7420077E551 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Italic.ttf"; path = "Fonts/Roboto-Italic.ttf"; sourceTree = SOURCE_ROOT; };
@@ -131,7 +131,7 @@
 		565DFB7615C3A587B230AB9C /* libPods-AegirWallet-AegirWalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AegirWallet-AegirWalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7374F90113ED2B1B14DCDCB4 /* Pods-AegirWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AegirWallet.release.xcconfig"; path = "Target Support Files/Pods-AegirWallet/Pods-AegirWallet.release.xcconfig"; sourceTree = "<group>"; };
 		7D5D7550E5DB4B41E98BAEE1 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-AegirWallet/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AegirWallet/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "AegirWallet/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		BECD7AAB586F60BD96917832 /* Pods-AegirWallet-AegirWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AegirWallet-AegirWalletTests.release.xcconfig"; path = "Target Support Files/Pods-AegirWallet-AegirWalletTests/Pods-AegirWallet-AegirWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		BFAA2577595961B237CC976D /* Pods-AegirWallet-AegirWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AegirWallet-AegirWalletTests.debug.xcconfig"; path = "Target Support Files/Pods-AegirWallet-AegirWalletTests/Pods-AegirWallet-AegirWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C28BF02600B2A30B80D8B38A /* Pods-AegirWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AegirWallet.debug.xcconfig"; path = "Target Support Files/Pods-AegirWallet/Pods-AegirWallet.debug.xcconfig"; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 				00E356F21AD99517003FC87E /* AegirWalletTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = AegirWalletTests;
+			path = "AegirWalletTests";
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -185,7 +185,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = AegirWallet;
+			name = "AegirWallet";
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -203,7 +203,7 @@
 			children = (
 				7D5D7550E5DB4B41E98BAEE1 /* ExpoModulesProvider.swift */,
 			);
-			name = AegirWallet;
+			name = "AegirWallet";
 			sourceTree = "<group>";
 		};
 		4A0D057D2996D72C0077E551 /* FontsApp */ = {
@@ -368,8 +368,8 @@
 			);
 			dependencies = (
 			);
-			name = AegirWallet;
-			productName = AegirWallet;
+			name = "AegirWallet";
+			productName = "AegirWallet";
 			productReference = 13B07F961A680F5B00A75B9A /* AegirWallet.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -662,7 +662,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = AegirWalletTests/Info.plist;
+				INFOPLIST_FILE = "AegirWalletTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -675,7 +675,7 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aegir.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aegirwallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AegirWallet.app/AegirWallet";
 			};
@@ -687,7 +687,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = AegirWalletTests/Info.plist;
+				INFOPLIST_FILE = "AegirWalletTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -700,7 +700,7 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aegir.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aegirwallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AegirWallet.app/AegirWallet";
 			};
@@ -715,7 +715,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 58DA485429;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = AegirWallet/Info.plist;
+				INFOPLIST_FILE = "AegirWallet/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Aegir Wallet";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -727,8 +727,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aegir.wallet;
-				PRODUCT_NAME = AegirWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aegirwallet";
+				PRODUCT_NAME = "AegirWallet";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -743,7 +743,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 58DA485429;
-				INFOPLIST_FILE = AegirWallet/Info.plist;
+				INFOPLIST_FILE = "AegirWallet/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Aegir Wallet";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -755,8 +755,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aegir.wallet;
-				PRODUCT_NAME = AegirWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aegirwallet";
+				PRODUCT_NAME = "AegirWallet";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
