@@ -11,6 +11,7 @@
     "devtools": "npx react-devtools",
     "release": "cd android && ./gradlew assembleRelease",
     "release:clean": "cd android && ./gradlew clean && ./gradlew assembleRelease",
+    "bundleRelease": "cd android && ./gradlew clean && ./gradlew bundleRelease",
     "postinstall": "patch-package"
   },
   "engines": {
