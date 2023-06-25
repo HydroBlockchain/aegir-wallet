@@ -291,7 +291,7 @@ const Deposits = ({route}: PropsParams) => {
       <HeaderCustom variant="back" title="Send transaction" />
       <Spinner visible={spinner} size={'large'} color={theme.colors.primary} />
 
-      <ViewContainer style={styles.viewContainer} >
+      <ViewContainer style={styles.viewContainer}>
         <ScrollView>
           <QrScanner
             isShow={Boolean(openQrScanner)}

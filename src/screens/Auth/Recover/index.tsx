@@ -1,9 +1,12 @@
 import React, { useContext, useState } from 'react';
 
 /* components */
-import { ethers } from 'ethers';
+import { ethers, Wallet } from 'ethers';
 import { View } from 'react-native';
-import bip39 from 'react-native-bip39';
+// import bip39 from 'react-native-bip39';
+// import bip39 from 'bip39';
+import * as bip39 from 'bip39';
+import {hdkey} from 'ethereumjs-wallet';
 import Button from '../../../components/Button';
 import * as SecureStore from 'expo-secure-store';
 import BgView from '../../../components/Layouts/BgView';
@@ -43,17 +46,22 @@ const Recover = ({ navigation }: PropsRoute) => {
       setIsLoading(false);
       return;
     }
-    
+
     const validate = await bip39.validateMnemonic(mnemonic);
     if (validate) {
-      const wallet = ethers.Wallet.fromMnemonic(mnemonic);
-      const privateKey = wallet.privateKey;
+      const seed = await bip39.mnemonicToSeed(mnemonic);
+      const hdNode = hdkey.fromMasterSeed(seed);
+      const node = hdNode.derivePath("m/44'/60'/0'/0/0");
+      const wallet = new Wallet(
+        node.getWallet().getPrivateKey().toString('hex'),
+      );
+      const privateKey = wallet._signingKey().privateKey;
       const publicKey = wallet.address;
 
       await SecureStore.setItemAsync(MNEMONIC_KEY, mnemonic);
 
       setIsLoading(false);
-      navigation.navigate("Password", { privateKey, publicKey });
+      navigation.navigate('Password', {privateKey, publicKey});
     } else {
       toast({
         type: 'error',

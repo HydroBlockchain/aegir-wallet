@@ -68,7 +68,8 @@ class Web3Service {
 	alchemyAPI: string = '';
 	web3: Web3 | null = null;
 	web3BSC: Web3 | null = null;
-	isMainnet: boolean = !__DEV__;
+	// isMainnet: boolean = !__DEV__;
+	isMainnet: boolean = true;
 	hydroTokenABI = HydroToken.abi;
 	raindropAddress: string = '';
 	snowflakeAddress: string = '';
@@ -107,14 +108,20 @@ class Web3Service {
 		const networkWebsocketBinance = isMainnet ? PROVIDER_WS_BSC : PROVIDER_WS_BSC_DEV;
 		const networkEthereum = ethers.providers.getNetwork(networkNameEthereum);
 
-		const providersETH: ProvidersEthereum[] = [
-			new ethers.providers.EtherscanProvider(networkEthereum),
-			ethers.providers.InfuraProvider.getWebSocketProvider(networkEthereum),
-			new ethers.providers.EtherscanProvider(networkEthereum, etherscanAPI),
-			ethers.providers.AlchemyProvider.getWebSocketProvider(networkEthereum),
-			ethers.providers.InfuraProvider.getWebSocketProvider(networkEthereum, infuraAPI),
-			ethers.providers.AlchemyProvider.getWebSocketProvider(networkEthereum, this.alchemyAPI),
-		];
+		let providersETH: ProvidersEthereum[]
+		try {
+			providersETH = [
+				new ethers.providers.EtherscanProvider(networkEthereum),
+				ethers.providers.InfuraProvider.getWebSocketProvider(networkEthereum),
+				new ethers.providers.EtherscanProvider(networkEthereum, etherscanAPI),
+				// ethers.providers.AlchemyProvider.getWebSocketProvider(networkEthereum),
+				ethers.providers.InfuraProvider.getWebSocketProvider(networkEthereum, infuraAPI),
+				ethers.providers.AlchemyProvider.getWebSocketProvider(networkEthereum, this.alchemyAPI),
+			];
+			
+		} catch (error) {
+			console.log('error', error);
+		}
 
 		this.providerETH = new ethers.providers.FallbackProvider(providersETH);
 

@@ -1,0 +1,31 @@
+diff --git a/node_modules/bip39/src/index.js b/node_modules/bip39/src/index.js
+index 91d1a72..f71d8c6 100644
+--- a/node_modules/bip39/src/index.js
++++ b/node_modules/bip39/src/index.js
+@@ -1,9 +1,12 @@
+ "use strict";
+ Object.defineProperty(exports, "__esModule", { value: true });
++global.Buffer = global.Buffer || require('buffer').Buffer
+ const createHash = require("create-hash");
+ const pbkdf2_1 = require("pbkdf2");
+ const randomBytes = require("randombytes");
+ const _wordlists_1 = require("./_wordlists");
++const { NativeModules } = require('react-native')
++const Aes = NativeModules.Aes
+ let DEFAULT_WORDLIST = _wordlists_1._default;
+ const INVALID_MNEMONIC = 'Invalid mnemonic';
+ const INVALID_ENTROPY = 'Invalid entropy';
+@@ -52,7 +55,12 @@ function salt(password) {
+ function mnemonicToSeedSync(mnemonic, password) {
+     const mnemonicBuffer = Buffer.from(normalize(mnemonic), 'utf8');
+     const saltBuffer = Buffer.from(salt(normalize(password)), 'utf8');
+-    return pbkdf2_1.pbkdf2Sync(mnemonicBuffer, saltBuffer, 2048, 64, 'sha512');
++    // For chrome environments use the javascript version of pbkdf2
++    if (__DEV__ && (!!global.__REMOTEDEV__ || (global.location && global.location.pathname.includes('/debugger-ui'))))
++        return pbkdf2_1.pbkdf2Sync(mnemonicBuffer, saltBuffer, 2048, 64, 'sha512')
++    const seed = Aes.pbkdf2Sync(mnemonicBuffer.toString('utf8'), saltBuffer.toString('utf8'), 2048, 512);
++    const seedBuffer = global.Buffer.from(seed, "hex")
++    return seedBuffer
+ }
+ exports.mnemonicToSeedSync = mnemonicToSeedSync;
+ function mnemonicToSeed(mnemonic, password) {

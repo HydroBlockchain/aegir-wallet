@@ -1,13 +1,11 @@
+import {StyleProp, ViewStyle} from 'react-native';
+
 export interface ParagraphProps {
-  stylesCustom?: {};
+  stylesCustom?: StyleProp<ViewStyle>;
   numberOfLines?: number;
   adjustsFontSizeToFit?: boolean;
   children: string | number | JSX.Element;
-  ellipsizeMode?:
-    | 'head'
-    | 'tail'
-    | 'clip'
-    | 'middle';
+  ellipsizeMode?: 'head' | 'tail' | 'clip' | 'middle';
   variant:
     | 'h1'
     | 'h2'
@@ -24,5 +22,5 @@ export interface ParagraphProps {
     | 'overline'
     | 'subtitle1'
     | 'subtitle2'
-    | 'inputLabel1'
+    | 'inputLabel1';
 }

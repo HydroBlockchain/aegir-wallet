@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 
-import { ethers } from "ethers";
-import bip39 from 'react-native-bip39';
+import { Wallet, ethers } from "ethers";
+import * as bip39 from 'bip39';
+import * as bip39scure from '@scure/bip39';
+// import bip39 from 'react-native-bip39';
 import Button from "../../../components/Button";
 import * as SecureStore from 'expo-secure-store';
 import Paragraph from "../../../components/Paragraph";
@@ -14,6 +16,9 @@ import { StackScreenProps } from '@react-navigation/stack';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { RootStackParams } from "../../../interfaces/RootStackParams";
 import ViewContainer from '../../../components/Layouts/ViewContainer';
+
+import {wordlist as english} from '@scure/bip39/wordlists/english';
+import {hdkey} from 'ethereumjs-wallet';
 
 /* constants */
 import { MNEMONIC_KEY } from '../../../../constants';
@@ -45,26 +50,34 @@ const Mnemonic = ({ navigation }: Props) => {
 	}
 
 	const createWallet = async () => {
-		if (mnemonic) return;
+    if (mnemonic) return;
 
-		setSpinner(true);
-		try {
-			const mnemonicTMP = await bip39.generateMnemonic(128);
-			const wallet = ethers.Wallet.fromMnemonic(mnemonicTMP);
+    // const mnemonicTMP = await bip39.generateMnemonic(128);
+    const mnemonicTMP = bip39scure.generateMnemonic(english);
+    console.log('mnemonicTMP :>> ', mnemonicTMP);
+    // const wallet = ethers.Wallet.fromMnemonic(mnemonicTMP);
+    try {
+      setSpinner(true);
+      const seed = await bip39.mnemonicToSeed(mnemonicTMP);
+      const hdNode = hdkey.fromMasterSeed(seed);
+      const node = hdNode.derivePath("m/44'/60'/0'/0/0");
+      const wallet = new Wallet(
+        node.getWallet().getPrivateKey().toString('hex'),
+      );
 
-			const publicKey = wallet.address;
-			const privateKey = wallet.privateKey;
+      const publicKey = wallet.address;
+      const privateKey = wallet.privateKey;
 
-			await SecureStore.setItemAsync(MNEMONIC_KEY, mnemonicTMP);
+      await SecureStore.setItemAsync(MNEMONIC_KEY, mnemonicTMP);
 
-			setKeys({ publicKey, privateKey });
+      setKeys({publicKey, privateKey});
 
-			setMnemonic(mnemonicTMP);
-		} catch (error: any) {
-			console.log(error.message);
-		}
-		setSpinner(false);
-	};
+      setMnemonic(mnemonicTMP);
+    } catch (error: any) {
+      console.log('Error in create wallet: ==>', error.message);
+    }
+    setSpinner(false);
+  };
 
 	return (
 		<BgView>

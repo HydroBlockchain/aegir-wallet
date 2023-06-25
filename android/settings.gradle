@@ -1,29 +1,19 @@
-rootProject.name = 'hydrowallet'
+rootProject.name = 'Aegir Wallet'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 
-/* Splash screen */
-include ':react-native-splash-screen'
+// react-native-splash-screen
+include ':react-native-splash-screen'   
 project(':react-native-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-splash-screen/android')
 
-/* Safe area context */
-include ':react-native-safe-area-context'
-project(':react-native-safe-area-context').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-safe-area-context/android')
-
-/* Randombytes */
-include ':react-native-randombytes'
-project(':react-native-randombytes').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-randombytes/android')
-
-/* Vector icons */
-include ':react-native-vector-icons'
-project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
-
-
-/* expo 43 */
-apply from: new File(["node", "--print", "require.resolve('expo/package.json')"].execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle");
-useExpoModules()
-
-/* expo 43 */
-apply from: new File(["node", "--print", "require.resolve('@react-native-community/cli-platform-android/package.json')"].execute(null, rootDir).text.trim(), "../native_modules.gradle");
-applyNativeModulesSettingsGradle(settings)
-
-
 include ':app'
+includeBuild('../node_modules/react-native-gradle-plugin')
+
+if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true") {
+    include(":ReactAndroid")
+    project(":ReactAndroid").projectDir = file('../node_modules/react-native/ReactAndroid')
+    include(":ReactAndroid:hermes-engine")
+    project(":ReactAndroid:hermes-engine").projectDir = file('../node_modules/react-native/ReactAndroid/hermes-engine')
+}
+
+apply from: new File(["node", "--print", "require.resolve('expo/package.json')"].execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle")
+useExpoModules()
